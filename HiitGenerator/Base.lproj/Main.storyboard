@@ -23,6 +23,9 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
                                 <state key="normal" title="Start"/>
+                                <connections>
+                                    <action selector="didPress:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Dwf-Xd-GUi"/>
+                                </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Puh-6F-Pwh" userLabel="Workout View">
                                 <rect key="frame" x="50" y="94" width="314" height="618"/>
@@ -99,6 +102,14 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <connections>
+                        <outlet property="button" destination="G6H-Yq-Ie9" id="DGs-Ws-bPT"/>
+                        <outlet property="timer" destination="xjw-MM-AZQ" id="NLl-sH-faG"/>
+                        <outlet property="workoutDescription" destination="u6f-gl-pAV" id="sJw-4O-kcj"/>
+                        <outlet property="workoutDifficulty" destination="ice-BW-T1b" id="dzI-jS-0To"/>
+                        <outlet property="workoutName" destination="rrv-0b-cr7" id="3oB-CG-uDr"/>
+                        <outlet property="workoutType" destination="Ey4-GG-7Kf" id="dMt-DJ-7RC"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
