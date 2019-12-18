@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		522F039323943C5600D743F7 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 522F039223943C5600D743F7 /* ViewModel.swift */; };
+		5299C80823AACB8E00074E6A /* WorkoutGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5299C80723AACB8D00074E6A /* WorkoutGenerator.swift */; };
 		52C26A7223923DB400F809E6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C26A7123923DB400F809E6 /* AppDelegate.swift */; };
 		52C26A7423923DB400F809E6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C26A7323923DB400F809E6 /* SceneDelegate.swift */; };
 		52C26A7623923DB400F809E6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C26A7523923DB400F809E6 /* ViewController.swift */; };
@@ -28,6 +30,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		522F039223943C5600D743F7 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
+		5299C80723AACB8D00074E6A /* WorkoutGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutGenerator.swift; sourceTree = "<group>"; };
 		52C26A6E23923DB400F809E6 /* HiitGenerator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HiitGenerator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		52C26A7123923DB400F809E6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		52C26A7323923DB400F809E6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -89,6 +93,8 @@
 				52C26A7C23923DBD00F809E6 /* LaunchScreen.storyboard */,
 				52C26A7F23923DBD00F809E6 /* Info.plist */,
 				52C26A9323923DEE00F809E6 /* WorkoutDataModels.swift */,
+				522F039223943C5600D743F7 /* ViewModel.swift */,
+				5299C80723AACB8D00074E6A /* WorkoutGenerator.swift */,
 			);
 			path = HiitGenerator;
 			sourceTree = "<group>";
@@ -203,6 +209,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				522F039323943C5600D743F7 /* ViewModel.swift in Sources */,
+				5299C80823AACB8E00074E6A /* WorkoutGenerator.swift in Sources */,
 				52C26A7623923DB400F809E6 /* ViewController.swift in Sources */,
 				52C26A7223923DB400F809E6 /* AppDelegate.swift in Sources */,
 				52C26A7423923DB400F809E6 /* SceneDelegate.swift in Sources */,

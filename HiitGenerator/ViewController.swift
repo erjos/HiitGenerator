@@ -9,12 +9,7 @@
 import UIKit
 
 class ViewController: UIViewController {
-    fileprivate enum WorkoutState {
-        case Active
-        case Rest
-        case Paused
-        case Stopped
-    }
+    var viewModel = ViewModel()
     
     @IBOutlet weak var workoutName: UILabel!
     @IBOutlet weak var workoutDescription: UILabel!
@@ -26,17 +21,34 @@ class ViewController: UIViewController {
     @IBOutlet weak var button: UIButton!
     
     @IBAction func didPress(_ sender: Any) {
+        
     }
-    
-    //var workout:
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setView(.Stopped)
         self.runTimer()
+        startFirstWorkout()
     }
     
-    fileprivate func setView(_ state: WorkoutState) {
+    func startFirstWorkout() {
+        guard let firstCycle = viewModel.routine.cycles.first else { return }
+        
+        //set the workout info on the screen
+        //start the timer - countdown from 45 seconds
+        //change the screen state to active
+        //need a specifc callback once the first workout timer is over to begin the rest period
+    }
+    
+    func setExerciseInfo(_ exercise: Exercise) {
+        workoutName.text = exercise.name
+        workoutDescription.text = exercise.description
+        workoutType.text = exercise.targetAreas.compactMap({ targetArea -> String in targetArea.rawValue })
+            .joined(separator: ", ")
+    }
+    
+    //IDK if we'll end up using this
+    fileprivate func setView(_ state: WorkoutViewState) {
         switch state {
         case .Active:
             setActive()
