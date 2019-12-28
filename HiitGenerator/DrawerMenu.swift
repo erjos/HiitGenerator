@@ -18,24 +18,20 @@ class DrawerMenu: UIControl {
     let HEADER_VIEW = "DrawerHeaderView"
     
     //eventually we want this view to contain the table view that represents the menu
-    var menuDisplay: UITableView?
+    lazy var menuDisplay: UITableView = UITableView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
     
-    //initializes the display and sets up datasource/delegate
+    var isAdded = false
+    
+    func addDisplayToView() {
+        guard !isAdded else { return }
+        self.superview?.addSubview(menuDisplay)
+        isAdded = true
+    }
     func setupDisplay() {
-        guard menuDisplay == nil else { return }
-        
-        
-        guard let parent = self.superview else { return }
-        
-        self.menuDisplay = UITableView(frame: CGRect(x: 0, y: 0, width: 0, height: parent.frame.height))
-        self.superview?.addSubview(menuDisplay!)
-        menuDisplay?.delegate = self
-        menuDisplay?.dataSource = self
-        menuDisplay?.register(UITableViewCell.self, forCellReuseIdentifier: CELL_REUSE_ID)
-        
-        menuDisplay?.backgroundColor = .darkGray
-        
-        self.menuDisplay?.reloadData()
+        menuDisplay.delegate = self
+        menuDisplay.dataSource = self
+        menuDisplay.register(UITableViewCell.self, forCellReuseIdentifier: CELL_REUSE_ID)
+        menuDisplay.backgroundColor = .darkGray
     }
     
     func getPanGesture(target: DrawerMenuDelgate) -> UIPanGestureRecognizer {
@@ -43,17 +39,18 @@ class DrawerMenu: UIControl {
         return UIPanGestureRecognizer(target: delegate, action: #selector(delegate?.handlePanGesture(_:)))
     }
     
-    
     //might be able to combine these
     func openMenu() {
+        addDisplayToView()
         UIView.animate(withDuration: 0.2) {
-            self.menuDisplay?.frame = CGRect(x: 0, y: 0, width: 300, height: (self.menuDisplay?.frame.height)!)
+            self.menuDisplay.frame = CGRect(x: 0, y: 0, width: 300, height: (self.superview?.frame.height)!)
             self.superview?.layoutIfNeeded()
         }
     }
+    
     func closeMenu() {
         UIView.animate(withDuration: 0.2) {
-            self.menuDisplay?.frame = CGRect(x: 0, y: 0, width: 0, height: (self.menuDisplay?.frame.height)!)
+            self.menuDisplay.frame = CGRect(x: 0, y: 0, width: 0, height: (self.superview?.frame.height)!)
             self.superview?.layoutIfNeeded()
         }
     }
@@ -64,20 +61,23 @@ class DrawerMenu: UIControl {
     }
     
     required init?(coder aDecoder: NSCoder) {
-      super.init(coder: aDecoder)
-      commonInit()
+        super.init(coder: aDecoder)
+        commonInit()
     }
 
     private func commonInit() {
-      backgroundColor = .blue
+        backgroundColor = .blue
+        self.setupDisplay()
+        self.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(DrawerMenu.didTap(_:))))
+    }
+    
+    @objc func didTap(_ gesture: UITapGestureRecognizer) {
+        openMenu()
     }
     
     //call this function from the handlePanGesture delegate function to allow interaction with the menu from any class
     func handleGesture(_ gesture: UIPanGestureRecognizer) {
-        setupDisplay()
-        //might not need this unwrapped here
-        //guard let parent = self.superview else { print("no superview") ; return }
-        
+        addDisplayToView()
         let gestureIsDraggingFromLeftToRight = (gesture.velocity(in: superview).x > 0)
         switch gesture.state {
         case .began:
@@ -85,7 +85,7 @@ class DrawerMenu: UIControl {
         case .changed:
             if let _ = gesture.view {
                 //create method to set the display width
-                self.menuDisplay?.frame = CGRect(x: 0, y: 0, width: (self.menuDisplay?.frame.width)! + gesture.translation(in: superview).x, height: (self.menuDisplay?.frame.height)!)
+                self.menuDisplay.frame = CGRect(x: 0, y: 0, width: (self.menuDisplay.frame.width) + gesture.translation(in: superview).x, height: ((self.superview?.frame.height)!))
                 
                 //self.menuCoverWidth.constant = UIScreen.main.bounds.width - self.menuWidth.constant
                 gesture.setTranslation(CGPoint.zero, in: superview)
@@ -93,14 +93,14 @@ class DrawerMenu: UIControl {
             //implements logic to determine if menu should remain open or closed
         case .ended:
             if gestureIsDraggingFromLeftToRight {
-                let hasMovedGreaterThanHalfway = (menuDisplay?.frame.width)! > 150
+                let hasMovedGreaterThanHalfway = (menuDisplay.frame.width) > 150
                 if (hasMovedGreaterThanHalfway) {
                     self.openMenu()
                 } else {
                     self.closeMenu()
                 }
             } else {
-                let hasMovedGreaterThanHalfway = (menuDisplay?.frame.width)! < 150
+                let hasMovedGreaterThanHalfway = (menuDisplay.frame.width) < 150
                 if (hasMovedGreaterThanHalfway) {
                     self.closeMenu()
                 } else {
