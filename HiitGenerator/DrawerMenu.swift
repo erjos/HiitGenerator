@@ -33,6 +33,8 @@ class DrawerMenu: UIControl {
         menuDisplay?.dataSource = self
         menuDisplay?.register(UITableViewCell.self, forCellReuseIdentifier: CELL_REUSE_ID)
         
+        menuDisplay?.backgroundColor = .darkGray
+        
         self.menuDisplay?.reloadData()
     }
     
@@ -122,7 +124,7 @@ extension DrawerMenu: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: CELL_REUSE_ID, for: indexPath)
         
         //configure cell
-        cell.backgroundColor = .darkGray
+        cell.backgroundColor = UIColor(red: 55/255, green: 55/255, blue: 55/255, alpha: 1)//.darkGray
         cell.textLabel?.textColor = UIColor.white
         cell.textLabel?.lineBreakMode = .byClipping
         cell.selectionStyle = .none

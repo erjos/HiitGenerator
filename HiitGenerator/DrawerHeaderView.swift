@@ -45,6 +45,11 @@ class DrawerHeaderView: UIView {
         self.editDoneButton.isHidden = shouldHide
     }
     
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        hideEditButton(shouldHide: true)
+    }
+    
     //Is this logic best contained in a method here? - gets more complex with multiple sections
 //    func setupHeaderView(tableState: DrawerTableState) {
 //
