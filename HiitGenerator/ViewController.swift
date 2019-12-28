@@ -11,6 +11,8 @@ import UIKit
 class ViewController: UIViewController {
     var viewModel = ViewModel()
     
+    @IBOutlet weak var drawerMenu: DrawerMenu!
+    
     @IBOutlet weak var workoutName: UILabel!
     @IBOutlet weak var workoutDescription: UILabel!
     @IBOutlet weak var workoutType: UILabel!
@@ -29,10 +31,14 @@ class ViewController: UIViewController {
         setView(.Stopped)
         self.runTimer()
         startFirstWorkout()
+        //sets delegate and generates a pan gesture
+        let pan = drawerMenu.getPanGesture(target: self)
+        //
+        self.view.addGestureRecognizer(pan)
     }
     
     func startFirstWorkout() {
-        guard let firstCycle = viewModel.routine.cycles.first else { return }
+        //guard let firstCycle = viewModel.routine.cycles.first else { return }
         
         //set the workout info on the screen
         //start the timer - countdown from 45 seconds
@@ -96,5 +102,13 @@ class ViewController: UIViewController {
         timerDevice.invalidate()
         seconds = 0
         timerDevice = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
+    }
+}
+
+extension ViewController: DrawerMenuDelgate {
+    
+    func handlePanGesture(_ gesture: UIPanGestureRecognizer) {
+        //this works... so we can modify the menu view this way - with a method that is public exposed to render the menu from this delegate function
+        self.drawerMenu.handleGesture(gesture)
     }
 }

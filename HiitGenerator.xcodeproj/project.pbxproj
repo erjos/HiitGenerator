@@ -17,6 +17,7 @@
 		52C26A7E23923DBD00F809E6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 52C26A7C23923DBD00F809E6 /* LaunchScreen.storyboard */; };
 		52C26A8923923DBD00F809E6 /* HiitGeneratorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C26A8823923DBD00F809E6 /* HiitGeneratorTests.swift */; };
 		52C26A9423923DEE00F809E6 /* WorkoutDataModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C26A9323923DEE00F809E6 /* WorkoutDataModels.swift */; };
+		52D78C4F23B6C3AB0004031A /* DrawerMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D78C4E23B6C3AB0004031A /* DrawerMenu.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +45,7 @@
 		52C26A8823923DBD00F809E6 /* HiitGeneratorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HiitGeneratorTests.swift; sourceTree = "<group>"; };
 		52C26A8A23923DBD00F809E6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		52C26A9323923DEE00F809E6 /* WorkoutDataModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutDataModels.swift; sourceTree = "<group>"; };
+		52D78C4E23B6C3AB0004031A /* DrawerMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawerMenu.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,6 +97,7 @@
 				52C26A9323923DEE00F809E6 /* WorkoutDataModels.swift */,
 				522F039223943C5600D743F7 /* ViewModel.swift */,
 				5299C80723AACB8D00074E6A /* WorkoutGenerator.swift */,
+				52D78C4E23B6C3AB0004031A /* DrawerMenu.swift */,
 			);
 			path = HiitGenerator;
 			sourceTree = "<group>";
@@ -210,6 +213,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				522F039323943C5600D743F7 /* ViewModel.swift in Sources */,
+				52D78C4F23B6C3AB0004031A /* DrawerMenu.swift in Sources */,
 				5299C80823AACB8E00074E6A /* WorkoutGenerator.swift in Sources */,
 				52C26A7623923DB400F809E6 /* ViewController.swift in Sources */,
 				52C26A7223923DB400F809E6 /* AppDelegate.swift in Sources */,

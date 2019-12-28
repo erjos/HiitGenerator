@@ -17,9 +17,9 @@ enum WorkoutViewState {
 
 class ViewModel {
     
-    var routine: Routine {
-        return WorkoutDataModels().generateRoutine()
-    }
+    var workoutGenerator = WOGenerator()
+    
+    //var routine: Routine {}
     
     var workoutPhases: [(timeInterval: Int, viewState: WorkoutViewState)]!
 }
