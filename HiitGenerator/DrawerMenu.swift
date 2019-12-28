@@ -11,18 +11,18 @@ import UIKit
 
 class DrawerMenu: UIControl {
     
-    //not sure what we need to use this for yet
     weak var delegate : DrawerMenuDelgate?
     private let CELL_REUSE_ID = "menuCell"
+    let HEADER_HEIGHT = 75
+    let CELL_HEIGHT = 44
+    let HEADER_VIEW = "DrawerHeaderView"
     
     //eventually we want this view to contain the table view that represents the menu
     var menuDisplay: UITableView?
     
     //initializes the display and sets up datasource/delegate
     func setupDisplay() {
-        guard menuDisplay == nil else {
-            return
-        }
+        guard menuDisplay == nil else { return }
         menuDisplay?.delegate = self
         menuDisplay?.dataSource = self
         menuDisplay?.register(UITableViewCell.self, forCellReuseIdentifier: CELL_REUSE_ID)
@@ -36,6 +36,21 @@ class DrawerMenu: UIControl {
     func getPanGesture(target: DrawerMenuDelgate) -> UIPanGestureRecognizer {
         self.delegate = target
         return UIPanGestureRecognizer(target: delegate, action: #selector(delegate?.handlePanGesture(_:)))
+    }
+    
+    
+    //might be able to combine these
+    func openMenu() {
+        UIView.animate(withDuration: 0.2) {
+            self.menuDisplay?.frame = CGRect(x: 0, y: 0, width: 300, height: (self.menuDisplay?.frame.height)!)
+            self.superview?.layoutIfNeeded()
+        }
+    }
+    func closeMenu() {
+        UIView.animate(withDuration: 0.2) {
+            self.menuDisplay?.frame = CGRect(x: 0, y: 0, width: 0, height: (self.menuDisplay?.frame.height)!)
+            self.superview?.layoutIfNeeded()
+        }
     }
     
     override init(frame: CGRect) {
@@ -55,38 +70,40 @@ class DrawerMenu: UIControl {
     //call this function from the handlePanGesture delegate function to allow interaction with the menu from any class
     func handleGesture(_ gesture: UIPanGestureRecognizer) {
         setupDisplay()
-        //let gestureIsDraggingFromLeftToRight = (gesture.velocity(in: view).x > 0)
+        //might not need this unwrapped here
+        //guard let parent = self.superview else { print("no superview") ; return }
+        
+        let gestureIsDraggingFromLeftToRight = (gesture.velocity(in: superview).x > 0)
         switch gesture.state {
         case .began:
             print("began")
         case .changed:
             if let _ = gesture.view {
                 //create method to set the display width
-                self.menuDisplay?.frame = CGRect(x: 0, y: 0, width: (self.menuDisplay?.frame.width)! + gesture.translation(in: self.superview).x, height: (self.menuDisplay?.frame.height)!)
+                self.menuDisplay?.frame = CGRect(x: 0, y: 0, width: (self.menuDisplay?.frame.width)! + gesture.translation(in: superview).x, height: (self.menuDisplay?.frame.height)!)
+                
                 //self.menuCoverWidth.constant = UIScreen.main.bounds.width - self.menuWidth.constant
                 gesture.setTranslation(CGPoint.zero, in: superview)
             }
             //implements logic to determine if menu should remain open or closed
         case .ended:
-            print("ended")
-//                if gestureIsDraggingFromLeftToRight {
-//                    let hasMovedGreaterThanHalfway = menuWidth.constant > 150
-//
-//                    if (hasMovedGreaterThanHalfway) {
-//                        self.openMenu()
-//                    } else {
-//                        self.closeMenu()
-//                    }
-//                } else {
-//                    let hasMovedGreaterThanHalfway = menuWidth.constant < 150
-//                    if (hasMovedGreaterThanHalfway) {
-//                        self.closeMenu()
-//                    } else {
-//                        self.openMenu()
-//                    }
-//                }
-            default:
-                break
+            if gestureIsDraggingFromLeftToRight {
+                let hasMovedGreaterThanHalfway = (menuDisplay?.frame.width)! > 150
+                if (hasMovedGreaterThanHalfway) {
+                    self.openMenu()
+                } else {
+                    self.closeMenu()
+                }
+            } else {
+                let hasMovedGreaterThanHalfway = (menuDisplay?.frame.width)! < 150
+                if (hasMovedGreaterThanHalfway) {
+                    self.closeMenu()
+                } else {
+                    self.openMenu()
+                }
+            }
+        default:
+            break
         }
     }
 }
@@ -94,18 +111,21 @@ class DrawerMenu: UIControl {
 extension DrawerMenu: UITableViewDataSource {
     //handles table setup
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        //
+        //make this dynamic
+        return 5
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        //
+        let cell = tableView.dequeueReusableCell(withIdentifier: CELL_REUSE_ID, for: indexPath)
+        //configure cell
+        return cell
     }
 }
 
 extension DrawerMenu: UITableViewDelegate {
     //handles passing the table selection to the delegate
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        <#code#>
+        //pass relevant data into the delegate method
     }
 }
 
