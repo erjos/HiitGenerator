@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="DrawerHeaderView" customModule="HiitGenerator" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="66"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bab-wx-PmR">
+                    <rect key="frame" x="5" y="21" width="24" height="24"/>
+                    <state key="normal" image="back_white">
+                        <color key="titleShadowColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
+                    <connections>
+                        <action selector="backButtonPressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="15l-MN-pIZ"/>
+                    </connections>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Menu" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VRr-no-qKv">
+                    <rect key="frame" x="39" y="18.5" width="59" height="29"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="74d-MA-5ti">
+                    <rect key="frame" x="330" y="18" width="30" height="30"/>
+                    <state key="normal" title="Edit">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
+                    <connections>
+                        <action selector="editButtonPressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="2nx-5x-dSa"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="0.1773212874" green="0.1773212874" blue="0.1773212874" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="bab-wx-PmR" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="2NX-LP-gXJ"/>
+                <constraint firstItem="VRr-no-qKv" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="2pK-Kl-hba"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="74d-MA-5ti" secondAttribute="trailing" constant="15" id="40g-JM-9Jo"/>
+                <constraint firstItem="bab-wx-PmR" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="5" id="5Pq-Q9-tV0"/>
+                <constraint firstItem="74d-MA-5ti" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="C7E-j6-teb"/>
+                <constraint firstItem="VRr-no-qKv" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="39" id="mTM-cY-LBk"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <connections>
+                <outlet property="backButton" destination="bab-wx-PmR" id="QVf-Ld-Nmc"/>
+                <outlet property="editDoneButton" destination="74d-MA-5ti" id="2Xf-qs-DLG"/>
+                <outlet property="headerLabel" destination="VRr-no-qKv" id="cY7-su-5pW"/>
+                <outlet property="headerLeadingConstraint" destination="mTM-cY-LBk" id="LHl-mo-jbi"/>
+            </connections>
+            <point key="canvasLocation" x="132" y="64.767616191904054"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="back_white" width="24" height="24"/>
+    </resources>
+</document>

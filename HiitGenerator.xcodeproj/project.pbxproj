@@ -18,6 +18,8 @@
 		52C26A8923923DBD00F809E6 /* HiitGeneratorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C26A8823923DBD00F809E6 /* HiitGeneratorTests.swift */; };
 		52C26A9423923DEE00F809E6 /* WorkoutDataModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C26A9323923DEE00F809E6 /* WorkoutDataModels.swift */; };
 		52D78C4F23B6C3AB0004031A /* DrawerMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D78C4E23B6C3AB0004031A /* DrawerMenu.swift */; };
+		52D78C5123B7367F0004031A /* DrawerHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 52D78C5023B7367F0004031A /* DrawerHeaderView.xib */; };
+		52D78C5323B737820004031A /* DrawerHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D78C5223B737820004031A /* DrawerHeaderView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +48,8 @@
 		52C26A8A23923DBD00F809E6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		52C26A9323923DEE00F809E6 /* WorkoutDataModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutDataModels.swift; sourceTree = "<group>"; };
 		52D78C4E23B6C3AB0004031A /* DrawerMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawerMenu.swift; sourceTree = "<group>"; };
+		52D78C5023B7367F0004031A /* DrawerHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DrawerHeaderView.xib; sourceTree = "<group>"; };
+		52D78C5223B737820004031A /* DrawerHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawerHeaderView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +102,8 @@
 				522F039223943C5600D743F7 /* ViewModel.swift */,
 				5299C80723AACB8D00074E6A /* WorkoutGenerator.swift */,
 				52D78C4E23B6C3AB0004031A /* DrawerMenu.swift */,
+				52D78C5023B7367F0004031A /* DrawerHeaderView.xib */,
+				52D78C5223B737820004031A /* DrawerHeaderView.swift */,
 			);
 			path = HiitGenerator;
 			sourceTree = "<group>";
@@ -194,6 +200,7 @@
 			files = (
 				52C26A7E23923DBD00F809E6 /* LaunchScreen.storyboard in Resources */,
 				52C26A7B23923DBD00F809E6 /* Assets.xcassets in Resources */,
+				52D78C5123B7367F0004031A /* DrawerHeaderView.xib in Resources */,
 				52C26A7923923DB400F809E6 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -214,6 +221,7 @@
 			files = (
 				522F039323943C5600D743F7 /* ViewModel.swift in Sources */,
 				52D78C4F23B6C3AB0004031A /* DrawerMenu.swift in Sources */,
+				52D78C5323B737820004031A /* DrawerHeaderView.swift in Sources */,
 				5299C80823AACB8E00074E6A /* WorkoutGenerator.swift in Sources */,
 				52C26A7623923DB400F809E6 /* ViewController.swift in Sources */,
 				52C26A7223923DB400F809E6 /* AppDelegate.swift in Sources */,
