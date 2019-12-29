@@ -26,6 +26,7 @@ class MenuDisplay: NSObject {
         menuView.dataSource = self
         menuView.delegate = self
         menuView.register(UITableViewCell.self, forCellReuseIdentifier: CELL_REUSE_ID)
+        menuView.bounces = false
     }
 }
 
@@ -82,7 +83,6 @@ extension MenuDisplay: UITableViewDelegate {
         return header
     }
     
-    //handles passing the table selection to the delegate
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //pass relevant data into the delegate method
     }

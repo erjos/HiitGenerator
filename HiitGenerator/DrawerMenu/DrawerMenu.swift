@@ -96,7 +96,6 @@ class DrawerMenu: UIControl {
             if let _ = gesture.view {
                 //create method to set the display width
                 self.menuView.frame = CGRect(x: 0, y: 0, width: (self.menuView.frame.width) + gesture.translation(in: superview).x, height: ((self.superview?.frame.height)!))
-                
                 //self.menuCoverWidth.constant = UIScreen.main.bounds.width - self.menuWidth.constant
                 gesture.setTranslation(CGPoint.zero, in: superview)
             }

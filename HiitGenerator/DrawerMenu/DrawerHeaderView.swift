@@ -16,10 +16,11 @@ class DrawerHeaderView: UIView {
     @IBOutlet weak var backButton: UIButton!
     
     weak var delegate: HeaderViewDelegate?
-    let DEFAULT_MENU_LABEL = "Menu"
     
-    let EDIT_LABEL = "Edit"
-    let DONE_LABEL = "Done"
+    private let DEFAULT_MENU_LABEL = "Menu"
+    
+    private let EDIT_LABEL = "Edit"
+    private let DONE_LABEL = "Done"
     
     @IBAction func backButtonPressed(_ sender: Any) {
         delegate?.didPressBack()
@@ -43,12 +44,12 @@ class DrawerHeaderView: UIView {
         }
     }
     
-    func hideBackButton(shouldHide: Bool) {
+    private func hideBackButton(shouldHide: Bool) {
         self.backButton.isHidden = shouldHide
         self.headerLeadingConstraint.constant = shouldHide ? 15 : 39
     }
     
-    func hideEditButton(shouldHide: Bool) {
+    private func hideEditButton(shouldHide: Bool) {
         self.editDoneButton.isHidden = shouldHide
     }
     
