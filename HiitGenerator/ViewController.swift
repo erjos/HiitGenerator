@@ -111,7 +111,19 @@ class ViewController: UIViewController {
     }
 }
 
-extension ViewController: DrawerMenuDelegate {
+extension ViewController: MenuInteractorDelegate {
+    func didSelectItem(indexPath: IndexPath, label: String) {
+        //handle select
+    }
+    
+    func didPressBack() {
+        //handle back press
+    }
+    
+    func didDeleteItem() {
+        //handle delete
+    }
+    
     //Consider how we want to trigger this to update
     func setDataSource(drawerMenu: DrawerMenu) -> MenuData {
         return MenuData("Menu", menuItems)

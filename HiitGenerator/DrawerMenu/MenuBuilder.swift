@@ -16,10 +16,12 @@ class MenuBuilder: NSObject {
     private let CELL_REUSE_ID = "menuCell"
     private var menuData: MenuData?
     
-    func setMenuData(_ data: MenuData?) {
-        self.menuData = data
-        
+    func setMenuData(_ menu: DrawerMenu) {
+        self.menuData = delegate?.setDataSource(drawerMenu: menu)
     }
+    
+    //this delegate is exposed via the DrawerMenu control so that view controllers can implement it
+    weak var delegate: MenuInteractorDelegate?
     
     //This function doesnt work for styling - make note in the documentation
     func setup(_ menuView: UITableView) {
@@ -31,8 +33,16 @@ class MenuBuilder: NSObject {
 }
 
 //the class that wants to handle these callbacks implements this delegate - we just need a way to set this delegate from the drawer menu
-protocol MenuInteractorProtocol : class {
+protocol MenuInteractorDelegate : class {
+    /**
+      * Sets the data source for the menu, implementation should return MenuDataObject. Can be used to reconfigure menu properites when the data source is changed or updated.
+     - Parameters:
+        - drawerMenu: The menu object that is requesting a new data source.
+    */
+    func setDataSource(drawerMenu: DrawerMenu)-> MenuData
+    
     func didSelectItem(indexPath: IndexPath, label: String)
+    
     func didPressBack()
     
     //function that lets users know to remove item from the data source
