@@ -21,12 +21,22 @@ class MenuBuilder: NSObject {
         
     }
     
+    //This function doesnt work for styling - make note in the documentation
     func setup(_ menuView: UITableView) {
         menuView.dataSource = self
         menuView.delegate = self
         menuView.register(UITableViewCell.self, forCellReuseIdentifier: CELL_REUSE_ID)
         menuView.bounces = false
     }
+}
+
+//the class that wants to handle these callbacks implements this delegate - we just need a way to set this delegate from the drawer menu
+protocol MenuInteractorProtocol : class {
+    func didSelectItem(indexPath: IndexPath, label: String)
+    func didPressBack()
+    
+    //function that lets users know to remove item from the data source
+    func didDeleteItem()
 }
 
 extension MenuBuilder: HeaderViewDelegate {
@@ -83,7 +93,7 @@ extension MenuBuilder: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //pass relevant data into the delegate method
+        
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {

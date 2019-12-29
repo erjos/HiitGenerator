@@ -11,7 +11,8 @@ import UIKit
 
 // Setup callbacks for menu selection, edits, back navigation, etc.
 class DrawerMenu: UIControl {
-    
+    //dont worry about the tap on the menu itself - just focus on the tap on the covering view
+    //add drop shadow to make it look like the drawer is sliding out from under - or provide access to set/remove drop shadow
     weak var gestureDelegate : DrawerGestureDelegate?
     weak var delegate: DrawerMenuDelegate?
     
@@ -24,6 +25,9 @@ class DrawerMenu: UIControl {
         self.superview?.addSubview(menuView)
         isDisplayAdded = true
         menuView.backgroundColor = .darkGray
+        menuView.separatorStyle = .singleLine
+        menuView.separatorColor = .black
+        menuView.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
     }
     
     /**
