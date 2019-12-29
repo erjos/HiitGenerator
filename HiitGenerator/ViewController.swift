@@ -33,10 +33,13 @@ class ViewController: UIViewController {
         setView(.Stopped)
         self.runTimer()
         startFirstWorkout()
-        //sets delegate and generates a pan gesture
-        let pan = drawerMenu.getPanGesture(target: self)
         
+        //sets delegate and generates a pan gesture
+        drawerMenu.gestureDelegate = self
+        let pan = drawerMenu.getPanGesture()
         drawerMenu.delegate = self
+        
+        drawerMenu.loadMenu()
         self.view.addGestureRecognizer(pan)
     }
     
@@ -111,18 +114,12 @@ class ViewController: UIViewController {
 extension ViewController: DrawerMenuDelegate {
     //Consider how we want to trigger this to update
     func setDataSource(drawerMenu: DrawerMenu) -> MenuData {
-        
-        //overload to create one option for one section and one for multiple sections
-        let items =
-        let sections = MenuSection(<#T##items: [String]##[String]#>, title: <#T##String#>)
-        let data = MenuData(<#T##sections: [MenuSection]##[MenuSection]#>, <#T##shouldEdit: Bool##Bool#>, <#T##backButton: Bool##Bool#>)
+        return MenuData("MATT WUZ HERE", menuItems)
     }
 }
 
 extension ViewController: DrawerGestureDelegate {
-    
     func handlePanGesture(_ gesture: UIPanGestureRecognizer) {
-        //this works... so we can modify the menu view this way - with a method that is public exposed to render the menu from this delegate function
         self.drawerMenu.handleGesture(gesture)
     }
 }

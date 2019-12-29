@@ -20,17 +20,22 @@ class DrawerMenu: UIControl {
     weak var gestureDelegate : DrawerGestureDelegate?
     weak var delegate: DrawerMenuDelegate?
     
-    //do we want to force unwrap here
     private var menuData: MenuData?
     
     lazy var menuDisplay: UITableView = UITableView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
     
     private var isDisplayAdded = false
     
-    func addDisplayToView() {
+    private func addDisplayToView() {
         guard !isDisplayAdded else { return }
         self.superview?.addSubview(menuDisplay)
         isDisplayAdded = true
+    }
+    
+    //document this function
+    func loadMenu() {
+        menuData = delegate?.setDataSource(drawerMenu: self)
+        menuDisplay.reloadData()
     }
     
     private func setupDisplay() {
@@ -39,8 +44,7 @@ class DrawerMenu: UIControl {
         menuDisplay.register(UITableViewCell.self, forCellReuseIdentifier: CELL_REUSE_ID)
     }
     
-    func getPanGesture(target: DrawerGestureDelegate) -> UIPanGestureRecognizer {
-        self.gestureDelegate = target
+    func getPanGesture() -> UIPanGestureRecognizer {
         return UIPanGestureRecognizer(target: gestureDelegate, action: #selector(gestureDelegate?.handlePanGesture(_:)))
     }
     
@@ -78,6 +82,7 @@ class DrawerMenu: UIControl {
         let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height))
         imageView.image = menuImage
         self.addSubview(imageView)
+        self.loadMenu()
     }
     
     @objc func didTap(_ gesture: UITapGestureRecognizer) {
@@ -127,27 +132,28 @@ class DrawerMenu: UIControl {
 }
 
 extension DrawerMenu: UITableViewDataSource {
+    
     func numberOfSections(in tableView: UITableView) -> Int {
-        //make this dynamic
-        return 1
+        return menuData?.sections.count ?? 0
     }
-    //handles table setup
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        //make this dynamic
-        return 5
+        return menuData?.sections[section].items.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CELL_REUSE_ID, for: indexPath)
         
         //configure cell
-        cell.backgroundColor = UIColor(red: 55/255, green: 55/255, blue: 55/255, alpha: 1)//.darkGray
+        cell.backgroundColor = UIColor(red: 55/255, green: 55/255, blue: 55/255, alpha: 1)
         cell.textLabel?.textColor = UIColor.white
         cell.textLabel?.lineBreakMode = .byClipping
         cell.selectionStyle = .none
         
-        cell.textLabel?.text = "test"
-        
+        //set cell title
+        if let item = menuData?.sections[indexPath.section].items[indexPath.row] {
+            cell.textLabel?.text = item
+        }
         return cell
     }
 }
@@ -161,10 +167,13 @@ extension DrawerMenu: UITableViewDelegate {
         }
         
         header.delegate = self
-        //header.setupHeaderView(tableState: tableState)
+        if let data = menuData {
+            header.setupHeaderView(data, section)
+        }
         tableView.setEditing(false, animated: false)
         return header
     }
+    
     //handles passing the table selection to the delegate
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //pass relevant data into the delegate method

@@ -34,6 +34,15 @@ class DrawerHeaderView: UIView {
         self.delegate?.didPressEdit(shouldEdit: isEdit)
     }
     
+    func setupHeaderView(_ data: MenuData, _ section: Int) {
+        let currentSection = data.sections[section]
+        headerLabel.text = currentSection.title
+        hideBackButton(shouldHide: !data.backButtonVisible)
+        if section == 0 {
+            hideEditButton(shouldHide: !data.shouldEdit)
+        }
+    }
+    
     func hideBackButton(shouldHide: Bool) {
         self.backButton.isHidden = shouldHide
         self.headerLeadingConstraint.constant = shouldHide ? 15 : 39
@@ -46,6 +55,7 @@ class DrawerHeaderView: UIView {
     override func awakeFromNib() {
         super.awakeFromNib()
         hideEditButton(shouldHide: true)
+        hideBackButton(shouldHide: true)
     }
     
 }
