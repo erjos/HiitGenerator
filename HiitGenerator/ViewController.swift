@@ -25,6 +25,8 @@ class ViewController: UIViewController {
     @IBAction func didPress(_ sender: Any) {
         
     }
+    
+    var menuItems = ["Log In", "Settings", "My Workouts", "Disclaimer", "About the App"]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -105,7 +107,7 @@ class ViewController: UIViewController {
     }
 }
 
-extension ViewController: DrawerMenuDelgate {
+extension ViewController: DrawerGestureDelegate {
     
     func handlePanGesture(_ gesture: UIPanGestureRecognizer) {
         //this works... so we can modify the menu view this way - with a method that is public exposed to render the menu from this delegate function

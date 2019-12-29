@@ -9,23 +9,33 @@
 import Foundation
 import UIKit
 
+//could eventually make it so that the menu appears from the top bottom left or right
+
+//what do we need to set up the table?
+//header name for each section
+//items for each section
+
+//is editable
+//should navigate back
+
+//so we could have multiple states, but we can just reconfigure the table for that...
+
 class DrawerMenu: UIControl {
     
-    weak var delegate : DrawerMenuDelgate?
+    weak var gestureDelegate : DrawerGestureDelegate?
     private let CELL_REUSE_ID = "menuCell"
     let HEADER_HEIGHT = 75
     let CELL_HEIGHT = 44
     let HEADER_VIEW = "DrawerHeaderView"
     
-    //eventually we want this view to contain the table view that represents the menu
     lazy var menuDisplay: UITableView = UITableView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
     
-    var isAdded = false
+    private var isDisplayAdded = false
     
     func addDisplayToView() {
-        guard !isAdded else { return }
+        guard !isDisplayAdded else { return }
         self.superview?.addSubview(menuDisplay)
-        isAdded = true
+        isDisplayAdded = true
     }
     func setupDisplay() {
         menuDisplay.delegate = self
@@ -34,9 +44,9 @@ class DrawerMenu: UIControl {
         menuDisplay.backgroundColor = .darkGray
     }
     
-    func getPanGesture(target: DrawerMenuDelgate) -> UIPanGestureRecognizer {
-        self.delegate = target
-        return UIPanGestureRecognizer(target: delegate, action: #selector(delegate?.handlePanGesture(_:)))
+    func getPanGesture(target: DrawerGestureDelegate) -> UIPanGestureRecognizer {
+        self.gestureDelegate = target
+        return UIPanGestureRecognizer(target: gestureDelegate, action: #selector(gestureDelegate?.handlePanGesture(_:)))
     }
     
     //might be able to combine these
@@ -114,6 +124,10 @@ class DrawerMenu: UIControl {
 }
 
 extension DrawerMenu: UITableViewDataSource {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        //make this dynamic
+        return 1
+    }
     //handles table setup
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //make this dynamic
@@ -169,9 +183,34 @@ extension DrawerMenu: UITableViewDelegate {
     }
 }
 
-//maybe this'll make it more obvious that we need to implement the pan gesture when using this control
-@objc protocol DrawerMenuDelgate : class {
+struct MenuData {
+    var backButtonVisible: Bool
+    var shouldEdit: Bool
+    var sections: [MenuSection]
+}
+
+struct MenuSection {
+    var title : String
+    var items : [String]
+}
+
+@objc protocol DrawerGestureDelegate : class {
+    /**
+      * Handles the pan gesture from the view controller where the menu exists. ViewControllers that implement this method should call the handleGesture(_ gesture: UIPanGestureRecognizer) function on the DrawerMenu and getPanGesture(target: DrawerGestureDelegate) -> UIPanGestureRecognizer to create and add the pan gesture to their view.
+     - Parameters:
+        - gesture: the pan gesture recognizer that is generated from the getPanGesture method on the DrawerMenu
+    */
     @objc func handlePanGesture(_ gesture: UIPanGestureRecognizer)
+}
+
+protocol DrawerMenuDelegate: class {
+    
+    /**
+      * Sets the data source for the menu
+     - Parameters:
+        - menuData: the object that represents the data in the menu
+    */
+    func setDataSource(menuData: MenuData)
 }
 
 extension DrawerMenu: HeaderViewDelegate {
