@@ -114,7 +114,7 @@ class ViewController: UIViewController {
 extension ViewController: DrawerMenuDelegate {
     //Consider how we want to trigger this to update
     func setDataSource(drawerMenu: DrawerMenu) -> MenuData {
-        return MenuData("MATT WUZ HERE", menuItems)
+        return MenuData("Menu", menuItems)
     }
 }
 
