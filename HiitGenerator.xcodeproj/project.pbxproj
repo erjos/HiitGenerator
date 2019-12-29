@@ -20,7 +20,7 @@
 		52D78C4F23B6C3AB0004031A /* DrawerMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D78C4E23B6C3AB0004031A /* DrawerMenu.swift */; };
 		52D78C5123B7367F0004031A /* DrawerHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 52D78C5023B7367F0004031A /* DrawerHeaderView.xib */; };
 		52D78C5323B737820004031A /* DrawerHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D78C5223B737820004031A /* DrawerHeaderView.swift */; };
-		52D78C5623B87FDC0004031A /* MenuDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D78C5523B87FDC0004031A /* MenuDisplay.swift */; };
+		52D78C5623B87FDC0004031A /* MenuBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D78C5523B87FDC0004031A /* MenuBuilder.swift */; };
 		52D78C5823B886C10004031A /* MenuData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D78C5723B886C10004031A /* MenuData.swift */; };
 /* End PBXBuildFile section */
 
@@ -52,7 +52,7 @@
 		52D78C4E23B6C3AB0004031A /* DrawerMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawerMenu.swift; sourceTree = "<group>"; };
 		52D78C5023B7367F0004031A /* DrawerHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DrawerHeaderView.xib; sourceTree = "<group>"; };
 		52D78C5223B737820004031A /* DrawerHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawerHeaderView.swift; sourceTree = "<group>"; };
-		52D78C5523B87FDC0004031A /* MenuDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuDisplay.swift; sourceTree = "<group>"; };
+		52D78C5523B87FDC0004031A /* MenuBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBuilder.swift; sourceTree = "<group>"; };
 		52D78C5723B886C10004031A /* MenuData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -125,7 +125,7 @@
 				52D78C5223B737820004031A /* DrawerHeaderView.swift */,
 				52D78C5023B7367F0004031A /* DrawerHeaderView.xib */,
 				52D78C4E23B6C3AB0004031A /* DrawerMenu.swift */,
-				52D78C5523B87FDC0004031A /* MenuDisplay.swift */,
+				52D78C5523B87FDC0004031A /* MenuBuilder.swift */,
 				52D78C5723B886C10004031A /* MenuData.swift */,
 			);
 			path = DrawerMenu;
@@ -236,7 +236,7 @@
 				522F039323943C5600D743F7 /* ViewModel.swift in Sources */,
 				52D78C4F23B6C3AB0004031A /* DrawerMenu.swift in Sources */,
 				52D78C5823B886C10004031A /* MenuData.swift in Sources */,
-				52D78C5623B87FDC0004031A /* MenuDisplay.swift in Sources */,
+				52D78C5623B87FDC0004031A /* MenuBuilder.swift in Sources */,
 				52D78C5323B737820004031A /* DrawerHeaderView.swift in Sources */,
 				5299C80823AACB8E00074E6A /* WorkoutGenerator.swift in Sources */,
 				52C26A7623923DB400F809E6 /* ViewController.swift in Sources */,

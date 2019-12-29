@@ -15,7 +15,7 @@ class DrawerMenu: UIControl {
     weak var gestureDelegate : DrawerGestureDelegate?
     weak var delegate: DrawerMenuDelegate?
     
-    private var menuBuilder = MenuDisplay()
+    private var menuBuilder = MenuBuilder()
     private lazy var menuView: UITableView = UITableView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
     private var isDisplayAdded = false
     

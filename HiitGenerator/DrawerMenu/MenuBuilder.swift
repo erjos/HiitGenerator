@@ -5,11 +5,10 @@
 //  Created by Ethan Joseph on 12/28/19.
 //  Copyright © 2019 Ethan Joseph. All rights reserved.
 //
-
 import Foundation
 import UIKit
 
-class MenuDisplay: NSObject {
+class MenuBuilder: NSObject {
     
     private let HEADER_HEIGHT = 75
     private let CELL_HEIGHT = 44
@@ -30,7 +29,7 @@ class MenuDisplay: NSObject {
     }
 }
 
-extension MenuDisplay: HeaderViewDelegate {
+extension MenuBuilder: HeaderViewDelegate {
     func didPressBack() {
         //deliver callback that back navigation was pressed
     }
@@ -41,7 +40,7 @@ extension MenuDisplay: HeaderViewDelegate {
 }
 
 
-extension MenuDisplay: UITableViewDataSource {
+extension MenuBuilder: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return menuData?.sections.count ?? 0
@@ -68,7 +67,7 @@ extension MenuDisplay: UITableViewDataSource {
     }
 }
 
-extension MenuDisplay: UITableViewDelegate {
+extension MenuBuilder: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         guard let header = Bundle.main.loadNibNamed(HEADER_VIEW, owner: self, options: nil)?.first as? DrawerHeaderView else {
             print("Failed to load and cast view")
