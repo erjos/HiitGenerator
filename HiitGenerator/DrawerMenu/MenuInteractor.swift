@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class MenuBuilder: NSObject {
+class MenuInteractor: NSObject {
     
     private let HEADER_HEIGHT = 75
     private let CELL_HEIGHT = 44
@@ -20,7 +20,6 @@ class MenuBuilder: NSObject {
         self.menuData = delegate?.setDataSource(drawerMenu: menu)
     }
     
-    //this delegate is exposed via the DrawerMenu control so that view controllers can implement it
     weak var delegate: MenuInteractorDelegate?
     
     //This function doesnt work for styling - make note in the documentation
@@ -49,18 +48,19 @@ protocol MenuInteractorDelegate : class {
     func didDeleteItem()
 }
 
-extension MenuBuilder: HeaderViewDelegate {
+extension MenuInteractor: HeaderViewDelegate {
     func didPressBack() {
-        //deliver callback that back navigation was pressed
+        delegate?.didPressBack()
     }
     
     func didPressEdit(shouldEdit: Bool) {
         //set editing on table if permitted - deliver callback
+        //pass relevant data to callback
     }
 }
 
 
-extension MenuBuilder: UITableViewDataSource {
+extension MenuInteractor: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return menuData?.sections.count ?? 0
@@ -87,7 +87,7 @@ extension MenuBuilder: UITableViewDataSource {
     }
 }
 
-extension MenuBuilder: UITableViewDelegate {
+extension MenuInteractor: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         guard let header = Bundle.main.loadNibNamed(HEADER_VIEW, owner: self, options: nil)?.first as? DrawerHeaderView else {
             print("Failed to load and cast view")
@@ -103,7 +103,8 @@ extension MenuBuilder: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        guard let item = menuData?.sections[indexPath.section].items[indexPath.row] else { return }
+        delegate?.didSelectItem(indexPath: indexPath, label: item)
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {

@@ -9,25 +9,23 @@
 import Foundation
 import UIKit
 
-// Setup callbacks for menu selection, edits, back navigation, etc.
-// Expose functions for users to close/open menu programatically
-
 class DrawerMenu: UIControl {
     //dont worry about the tap on the menu itself - just focus on the tap on the covering view
-    //add drop shadow to make it look like the drawer is sliding out from under - or provide access to set/remove drop shadow
+    //add drop shadow?
+    //expose open/close functions
     weak var gestureDelegate : DrawerGestureDelegate?
     
     //exposed interaction with delegate that lives on the menu interactor
     weak var delegate: MenuInteractorDelegate? {
         get {
-            return menuBuilder.delegate
+            return menuInteractor.delegate
         }
         set {
-            menuBuilder.delegate = newValue
+            menuInteractor.delegate = newValue
         }
     }
     
-    private var menuBuilder = MenuBuilder()
+    private var menuInteractor = MenuInteractor()
     private lazy var menuView: UITableView = UITableView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
     private var isDisplayAdded = false
     
@@ -46,7 +44,7 @@ class DrawerMenu: UIControl {
     */
     func loadMenu() {
         //triggers delegate function on menu interactor to retrieve the data source from the delegate
-        menuBuilder.setMenuData(self)
+        menuInteractor.setMenuData(self)
         menuView.reloadData()
     }
     
@@ -83,7 +81,7 @@ class DrawerMenu: UIControl {
     }
 
     private func commonInit() {
-        self.menuBuilder.setup(menuView)
+        self.menuInteractor.setup(menuView)
         self.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(DrawerMenu.didTap(_:))))
         
         let menuImage = UIImage(named: "menu_black")
@@ -146,13 +144,3 @@ class DrawerMenu: UIControl {
     */
     @objc func handlePanGesture(_ gesture: UIPanGestureRecognizer)
 }
-
-//protocol DrawerMenuDelegate: class {
-//
-//    /**
-//      * Sets the data source for the menu, implementation should return MenuDataObject. Can be used to reconfigure menu properites when the data source is changed or updated.
-//     - Parameters:
-//        - drawerMenu: The menu object that is requesting a new data source.
-//    */
-//    func setDataSource(drawerMenu: DrawerMenu)-> MenuData
-//}

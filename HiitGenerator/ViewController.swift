@@ -38,7 +38,6 @@ class ViewController: UIViewController {
         drawerMenu.gestureDelegate = self
         let pan = drawerMenu.getPanGesture()
         drawerMenu.delegate = self
-        
         drawerMenu.loadMenu()
         self.view.addGestureRecognizer(pan)
     }
