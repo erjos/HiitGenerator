@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 
+// Setup callbacks for menu selection, edits, back navigation, etc.
 class DrawerMenu: UIControl {
     
     weak var gestureDelegate : DrawerGestureDelegate?
@@ -25,12 +26,17 @@ class DrawerMenu: UIControl {
         menuView.backgroundColor = .darkGray
     }
     
-    //document this function
+    /**
+      * Call this function if you want to reload the menu data or change the menu data source. It will trigger the setDataSource(drawerMenu: DrawerMenu)-> MenuData delegate function.
+    */
     func loadMenu() {
         menuBuilder.setMenuData(delegate?.setDataSource(drawerMenu: self))
         menuView.reloadData()
     }
     
+    /**
+      * Returns a pan gesture that is used to open and close the menu. Add it to the view that is responsible for displaying the menu and implement the MenuGestureDelegate to handle the selector.
+    */
     func getPanGesture() -> UIPanGestureRecognizer {
         return UIPanGestureRecognizer(target: gestureDelegate, action: #selector(gestureDelegate?.handlePanGesture(_:)))
     }
