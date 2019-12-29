@@ -35,7 +35,8 @@ class ViewController: UIViewController {
         startFirstWorkout()
         //sets delegate and generates a pan gesture
         let pan = drawerMenu.getPanGesture(target: self)
-        //
+        
+        drawerMenu.delegate = self
         self.view.addGestureRecognizer(pan)
     }
     
@@ -104,6 +105,17 @@ class ViewController: UIViewController {
         timerDevice.invalidate()
         seconds = 0
         timerDevice = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
+    }
+}
+
+extension ViewController: DrawerMenuDelegate {
+    //Consider how we want to trigger this to update
+    func setDataSource(drawerMenu: DrawerMenu) -> MenuData {
+        
+        //overload to create one option for one section and one for multiple sections
+        let items =
+        let sections = MenuSection(<#T##items: [String]##[String]#>, title: <#T##String#>)
+        let data = MenuData(<#T##sections: [MenuSection]##[MenuSection]#>, <#T##shouldEdit: Bool##Bool#>, <#T##backButton: Bool##Bool#>)
     }
 }
 

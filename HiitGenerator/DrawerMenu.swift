@@ -9,15 +9,19 @@
 import Foundation
 import UIKit
 
-//could eventually make it so that the menu appears from the top bottom left or right
-
+//TODO: add enum that controls menu location and style (top,left,bottom,etc.)
 class DrawerMenu: UIControl {
     
-    weak var gestureDelegate : DrawerGestureDelegate?
     private let CELL_REUSE_ID = "menuCell"
     private let HEADER_HEIGHT = 75
     private let CELL_HEIGHT = 44
     private let HEADER_VIEW = "DrawerHeaderView"
+    
+    weak var gestureDelegate : DrawerGestureDelegate?
+    weak var delegate: DrawerMenuDelegate?
+    
+    //do we want to force unwrap here
+    private var menuData: MenuData?
     
     lazy var menuDisplay: UITableView = UITableView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
     
@@ -80,7 +84,11 @@ class DrawerMenu: UIControl {
         openMenu()
     }
     
-    //call this function from the handlePanGesture delegate function to allow interaction with the menu from any class
+    /**
+      * This function handles the gesture logic for the standard sliding drawer behavior. Implement this method in the DrawerGestureDelegate to handle the gesture added on the view where the menu lives.
+     - Parameters:
+        - gesture: The pan gesture on the view, which controls the menu.
+    */
     func handleGesture(_ gesture: UIPanGestureRecognizer) {
         addDisplayToView()
         let gestureIsDraggingFromLeftToRight = (gesture.velocity(in: superview).x > 0)
@@ -183,10 +191,17 @@ struct MenuData {
     var shouldEdit: Bool
     var sections: [MenuSection]
     
+    //document these inits
     init(_ sections:[MenuSection], _ shouldEdit: Bool = false, _ backButton: Bool = false) {
         self.backButtonVisible = backButton
         self.shouldEdit = shouldEdit
         self.sections = sections
+    }
+    
+    init(_ title: String, _ items: [String], _ shouldEdit: Bool = false, _ backButton: Bool = false) {
+        self.sections = [MenuSection(items, title: title)]
+        self.shouldEdit = shouldEdit
+        self.backButtonVisible = backButton
     }
 }
 
@@ -194,6 +209,7 @@ struct MenuSection {
     var title : String
     var items : [String]
     
+    //document init
     init(_ items: [String], title: String) {
         self.title = title
         self.items = items
