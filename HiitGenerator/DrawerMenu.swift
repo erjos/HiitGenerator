@@ -11,15 +11,6 @@ import UIKit
 
 //could eventually make it so that the menu appears from the top bottom left or right
 
-//what do we need to set up the table?
-//header name for each section
-//items for each section
-
-//is editable
-//should navigate back
-
-//so we could have multiple states, but we can just reconfigure the table for that...
-
 class DrawerMenu: UIControl {
     
     weak var gestureDelegate : DrawerGestureDelegate?
@@ -187,6 +178,12 @@ struct MenuData {
     var backButtonVisible: Bool
     var shouldEdit: Bool
     var sections: [MenuSection]
+    
+    init(sections:[MenuSection], shouldEdit: Bool = false, backButton: Bool = false) {
+        self.backButtonVisible = backButton
+        self.shouldEdit = shouldEdit
+        self.sections = sections
+    }
 }
 
 struct MenuSection {
@@ -206,11 +203,9 @@ struct MenuSection {
 protocol DrawerMenuDelegate: class {
     
     /**
-      * Sets the data source for the menu
-     - Parameters:
-        - menuData: the object that represents the data in the menu
+      * Sets the data source for the menu, implementation should return MenuDataObject
     */
-    func setDataSource(menuData: MenuData)
+    func setDataSource()->MenuData
 }
 
 extension DrawerMenu: HeaderViewDelegate {
