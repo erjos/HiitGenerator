@@ -15,9 +15,9 @@ class DrawerMenu: UIControl {
     
     weak var gestureDelegate : DrawerGestureDelegate?
     private let CELL_REUSE_ID = "menuCell"
-    let HEADER_HEIGHT = 75
-    let CELL_HEIGHT = 44
-    let HEADER_VIEW = "DrawerHeaderView"
+    private let HEADER_HEIGHT = 75
+    private let CELL_HEIGHT = 44
+    private let HEADER_VIEW = "DrawerHeaderView"
     
     lazy var menuDisplay: UITableView = UITableView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
     
@@ -28,11 +28,11 @@ class DrawerMenu: UIControl {
         self.superview?.addSubview(menuDisplay)
         isDisplayAdded = true
     }
-    func setupDisplay() {
+    
+    private func setupDisplay() {
         menuDisplay.delegate = self
         menuDisplay.dataSource = self
         menuDisplay.register(UITableViewCell.self, forCellReuseIdentifier: CELL_REUSE_ID)
-        menuDisplay.backgroundColor = .darkGray
     }
     
     func getPanGesture(target: DrawerGestureDelegate) -> UIPanGestureRecognizer {
@@ -41,7 +41,7 @@ class DrawerMenu: UIControl {
     }
     
     //might be able to combine these
-    func openMenu() {
+    private func openMenu() {
         addDisplayToView()
         UIView.animate(withDuration: 0.2) {
             self.menuDisplay.frame = CGRect(x: 0, y: 0, width: 300, height: (self.superview?.frame.height)!)
@@ -49,7 +49,7 @@ class DrawerMenu: UIControl {
         }
     }
     
-    func closeMenu() {
+    private func closeMenu() {
         UIView.animate(withDuration: 0.2) {
             self.menuDisplay.frame = CGRect(x: 0, y: 0, width: 0, height: (self.superview?.frame.height)!)
             self.superview?.layoutIfNeeded()
@@ -67,9 +67,13 @@ class DrawerMenu: UIControl {
     }
 
     private func commonInit() {
-        backgroundColor = .blue
         self.setupDisplay()
         self.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(DrawerMenu.didTap(_:))))
+        
+        let menuImage = UIImage(named: "menu_black")
+        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height))
+        imageView.image = menuImage
+        self.addSubview(imageView)
     }
     
     @objc func didTap(_ gesture: UITapGestureRecognizer) {
@@ -179,7 +183,7 @@ struct MenuData {
     var shouldEdit: Bool
     var sections: [MenuSection]
     
-    init(sections:[MenuSection], shouldEdit: Bool = false, backButton: Bool = false) {
+    init(_ sections:[MenuSection], _ shouldEdit: Bool = false, _ backButton: Bool = false) {
         self.backButtonVisible = backButton
         self.shouldEdit = shouldEdit
         self.sections = sections
@@ -189,13 +193,18 @@ struct MenuData {
 struct MenuSection {
     var title : String
     var items : [String]
+    
+    init(_ items: [String], title: String) {
+        self.title = title
+        self.items = items
+    }
 }
 
 @objc protocol DrawerGestureDelegate : class {
     /**
       * Handles the pan gesture from the view controller where the menu exists. ViewControllers that implement this method should call the handleGesture(_ gesture: UIPanGestureRecognizer) function on the DrawerMenu and getPanGesture(target: DrawerGestureDelegate) -> UIPanGestureRecognizer to create and add the pan gesture to their view.
      - Parameters:
-        - gesture: the pan gesture recognizer that is generated from the getPanGesture method on the DrawerMenu
+        - gesture: The pan gesture recognizer that is generated from the getPanGesture method on the DrawerMenu
     */
     @objc func handlePanGesture(_ gesture: UIPanGestureRecognizer)
 }
@@ -203,9 +212,11 @@ struct MenuSection {
 protocol DrawerMenuDelegate: class {
     
     /**
-      * Sets the data source for the menu, implementation should return MenuDataObject
+      * Sets the data source for the menu, implementation should return MenuDataObject. Can be used to reconfigure menu properites when the data source is changed or updated.
+     - Parameters:
+        - drawerMenu: The menu object that is requesting a new data source.
     */
-    func setDataSource()->MenuData
+    func setDataSource(drawerMenu: DrawerMenu)-> MenuData
 }
 
 extension DrawerMenu: HeaderViewDelegate {
