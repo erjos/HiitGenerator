@@ -27,12 +27,21 @@ class DrawerMenu: UIControl {
     
     private var menuInteractor = MenuInteractor()
     private lazy var menuView: UITableView = UITableView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+    private lazy var coverView: UIView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+    
     private var isDisplayAdded = false
     
+    
+    //TODO: it is confusing that this is where we are styling the table - either need to make this more obvious or do it in a different place so we know where it happens
     private func addDisplayToView() {
         guard !isDisplayAdded else { return }
         self.superview?.addSubview(menuView)
+        coverView.backgroundColor = .black
+        coverView.alpha = 0.5
+        self.superview?.addSubview(coverView)
         isDisplayAdded = true
+        
+        //MENU DISPLAY STYLING
         menuView.backgroundColor = .darkGray
         menuView.separatorStyle = .singleLine
         menuView.separatorColor = .black
@@ -59,6 +68,7 @@ class DrawerMenu: UIControl {
         addDisplayToView()
         UIView.animate(withDuration: 0.2) {
             self.menuView.frame = CGRect(x: 0, y: 0, width: 300, height: (self.superview?.frame.height)!)
+            self.coverView.frame = CGRect(x: 300, y: 0, width: (self.superview?.frame.width)! - 300, height: (self.superview?.frame.height)!)
             self.superview?.layoutIfNeeded()
         }
     }
@@ -66,6 +76,7 @@ class DrawerMenu: UIControl {
     private func closeMenu() {
         UIView.animate(withDuration: 0.2) {
             self.menuView.frame = CGRect(x: 0, y: 0, width: 0, height: (self.superview?.frame.height)!)
+            self.coverView.frame = CGRect(x: 0, y: 0, width: 0, height: (self.superview?.frame.height)!)
             self.superview?.layoutIfNeeded()
         }
     }
@@ -109,7 +120,9 @@ class DrawerMenu: UIControl {
         case .changed:
             if let _ = gesture.view {
                 //create method to set the display width
-                self.menuView.frame = CGRect(x: 0, y: 0, width: (self.menuView.frame.width) + gesture.translation(in: superview).x, height: ((self.superview?.frame.height)!))
+                let newWidth = (self.menuView.frame.width) + gesture.translation(in: superview).x
+                self.menuView.frame = CGRect(x: 0, y: 0, width: newWidth, height: ((self.superview?.frame.height)!))
+                self.coverView.frame = CGRect(x: newWidth, y: 0, width: (superview?.frame.width)! - newWidth, height: ((self.superview?.frame.height)!))
                 //self.menuCoverWidth.constant = UIScreen.main.bounds.width - self.menuWidth.constant
                 gesture.setTranslation(CGPoint.zero, in: superview)
             }
@@ -143,4 +156,16 @@ class DrawerMenu: UIControl {
         - gesture: The pan gesture recognizer that is generated from the getPanGesture method on the DrawerMenu
     */
     @objc func handlePanGesture(_ gesture: UIPanGestureRecognizer)
+}
+
+extension UIView {
+    func dropShadow() {
+        //self.layer.shadowPath = UIBezierPath(rect: self.layer.bounds).cgPath
+        self.layer.masksToBounds = false
+        self.layer.shadowColor = UIColor.black.cgColor
+        self.layer.shadowOpacity = 0.9
+        self.layer.shadowOffset = CGSize(width: 0.0, height: 2.0)
+        self.layer.shadowRadius = 4.0
+        //self.layer.cornerRadius = 5.0
+    }
 }
