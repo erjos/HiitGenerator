@@ -9,6 +9,11 @@
 import Foundation
 import UIKit
 
+//fix the bexier path for the shadow
+//fix the force unwraps
+//add gesture to cover view
+//make menu width dynamic based on screen size
+
 class DrawerMenu: UIControl {
     //dont worry about the tap on the menu itself - just focus on the tap on the covering view
     //add drop shadow?
@@ -28,6 +33,10 @@ class DrawerMenu: UIControl {
     private var menuInteractor = MenuInteractor()
     private lazy var menuView: UITableView = UITableView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
     private lazy var coverView: UIView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+    private lazy var shadowView: UIView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+    
+    private let menuWidth:CGFloat = 300
+    private let shadowWidth:CGFloat = 5
     
     private var isDisplayAdded = false
     
@@ -35,17 +44,22 @@ class DrawerMenu: UIControl {
     //TODO: it is confusing that this is where we are styling the table - either need to make this more obvious or do it in a different place so we know where it happens
     private func addDisplayToView() {
         guard !isDisplayAdded else { return }
+        self.superview?.addSubview(shadowView)
         self.superview?.addSubview(menuView)
-        coverView.backgroundColor = .black
-        coverView.alpha = 0.5
         self.superview?.addSubview(coverView)
         isDisplayAdded = true
+        
+        coverView.backgroundColor = .clear
+        coverView.alpha = 0.5
         
         //MENU DISPLAY STYLING
         menuView.backgroundColor = .darkGray
         menuView.separatorStyle = .singleLine
         menuView.separatorColor = .black
         menuView.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        
+        shadowView.backgroundColor = .black
+        shadowView.dropShadow()
     }
     
     /**
@@ -67,8 +81,11 @@ class DrawerMenu: UIControl {
     private func openMenu() {
         addDisplayToView()
         UIView.animate(withDuration: 0.2) {
-            self.menuView.frame = CGRect(x: 0, y: 0, width: 300, height: (self.superview?.frame.height)!)
-            self.coverView.frame = CGRect(x: 300, y: 0, width: (self.superview?.frame.width)! - 300, height: (self.superview?.frame.height)!)
+            
+            
+            self.menuView.frame = CGRect(x: 0, y: 0, width: self.menuWidth, height: (self.superview?.frame.height)!)
+            self.shadowView.frame = CGRect(x: (self.menuWidth - self.shadowWidth), y: 0, width: self.shadowWidth, height: (self.superview?.frame.height)!)
+            self.coverView.frame = CGRect(x: self.menuWidth, y: 0, width: (self.superview?.frame.width)! - self.menuWidth, height: (self.superview?.frame.height)!)
             self.superview?.layoutIfNeeded()
         }
     }
@@ -76,6 +93,7 @@ class DrawerMenu: UIControl {
     private func closeMenu() {
         UIView.animate(withDuration: 0.2) {
             self.menuView.frame = CGRect(x: 0, y: 0, width: 0, height: (self.superview?.frame.height)!)
+            self.shadowView.frame = CGRect(x: 0, y: 0, width: 0, height: (self.superview?.frame.height)!)
             self.coverView.frame = CGRect(x: 0, y: 0, width: 0, height: (self.superview?.frame.height)!)
             self.superview?.layoutIfNeeded()
         }
@@ -123,7 +141,8 @@ class DrawerMenu: UIControl {
                 let newWidth = (self.menuView.frame.width) + gesture.translation(in: superview).x
                 self.menuView.frame = CGRect(x: 0, y: 0, width: newWidth, height: ((self.superview?.frame.height)!))
                 self.coverView.frame = CGRect(x: newWidth, y: 0, width: (superview?.frame.width)! - newWidth, height: ((self.superview?.frame.height)!))
-                //self.menuCoverWidth.constant = UIScreen.main.bounds.width - self.menuWidth.constant
+                self.shadowView.frame = CGRect(x: newWidth - shadowWidth, y: 0, width: shadowWidth, height: ((self.superview?.frame.height)!))
+                
                 gesture.setTranslation(CGPoint.zero, in: superview)
             }
             //implements logic to determine if menu should remain open or closed
@@ -163,9 +182,9 @@ extension UIView {
         //self.layer.shadowPath = UIBezierPath(rect: self.layer.bounds).cgPath
         self.layer.masksToBounds = false
         self.layer.shadowColor = UIColor.black.cgColor
-        self.layer.shadowOpacity = 0.9
-        self.layer.shadowOffset = CGSize(width: 0.0, height: 2.0)
-        self.layer.shadowRadius = 4.0
+        self.layer.shadowOpacity = 1.0
+        self.layer.shadowOffset = CGSize(width: 3.0, height: 0.0)
+        self.layer.shadowRadius = 3.0
         //self.layer.cornerRadius = 5.0
     }
 }
