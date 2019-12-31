@@ -9,14 +9,14 @@
 import Foundation
 import UIKit
 
-//fix the bexier path for the shadow
+//fix the bezier path for the shadow
 //fix the force unwraps
 //add gesture to cover view
 //make menu width dynamic based on screen size
 
 class DrawerMenu: UIControl {
     //dont worry about the tap on the menu itself - just focus on the tap on the covering view
-    //add drop shadow?
+    
     //expose open/close functions
     weak var gestureDelegate : DrawerGestureDelegate?
     
@@ -51,6 +51,7 @@ class DrawerMenu: UIControl {
         
         coverView.backgroundColor = .clear
         coverView.alpha = 0.5
+        coverView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleCoverTap(_:))))
         
         //MENU DISPLAY STYLING
         menuView.backgroundColor = .darkGray
@@ -118,6 +119,10 @@ class DrawerMenu: UIControl {
         imageView.image = menuImage
         self.addSubview(imageView)
         self.loadMenu()
+    }
+    
+    @objc private func handleCoverTap(_ gesture: UITapGestureRecognizer) {
+        closeMenu()
     }
     
     @objc private func didTap(_ gesture: UITapGestureRecognizer) {
