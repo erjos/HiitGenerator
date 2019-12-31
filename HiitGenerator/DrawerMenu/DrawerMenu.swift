@@ -9,14 +9,12 @@
 import Foundation
 import UIKit
 
-//fix the bezier path for the shadow
 //fix the force unwraps
 
 //make menu width dynamic based on screen size
 
 class DrawerMenu: UIControl {
     
-    //expose open/close functions
     weak var gestureDelegate : DrawerGestureDelegate?
     
     weak var delegate: MenuInteractorDelegate? {
@@ -29,11 +27,12 @@ class DrawerMenu: UIControl {
     }
     
     private var menuInteractor = MenuInteractor()
+    
+    //initialize with height from the parent view to make the animation smoother
     private lazy var menuView: UITableView = UITableView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
     private lazy var coverView: UIView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
     private lazy var shadowView: UIView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
     
-    private let menuWidth:CGFloat = 300
     private let shadowWidth:CGFloat = 5
     
     private var isDisplayAdded = false
@@ -62,7 +61,7 @@ class DrawerMenu: UIControl {
     }
     
     /**
-      * Call this function if you want to reload the menu data or change the menu data source. It will trigger the setDataSource(drawerMenu: DrawerMenu)-> MenuData delegate function.
+     Call this function if you want to reload the menu data or change the menu data source. It will trigger the setDataSource(drawerMenu: DrawerMenu)-> MenuData delegate function.
     */
     func loadMenu() {
         //triggers delegate function on menu interactor to retrieve the data source from the delegate
@@ -71,29 +70,36 @@ class DrawerMenu: UIControl {
     }
     
     /**
-      * Returns a pan gesture that is used to open and close the menu. Add it to the view that is responsible for displaying the menu and implement the MenuGestureDelegate to handle the selector.
+     Returns a pan gesture that is used to open and close the menu. Add it to the view that is responsible for displaying the menu and implement the MenuGestureDelegate to handle the selector.
     */
     func getPanGesture() -> UIPanGestureRecognizer {
         return UIPanGestureRecognizer(target: gestureDelegate, action: #selector(gestureDelegate?.handlePanGesture(_:)))
     }
     
-    private func openMenu() {
+    /**
+     Opens the menu display.
+    */
+    func openMenu() {
         setupDisplay()
         UIView.animate(withDuration: 0.2) {
-            
-            
-            self.menuView.frame = CGRect(x: 0, y: 0, width: self.menuWidth, height: (self.superview?.frame.height)!)
-            self.shadowView.frame = CGRect(x: (self.menuWidth - self.shadowWidth), y: 0, width: self.shadowWidth, height: (self.superview?.frame.height)!)
-            self.coverView.frame = CGRect(x: self.menuWidth, y: 0, width: (self.superview?.frame.width)! - self.menuWidth, height: (self.superview?.frame.height)!)
+            guard let parent = self.superview else { return }
+            let menuWidth = parent.frame.width * (2/3)
+            self.menuView.frame = CGRect(x: 0, y: 0, width: menuWidth, height: parent.frame.height)
+            self.shadowView.frame = CGRect(x: (menuWidth - self.shadowWidth), y: 0, width: self.shadowWidth, height: parent.frame.height)
+            self.coverView.frame = CGRect(x: menuWidth, y: 0, width: parent.frame.width - menuWidth, height: parent.frame.height)
             self.superview?.layoutIfNeeded()
         }
     }
     
-    private func closeMenu() {
+    /**
+     Closes the menu display.
+    */
+    func closeMenu() {
         UIView.animate(withDuration: 0.2) {
-            self.menuView.frame = CGRect(x: 0, y: 0, width: 0, height: (self.superview?.frame.height)!)
-            self.shadowView.frame = CGRect(x: 0, y: 0, width: 0, height: (self.superview?.frame.height)!)
-            self.coverView.frame = CGRect(x: 0, y: 0, width: 0, height: (self.superview?.frame.height)!)
+            guard let parent = self.superview else { return }
+            self.menuView.frame = CGRect(x: 0, y: 0, width: 0, height: parent.frame.height)
+            self.shadowView.frame = CGRect(x: 0, y: 0, width: 0, height: parent.frame.height)
+            self.coverView.frame = CGRect(x: 0, y: 0, width: 0, height: parent.frame.height)
             self.superview?.layoutIfNeeded()
         }
     }
@@ -188,6 +194,6 @@ extension UIView {
         self.layer.shadowOpacity = 1.0
         self.layer.shadowOffset = CGSize(width: 3.0, height: 0.0)
         self.layer.shadowRadius = 3.0
-        //self.layer.cornerRadius = 5.0
+        self.layer.cornerRadius = 0.0
     }
 }
