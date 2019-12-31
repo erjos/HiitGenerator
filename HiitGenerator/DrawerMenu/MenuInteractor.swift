@@ -16,6 +16,8 @@ class MenuInteractor: NSObject {
     private let CELL_REUSE_ID = "menuCell"
     private var menuData: MenuData?
     
+    lazy var menuTable: UITableView = UITableView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+    
     func setMenuData(_ menu: DrawerMenu) {
         self.menuData = delegate?.setDataSource(drawerMenu: menu)
     }
@@ -32,10 +34,10 @@ class MenuInteractor: NSObject {
         menuView.delegate = self
         menuView.register(UITableViewCell.self, forCellReuseIdentifier: CELL_REUSE_ID)
         menuView.bounces = false
+        menuTable = menuView
     }
 }
 
-//the class that wants to handle these callbacks implements this delegate - we just need a way to set this delegate from the drawer menu
 protocol MenuInteractorDelegate : class {
     /**
       * Sets the data source for the menu, implementation should return MenuDataObject. Can be used to reconfigure menu properites when the data source is changed or updated.
@@ -44,12 +46,24 @@ protocol MenuInteractorDelegate : class {
     */
     func setDataSource(drawerMenu: DrawerMenu)-> MenuData
     
+    /**
+      * Called when a row in the menu display table is selected.
+     - Parameters:
+        - indexPath: The indexPath of the selected item
+        - label: The label of the selected item.
+    */
     func didSelectItem(indexPath: IndexPath, label: String)
     
+    /**
+     Called when the user clicks on the back navigation in the menu header.
+     */
     func didPressBack()
     
-    //function that lets users know to remove item from the data source
-    func didDeleteItem()
+    /// Called when user deletes an item from the table
+    /// - Parameters:
+    ///   - indexPath: The index path of the item to be removed from the data source.
+    ///   - label: The label of the item to be removed.
+    func didDeleteItem(indexPath: IndexPath, label: String)
 }
 
 extension MenuInteractor: HeaderViewDelegate {
@@ -58,8 +72,7 @@ extension MenuInteractor: HeaderViewDelegate {
     }
     
     func didPressEdit(shouldEdit: Bool) {
-        //set editing on table if permitted - deliver callback
-        //pass relevant data to callback
+        self.menuTable.setEditing(shouldEdit, animated: true)
     }
 }
 
@@ -77,17 +90,24 @@ extension MenuInteractor: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CELL_REUSE_ID, for: indexPath)
         
-        //configure cell
+        //CONFIGURE CELL
         cell.backgroundColor = UIColor(red: 55/255, green: 55/255, blue: 55/255, alpha: 1)
         cell.textLabel?.textColor = UIColor.white
         cell.textLabel?.lineBreakMode = .byClipping
         cell.selectionStyle = .none
         
-        //set cell title
+        //SET TITLE
         if let item = menuData?.sections[indexPath.section].items[indexPath.row] {
             cell.textLabel?.text = item
         }
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            guard let item = menuData?.sections[indexPath.section].items[indexPath.row] else { return }
+            self.delegate?.didDeleteItem(indexPath: indexPath, label: item)
+        }
     }
 }
 

@@ -31,7 +31,6 @@ class DrawerHeaderView: UIView {
         let title = isEdit ? DONE_LABEL : EDIT_LABEL
         self.editDoneButton.setTitle(title, for: .normal)
         
-        //Handle button delegate action
         self.delegate?.didPressEdit(shouldEdit: isEdit)
     }
     

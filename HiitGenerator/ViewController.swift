@@ -119,8 +119,8 @@ extension ViewController: MenuInteractorDelegate {
         //handle back press
     }
     
-    func didDeleteItem() {
-        //handle delete
+    func didDeleteItem(indexPath: IndexPath, label: String) {
+        //delete item from data source
     }
     
     //Consider how we want to trigger this to update

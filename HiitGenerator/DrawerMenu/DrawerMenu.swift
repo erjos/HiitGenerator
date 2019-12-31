@@ -9,27 +9,22 @@
 import Foundation
 import UIKit
 
-//fix the force unwraps
-
-//make menu width dynamic based on screen size
-
 class DrawerMenu: UIControl {
     
     weak var gestureDelegate : DrawerGestureDelegate?
     
     weak var delegate: MenuInteractorDelegate? {
-        get {
-            return menuInteractor.delegate
-        }
-        set {
-            menuInteractor.delegate = newValue
-        }
+        get { return menuInteractor.delegate }
+        set { menuInteractor.delegate = newValue }
     }
     
     private var menuInteractor = MenuInteractor()
     
-    //initialize with height from the parent view to make the animation smoother
-    private lazy var menuView: UITableView = UITableView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+    private var menuView : UITableView {
+        get { return menuInteractor.menuTable }
+        set { menuInteractor.menuTable = newValue }
+    }
+    
     private lazy var coverView: UIView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
     private lazy var shadowView: UIView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
     
@@ -140,21 +135,20 @@ class DrawerMenu: UIControl {
     */
     func handleGesture(_ gesture: UIPanGestureRecognizer) {
         setupDisplay()
+        guard let parent = self.superview else { return }
         let gestureIsDraggingFromLeftToRight = (gesture.velocity(in: superview).x > 0)
         switch gesture.state {
         case .began:
             print("began")
         case .changed:
             if let _ = gesture.view {
-                //create method to set the display width
-                let newWidth = (self.menuView.frame.width) + gesture.translation(in: superview).x
-                self.menuView.frame = CGRect(x: 0, y: 0, width: newWidth, height: ((self.superview?.frame.height)!))
-                self.coverView.frame = CGRect(x: newWidth, y: 0, width: (superview?.frame.width)! - newWidth, height: ((self.superview?.frame.height)!))
-                self.shadowView.frame = CGRect(x: newWidth - shadowWidth, y: 0, width: shadowWidth, height: ((self.superview?.frame.height)!))
+                let newWidth = (self.menuView.frame.width) + gesture.translation(in: parent).x
+                self.menuView.frame = CGRect(x: 0, y: 0, width: newWidth, height: parent.frame.height)
+                self.coverView.frame = CGRect(x: newWidth, y: 0, width: parent.frame.width - newWidth, height: parent.frame.height)
+                self.shadowView.frame = CGRect(x: newWidth - shadowWidth, y: 0, width: shadowWidth, height: parent.frame.height)
                 
-                gesture.setTranslation(CGPoint.zero, in: superview)
+                gesture.setTranslation(CGPoint.zero, in: parent)
             }
-            //implements logic to determine if menu should remain open or closed
         case .ended:
             if gestureIsDraggingFromLeftToRight {
                 let hasMovedGreaterThanHalfway = (menuView.frame.width) > 150
@@ -188,7 +182,6 @@ class DrawerMenu: UIControl {
 
 extension UIView {
     func dropShadow() {
-        //self.layer.shadowPath = UIBezierPath(rect: self.layer.bounds).cgPath
         self.layer.masksToBounds = false
         self.layer.shadowColor = UIColor.black.cgColor
         self.layer.shadowOpacity = 1.0
