@@ -11,16 +11,14 @@ import UIKit
 
 //fix the bezier path for the shadow
 //fix the force unwraps
-//add gesture to cover view
+
 //make menu width dynamic based on screen size
 
 class DrawerMenu: UIControl {
-    //dont worry about the tap on the menu itself - just focus on the tap on the covering view
     
     //expose open/close functions
     weak var gestureDelegate : DrawerGestureDelegate?
     
-    //exposed interaction with delegate that lives on the menu interactor
     weak var delegate: MenuInteractorDelegate? {
         get {
             return menuInteractor.delegate
@@ -40,25 +38,25 @@ class DrawerMenu: UIControl {
     
     private var isDisplayAdded = false
     
-    
-    //TODO: it is confusing that this is where we are styling the table - either need to make this more obvious or do it in a different place so we know where it happens
-    private func addDisplayToView() {
+    private func setupDisplay() {
         guard !isDisplayAdded else { return }
         self.superview?.addSubview(shadowView)
         self.superview?.addSubview(menuView)
         self.superview?.addSubview(coverView)
         isDisplayAdded = true
         
+        //COVER VIEW
         coverView.backgroundColor = .clear
         coverView.alpha = 0.5
         coverView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleCoverTap(_:))))
         
-        //MENU DISPLAY STYLING
+        //MENU VIEW STYLING
         menuView.backgroundColor = .darkGray
         menuView.separatorStyle = .singleLine
         menuView.separatorColor = .black
         menuView.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         
+        //SHADOW VIEW
         shadowView.backgroundColor = .black
         shadowView.dropShadow()
     }
@@ -80,7 +78,7 @@ class DrawerMenu: UIControl {
     }
     
     private func openMenu() {
-        addDisplayToView()
+        setupDisplay()
         UIView.animate(withDuration: 0.2) {
             
             
@@ -135,7 +133,7 @@ class DrawerMenu: UIControl {
         - gesture: The pan gesture on the view, which controls the menu.
     */
     func handleGesture(_ gesture: UIPanGestureRecognizer) {
-        addDisplayToView()
+        setupDisplay()
         let gestureIsDraggingFromLeftToRight = (gesture.velocity(in: superview).x > 0)
         switch gesture.state {
         case .began:

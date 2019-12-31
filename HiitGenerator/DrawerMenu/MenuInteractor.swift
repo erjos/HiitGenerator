@@ -22,7 +22,11 @@ class MenuInteractor: NSObject {
     
     weak var delegate: MenuInteractorDelegate?
     
-    //This function doesnt work for styling - make note in the documentation
+    /**
+      * Sets up the data source and delegate for the menu table view to be handled by the interactor rather than the DrawerMenu class. Cannot be used for styling the menu.
+     - Parameters:
+        - menuView: The table view that represents the menu.
+    */
     func setup(_ menuView: UITableView) {
         menuView.dataSource = self
         menuView.delegate = self
