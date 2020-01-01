@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import DrawerMenu
 
 class ViewController: UIViewController {
     var viewModel = ViewModel()

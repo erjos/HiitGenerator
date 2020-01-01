@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		522D275623BC5709003E76F8 /* DrawerMenu.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5257709023BC54F90042F0DF /* DrawerMenu.framework */; };
+		522D275723BC5709003E76F8 /* DrawerMenu.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5257709023BC54F90042F0DF /* DrawerMenu.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		522F039323943C5600D743F7 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 522F039223943C5600D743F7 /* ViewModel.swift */; };
 		5299C80823AACB8E00074E6A /* WorkoutGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5299C80723AACB8D00074E6A /* WorkoutGenerator.swift */; };
 		52C26A7223923DB400F809E6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C26A7123923DB400F809E6 /* AppDelegate.swift */; };
@@ -17,14 +19,23 @@
 		52C26A7E23923DBD00F809E6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 52C26A7C23923DBD00F809E6 /* LaunchScreen.storyboard */; };
 		52C26A8923923DBD00F809E6 /* HiitGeneratorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C26A8823923DBD00F809E6 /* HiitGeneratorTests.swift */; };
 		52C26A9423923DEE00F809E6 /* WorkoutDataModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C26A9323923DEE00F809E6 /* WorkoutDataModels.swift */; };
-		52D78C4F23B6C3AB0004031A /* DrawerMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D78C4E23B6C3AB0004031A /* DrawerMenu.swift */; };
-		52D78C5123B7367F0004031A /* DrawerHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 52D78C5023B7367F0004031A /* DrawerHeaderView.xib */; };
-		52D78C5323B737820004031A /* DrawerHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D78C5223B737820004031A /* DrawerHeaderView.swift */; };
-		52D78C5623B87FDC0004031A /* MenuInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D78C5523B87FDC0004031A /* MenuInteractor.swift */; };
-		52D78C5823B886C10004031A /* MenuData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D78C5723B886C10004031A /* MenuData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		5257708F23BC54F90042F0DF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5257708A23BC54F90042F0DF /* DrawerMenu.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 52D78C3423B6BF810004031A;
+			remoteInfo = DrawerMenu;
+		};
+		5257709123BC54F90042F0DF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5257708A23BC54F90042F0DF /* DrawerMenu.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 52D78C3D23B6BF810004031A;
+			remoteInfo = DrawerMenuTests;
+		};
 		52C26A8523923DBD00F809E6 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 52C26A6623923DB400F809E6 /* Project object */;
@@ -34,8 +45,23 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		522D275823BC5709003E76F8 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				522D275723BC5709003E76F8 /* DrawerMenu.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		522F039223943C5600D743F7 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
+		5257708A23BC54F90042F0DF /* DrawerMenu.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = DrawerMenu.xcodeproj; path = ../DrawerMenu/DrawerMenu.xcodeproj; sourceTree = "<group>"; };
 		5299C80723AACB8D00074E6A /* WorkoutGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutGenerator.swift; sourceTree = "<group>"; };
 		52C26A6E23923DB400F809E6 /* HiitGenerator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HiitGenerator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		52C26A7123923DB400F809E6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -49,11 +75,6 @@
 		52C26A8823923DBD00F809E6 /* HiitGeneratorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HiitGeneratorTests.swift; sourceTree = "<group>"; };
 		52C26A8A23923DBD00F809E6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		52C26A9323923DEE00F809E6 /* WorkoutDataModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutDataModels.swift; sourceTree = "<group>"; };
-		52D78C4E23B6C3AB0004031A /* DrawerMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawerMenu.swift; sourceTree = "<group>"; };
-		52D78C5023B7367F0004031A /* DrawerHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DrawerHeaderView.xib; sourceTree = "<group>"; };
-		52D78C5223B737820004031A /* DrawerHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawerHeaderView.swift; sourceTree = "<group>"; };
-		52D78C5523B87FDC0004031A /* MenuInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuInteractor.swift; sourceTree = "<group>"; };
-		52D78C5723B886C10004031A /* MenuData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +82,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				522D275623BC5709003E76F8 /* DrawerMenu.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -74,12 +96,30 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		522D275023BC559D003E76F8 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		5257708B23BC54F90042F0DF /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				5257709023BC54F90042F0DF /* DrawerMenu.framework */,
+				5257709223BC54F90042F0DF /* DrawerMenuTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		52C26A6523923DB400F809E6 = {
 			isa = PBXGroup;
 			children = (
+				5257708A23BC54F90042F0DF /* DrawerMenu.xcodeproj */,
 				52C26A7023923DB400F809E6 /* HiitGenerator */,
 				52C26A8723923DBD00F809E6 /* HiitGeneratorTests */,
 				52C26A6F23923DB400F809E6 /* Products */,
+				522D275023BC559D003E76F8 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -95,7 +135,6 @@
 		52C26A7023923DB400F809E6 /* HiitGenerator */ = {
 			isa = PBXGroup;
 			children = (
-				52D78C5423B87F980004031A /* DrawerMenu */,
 				52C26A7123923DB400F809E6 /* AppDelegate.swift */,
 				52C26A7323923DB400F809E6 /* SceneDelegate.swift */,
 				52C26A7523923DB400F809E6 /* ViewController.swift */,
@@ -119,18 +158,6 @@
 			path = HiitGeneratorTests;
 			sourceTree = "<group>";
 		};
-		52D78C5423B87F980004031A /* DrawerMenu */ = {
-			isa = PBXGroup;
-			children = (
-				52D78C5223B737820004031A /* DrawerHeaderView.swift */,
-				52D78C5023B7367F0004031A /* DrawerHeaderView.xib */,
-				52D78C4E23B6C3AB0004031A /* DrawerMenu.swift */,
-				52D78C5523B87FDC0004031A /* MenuInteractor.swift */,
-				52D78C5723B886C10004031A /* MenuData.swift */,
-			);
-			path = DrawerMenu;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -141,6 +168,7 @@
 				52C26A6A23923DB400F809E6 /* Sources */,
 				52C26A6B23923DB400F809E6 /* Frameworks */,
 				52C26A6C23923DB400F809E6 /* Resources */,
+				522D275823BC5709003E76F8 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -199,6 +227,12 @@
 			mainGroup = 52C26A6523923DB400F809E6;
 			productRefGroup = 52C26A6F23923DB400F809E6 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 5257708B23BC54F90042F0DF /* Products */;
+					ProjectRef = 5257708A23BC54F90042F0DF /* DrawerMenu.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				52C26A6D23923DB400F809E6 /* HiitGenerator */,
@@ -207,6 +241,23 @@
 		};
 /* End PBXProject section */
 
+/* Begin PBXReferenceProxy section */
+		5257709023BC54F90042F0DF /* DrawerMenu.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = DrawerMenu.framework;
+			remoteRef = 5257708F23BC54F90042F0DF /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		5257709223BC54F90042F0DF /* DrawerMenuTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = DrawerMenuTests.xctest;
+			remoteRef = 5257709123BC54F90042F0DF /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
 /* Begin PBXResourcesBuildPhase section */
 		52C26A6C23923DB400F809E6 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
@@ -214,7 +265,6 @@
 			files = (
 				52C26A7E23923DBD00F809E6 /* LaunchScreen.storyboard in Resources */,
 				52C26A7B23923DBD00F809E6 /* Assets.xcassets in Resources */,
-				52D78C5123B7367F0004031A /* DrawerHeaderView.xib in Resources */,
 				52C26A7923923DB400F809E6 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -234,10 +284,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				522F039323943C5600D743F7 /* ViewModel.swift in Sources */,
-				52D78C4F23B6C3AB0004031A /* DrawerMenu.swift in Sources */,
-				52D78C5823B886C10004031A /* MenuData.swift in Sources */,
-				52D78C5623B87FDC0004031A /* MenuInteractor.swift in Sources */,
-				52D78C5323B737820004031A /* DrawerHeaderView.swift in Sources */,
 				5299C80823AACB8E00074E6A /* WorkoutGenerator.swift in Sources */,
 				52C26A7623923DB400F809E6 /* ViewController.swift in Sources */,
 				52C26A7223923DB400F809E6 /* AppDelegate.swift in Sources */,
