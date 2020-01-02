@@ -89,7 +89,7 @@
                                     <constraint firstItem="Ey4-GG-7Kf" firstAttribute="top" secondItem="u6f-gl-pAV" secondAttribute="bottom" constant="25" id="gF3-N5-jLj"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a1S-BK-WVS" customClass="DrawerMenu" customModule="HiitGenerator" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a1S-BK-WVS" customClass="DrawerMenu" customModule="DrawerMenu">
                                 <rect key="frame" x="20" y="51" width="40" height="40"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <constraints>
