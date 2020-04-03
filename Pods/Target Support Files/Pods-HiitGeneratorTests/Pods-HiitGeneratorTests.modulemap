@@ -1,0 +1,6 @@
+framework module Pods_HiitGeneratorTests {
+  umbrella header "Pods-HiitGeneratorTests-umbrella.h"
+
+  export *
+  module * { export * }
+}

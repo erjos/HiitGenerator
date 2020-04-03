@@ -35,12 +35,8 @@ class ViewController: UIViewController {
         self.runTimer()
         startFirstWorkout()
         
-        //sets delegate and generates a pan gesture
-        drawerMenu.gestureDelegate = self
-        let pan = drawerMenu.getPanGesture()
         drawerMenu.delegate = self
         drawerMenu.loadMenu()
-        self.view.addGestureRecognizer(pan)
     }
     
     func startFirstWorkout() {
@@ -109,6 +105,7 @@ class ViewController: UIViewController {
         seconds = 0
         timerDevice = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
     }
+    
 }
 
 extension ViewController: MenuInteractorDelegate {
@@ -127,11 +124,5 @@ extension ViewController: MenuInteractorDelegate {
     //Consider how we want to trigger this to update
     func setDataSource(drawerMenu: DrawerMenu) -> MenuData {
         return MenuData("Menu", menuItems)
-    }
-}
-
-extension ViewController: DrawerGestureDelegate {
-    func handlePanGesture(_ gesture: UIPanGestureRecognizer) {
-        self.drawerMenu.handleGesture(gesture)
     }
 }

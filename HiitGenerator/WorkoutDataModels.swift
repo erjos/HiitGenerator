@@ -7,6 +7,9 @@
 //
 
 import Foundation
+
+//need an efficient way to get and modify these workouts :/
+
 //An idea would be to create a crowd-source component - let users add workouts of their own
 //Save workouts that individuals create and we can send them out to others...
 
