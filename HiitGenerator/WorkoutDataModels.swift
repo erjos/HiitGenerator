@@ -24,6 +24,10 @@ class WorkoutDataModels {
         var difficulty: Difficulty
     }
     
+    //TODO: other beneficial pieces of data:
+    //tips/pointers - // modifications?
+    //equipment needed - to adapt to what users may have on hand
+    
     enum WorkoutType: String {
         case Arms = "arms"
         case Shoulders = "shoulders"
@@ -44,7 +48,7 @@ class WorkoutDataModels {
     }
 
     
-    // Need a way to edit these instructions
+    // Need a way to edit these instructions and add new ones
     
     //Solution would be to create a CMS for the workouts on the client to edit and add.
     
@@ -57,7 +61,7 @@ class WorkoutDataModels {
                      "difficulty" : 2] as [String: Any]
     
     let moutainClimber = ["name" : "Mountain Climber",
-                          "description" : "Full-body core exercise",
+                          "description" : "Full-body core exercise.",
                           "instructions" : ["Start in a plank position.",
                                             "Keeping the rest of your body stationary, bend one leg at the knee bringing it up to your chest.",
                                             "Alternate between legs."],
@@ -73,7 +77,7 @@ class WorkoutDataModels {
                   "difficulty" : 2] as [String: Any]
     
     let inchworm = ["name" : "Inchworm",
-                    "description" : "Great core workout or warmup",
+                    "description" : "Great core workout or warmup.",
                     "instructions" : ["Bend at the waist and place your hands on the ground.",
                                       "Using your hands, walk yourself out until you reach plank position.",
                                       "Walk yourself back to your starting position."],
@@ -90,40 +94,40 @@ class WorkoutDataModels {
     
     let toeTap = ["name" : "Toe Tap",
                   "description" : "Gets the heart pumping.",
-                  "instructions" : ["Use a sturdy surface around knee height or shorter",
+                  "instructions" : ["Use a sturdy surface around knee height or below.",
                                     "Bring the toe of your foot onto the surface until it lightly touches.",
                                     "Rapidly return your foot to starting position and switch feet, creating a running motion."],
                   "workout_types" : ["cardio","legs"],
                   "difficulty" : 1] as [String: Any]
     
     let jumpingJack = ["name" : "Jumping Jack",
-                       "description" : "A gymclass favorite. Still good for you.",
+                       "description" : "A gymclass favorite.",
                        "instructions" : ["Do a jumping jack."],
                        "workout_types" : ["cardio"],
                        "difficulty" : 1] as [String: Any]
     
     let skater = ["name" : "Skater",
-                  "description" : "",
-                  "instructions" : ["","",""],
-                  "workout_types" : ["","",""],
+                  "description" : "Skate in place, jump side-to-side. Great for strength and agility.",
+                  "instructions" : ["Ensure you have room to jump side to side. Crouch down with your one leg reaching the opposite leg out behind you for balance while coming across your body to touch your foot. ",
+                                    "Jump sideways off your crouched foot onto your other leg and bend the knee to absorb the impact.",
+                                    "Ensure your are balanced and steady, then repeat."],
+                  "workout_types" : ["cardio","legs"],
                   "difficulty" : 2] as [String: Any]
     
-    let skiHop = ["name" : "Ski Hop",
-                 "descriptio n" : "",
-                 "instructions" : ["","",""],
-                 "workout_types" : ["","",""],
-                 "difficulty" : 2] as [String: Any]
-    
     let squatAbTwist = ["name" : "Squat with Ab Twist",
-                        "description" : "",
-                        "instructions" : ["","",""],
-                        "workout_types" : ["","",""],
+                        "description" : "Normal squat with a twist to help engage the abs.",
+                        "instructions" : ["Start with feet shoulder width apart.",
+                                          "Sit back in a squat and extend upwards engaging your legs.",
+                                          "When you reach the top of your squat tighten your abs to bring one knee up and touch the opposite elbow. Repeat."],
+                        "workout_types" : ["cardio","legs","core"],
                         "difficulty" : 2] as [String: Any]
     
     let sideShuffle = ["name" : "Side Shuffle",
-                       "description" : "",
-                       "instructions" : ["","",""],
-                       "workout_types" : ["","",""],
+                       "description" : "A simple exercise to elevate the heart-rate.",
+                       "instructions" : ["Ensure you have enough room on either side.",
+                                         "Step out to the side with one foot shuffling your opposite foot in to touch the inside of your stepping foot.",
+                                         "Repeat in the opposite direction."],
+                       "workout_types" : ["cardio"],
                        "difficulty" : 1] as [String: Any]
     
     let highKnees = ["name" : "High Knee",
@@ -142,13 +146,17 @@ class WorkoutDataModels {
     
     let mountainClimberTwist = ["name" : "Mountain Climbers with Twist",
                                 "description" : "Mountain climbers with added ab twist for difficulty.",
-                                "instructions" : ["Similar to a normal mountain climber begin in plank position.","Bring your knee up to the opposite elbow.","Repeat with opposite side."],
+                                "instructions" : ["Similar to a normal mountain climber begin in plank position.",
+                                                  "Bring your knee up to the opposite elbow.",
+                                                  "Repeat with opposite side."],
                                 "workout_types" : ["cardio","core","arms"],
                                 "difficulty" : 3] as [String: Any]
     
     let plankKneeTap = ["name" : "Plank Knee Tap",
                         "description" : "As if planks weren't hard enough.",
-                        "instructions" : ["Start in the plank position.","Bring one arm down and the opposite leg up to tap the opposite knee",""],
+                        "instructions" : ["Start in the plank position.",
+                                          "Bending at the waist, while keeping your back straight, bring one arm down and tap the opposite knee.",
+                                          "Extend at the waist returning to a normal plank position and repeat with the opposite side."],
                         "workout_types" : ["cardio","core","arms"],
                         "difficulty" : 3] as [String: Any]
     
@@ -160,6 +168,8 @@ class WorkoutDataModels {
                            "workout_types" : ["cardio","legs"],
                            "difficulty" : 2] as [String: Any]
     
+    
+    
 //    "Step Up"
 //    "Reverse Lunge with Hop"
 //    "Triceps Pushup with Mountain Climber"
@@ -169,14 +179,23 @@ class WorkoutDataModels {
 //    "Inchworm with Pushup"
 //    "Plank with Knee Dips"
     
-    func createExerciseCollection(collection: [Exercise]) {
+    
+    func createExerciseCollection(collection: [[String: Any]]) {
         
-        for exercise in collection {
-            writeDataToFirestore(exercise: exercise)
+        let firestore = Firestore.firestore()
+        
+        for exercise_data in collection {
+            firestore.collection("exercise").addDocument(data: exercise_data) { (error_optional) in
+                if let _ = error_optional {
+                    // TODO: handle error
+                }
+                // TODO: completion actions
+            }
         }
     }
     
-    func writeDataToFirestore(exercise: Exercise) {
+    /// Stores excercise data model in firestore as a new document
+    func writeExerciseToFirestore(exercise: Exercise) {
         
         // Adds document and generates UUID automatically
         let workout_types_array = exercise.workoutTypes.map { (type) -> String in
@@ -187,7 +206,7 @@ class WorkoutDataModels {
                              "description": exercise.description,
                              "instructions": exercise.instructions,
                              "workout_types": workout_types_array,
-                             "difficulty": exercise.difficulty] as [String : Any]
+                             "difficulty": exercise.difficulty] as [String: Any]
         let _ = Firestore.firestore().collection("exercises").addDocument(data: exercise_data) { (error_optional) in
             // TODO: add error handler and any completion actions
         }
