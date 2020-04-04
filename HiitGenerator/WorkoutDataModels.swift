@@ -8,28 +8,41 @@
 import Foundation
 import FirebaseFirestore
 
+// App concept:
+//Barebones simplified way to generate randomized minimalist workouts.
+
+//Themes
+//Could utilize the retro, analog vibes of a classic no frills gym
+
 class WorkoutDataModels {
     
     struct Exercise {
         var name: String
         var description: String
         var instructions: [String]
-        var workoutTypes: [WorkoutTypes]
+        var workoutTypes: [WorkoutType]
         var difficulty: Difficulty
     }
     
-    enum WorkoutTypes: String {
-        case Arms = "Arms"
-        case Shoulders = "Shoulders"
-        case Biceps = "Biceps"
-        case Triceps = "Triceps"
-        case Chest = "Chest"
-        case Back = "Back"
-        case Legs = "Legs"
-        case Cardio = "Cardio"
-        case Core = "Core"
+    enum WorkoutType: String {
+        case Arms = "arms"
+        case Shoulders = "shoulders"
+        case Biceps = "biceps"
+        case Triceps = "triceps"
+        case Chest = "chest"
+        case Back = "back"
+        case Legs = "legs"
+        case Cardio = "cardio"
+        case Core = "core"
     }
     
+    /// Exercise difficulty and complexity scale with 1 being the easiest
+    enum Difficulty: Int {
+        case One = 1
+        case Two = 2
+        case Three = 3
+    }
+
     
     // Need a way to edit these instructions
     
@@ -41,7 +54,7 @@ class WorkoutDataModels {
                                        "Sit back into a squat position, breaking at the hips first.",
                                        "Extend upwards into a jump. Repeat."],
                      "workout_types" : ["cardio","legs","core"],
-                     "difficulty" : "medium"] as [String: Any]
+                     "difficulty" : 2] as [String: Any]
     
     let moutainClimber = ["name" : "Mountain Climber",
                           "description" : "Full-body core exercise",
@@ -49,98 +62,112 @@ class WorkoutDataModels {
                                             "Keeping the rest of your body stationary, bend one leg at the knee bringing it up to your chest.",
                                             "Alternate between legs."],
                           "workout_types" : ["cardio","core","arms"],
-                          "difficulty" : "medium"] as [String: Any]
+                          "difficulty" : 2] as [String: Any]
     
     let burpee = ["name" : "Burpee",
                   "description" : "Combination of a plank and a squat jump.",
-                  "instructions" : ["Bend at the knees and plant your hands on the ground.","Jump your feet back moving into a plank position.","Jump you feet back up to your hands and perform a jump squat."],
+                  "instructions" : ["Bend at the knees and plant your hands on the ground.",
+                                    "Jump your feet back moving into a plank position.",
+                                    "Jump your feet back up to your hands and perform a jump squat raising your hands above your head."],
                   "workout_types" : ["cardio","core","legs"],
-                  "difficulty" : "medium"] as [String: Any]
+                  "difficulty" : 2] as [String: Any]
     
     let inchworm = ["name" : "Inchworm",
-                    "description" : "",
-                    "instructions" : ["","",""],
-                    "workout_types" : ["","",""],
-                    "difficulty" : "medium"] as [String: Any]
+                    "description" : "Great core workout or warmup",
+                    "instructions" : ["Bend at the waist and place your hands on the ground.",
+                                      "Using your hands, walk yourself out until you reach plank position.",
+                                      "Walk yourself back to your starting position."],
+                    "workout_types" : ["core","arms"],
+                    "difficulty" : 2] as [String: Any]
     
     let lungeJump = ["name" : "Lunge Jump",
-                     "description" : "",
-                     "instructions" : ["","",""],
-                     "workout_types" : ["","",""],
-                     "difficulty" : "medium"] as [String: Any]
+                     "description" : "Advanced plyometric version of the basic lunge.",
+                     "instructions" : ["Begin by stepping one leg forward into a lunge.",
+                                       "Explode upwards into a jump.",
+                                       "Switch your feet before you land entering a lunge with the opposite foot."],
+                     "workout_types" : ["cardio","legs"],
+                     "difficulty" : 3] as [String: Any]
     
     let toeTap = ["name" : "Toe Tap",
-                  "description" : "",
-                  "instructions" : ["","",""],
-                  "workout_types" : ["","",""],
-                  "difficulty" : "easy"] as [String: Any]
+                  "description" : "Gets the heart pumping.",
+                  "instructions" : ["Use a sturdy surface around knee height or shorter",
+                                    "Bring the toe of your foot onto the surface until it lightly touches.",
+                                    "Rapidly return your foot to starting position and switch feet, creating a running motion."],
+                  "workout_types" : ["cardio","legs"],
+                  "difficulty" : 1] as [String: Any]
     
     let jumpingJack = ["name" : "Jumping Jack",
-                       "description" : "",
-                       "instructions" : ["","",""],
-                       "workout_types" : ["","",""],
-                       "difficulty" : "easy"] as [String: Any]
+                       "description" : "A gymclass favorite. Still good for you.",
+                       "instructions" : ["Do a jumping jack."],
+                       "workout_types" : ["cardio"],
+                       "difficulty" : 1] as [String: Any]
     
     let skater = ["name" : "Skater",
                   "description" : "",
                   "instructions" : ["","",""],
                   "workout_types" : ["","",""],
-                  "difficulty" : "medium"] as [String: Any]
+                  "difficulty" : 2] as [String: Any]
     
     let skiHop = ["name" : "Ski Hop",
                  "descriptio n" : "",
                  "instructions" : ["","",""],
                  "workout_types" : ["","",""],
-                 "difficulty" : "medium"] as [String: Any]
+                 "difficulty" : 2] as [String: Any]
     
     let squatAbTwist = ["name" : "Squat with Ab Twist",
                         "description" : "",
                         "instructions" : ["","",""],
                         "workout_types" : ["","",""],
-                        "difficulty" : "medium"] as [String: Any]
+                        "difficulty" : 2] as [String: Any]
     
     let sideShuffle = ["name" : "Side Shuffle",
                        "description" : "",
                        "instructions" : ["","",""],
                        "workout_types" : ["","",""],
-                       "difficulty" : "easy"] as [String: Any]
+                       "difficulty" : 1] as [String: Any]
     
     let highKnees = ["name" : "High Knee",
-                     "description" : "",
-                     "instructions" : ["","",""],
-                     "workout_types" : ["","",""],
-                     "difficulty" : "medium"] as [String: Any]
+                     "description" : "Reminds me of soccer practice.",
+                     "instructions" : ["Raise your knees straight up in the air.",
+                                       "Alternate quickly, driving each knee high into the air.",
+                                       "Repeat."],
+                     "workout_types" : ["cardio","legs"],
+                     "difficulty" : 2] as [String: Any]
     
     let jumpRope = ["name" : "Jump Rope",
-                    "description" : "",
-                    "instructions" : ["","",""],
-                    "workout_types" : ["","",""],
-                    "difficulty" : "medium"] as [String: Any]
+                    "description" : "Classic, what can I say.",
+                    "instructions" : ["Jump some rope","",""],
+                    "workout_types" : ["cardio"],
+                    "difficulty" : 2] as [String: Any]
     
     let mountainClimberTwist = ["name" : "Mountain Climbers with Twist",
-                                "description" : "",
-                                "instructions" : ["","",""],
-                                "workout_types" : ["","",""],
-                                "difficulty" : ""] as [String: Any]
+                                "description" : "Mountain climbers with added ab twist for difficulty.",
+                                "instructions" : ["Similar to a normal mountain climber begin in plank position.","Bring your knee up to the opposite elbow.","Repeat with opposite side."],
+                                "workout_types" : ["cardio","core","arms"],
+                                "difficulty" : 3] as [String: Any]
     
     let plankKneeTap = ["name" : "Plank Knee Tap",
-                        "description" : "",
-                        "instructions" : ["","",""],
-                        "workout_types" : ["","",""],
-                        "difficulty" : ""] as [String: Any]
+                        "description" : "As if planks weren't hard enough.",
+                        "instructions" : ["Start in the plank position.","Bring one arm down and the opposite leg up to tap the opposite knee",""],
+                        "workout_types" : ["cardio","core","arms"],
+                        "difficulty" : 3] as [String: Any]
     
     let longJumpJogBack = ["name" : "Long Jump with Jog Back",
-                           "description" : "",
-                           "instructions" : ["Keeping your feet together, take a long jump forward.","After you land, jog backwards to your starting position.","Repeat."],
-                           "workout_types" : ["Cardio","Legs"],
-                           "difficulty" : "medium"] as [String: Any]
+                           "description" : "Great for legs and cardio.",
+                           "instructions" : ["Keeping your feet together, take a long jump forward.",
+                                             "After you land, jog backwards to your starting position.",
+                                             "Repeat."],
+                           "workout_types" : ["cardio","legs"],
+                           "difficulty" : 2] as [String: Any]
     
-    "Step Up"
-    "Reverse Lunge with Hop"
-    "Triceps Pushup with Mountain Climber"
-    "Donkey Kick"
-    "Pushup with Knee Touch"
-    "Burpee with Pushup"
+//    "Step Up"
+//    "Reverse Lunge with Hop"
+//    "Triceps Pushup with Mountain Climber"
+//    "Donkey Kick"
+//    "Pushup with Knee Touch"
+//    "Burpee with Pushup"
+//    "Inchworm with Pushup"
+//    "Plank with Knee Dips"
     
     func createExerciseCollection(collection: [Exercise]) {
         
@@ -227,12 +254,4 @@ class WorkoutDataModels {
     //bicycles - abs
     //leg raises
     //
-}
-
-
-
-enum Difficulty: Int {
-    case Easy = 1
-    case Medium = 2
-    case Hard = 3
 }
