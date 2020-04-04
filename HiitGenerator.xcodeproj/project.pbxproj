@@ -11,7 +11,6 @@
 		522D275623BC5709003E76F8 /* DrawerMenu.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5257709023BC54F90042F0DF /* DrawerMenu.framework */; };
 		522D275723BC5709003E76F8 /* DrawerMenu.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5257709023BC54F90042F0DF /* DrawerMenu.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		522F039323943C5600D743F7 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 522F039223943C5600D743F7 /* ViewModel.swift */; };
-		525A20F524379354001E6568 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 525A20F224379354001E6568 /* GoogleService-Info.plist */; };
 		5299C80823AACB8E00074E6A /* WorkoutGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5299C80723AACB8D00074E6A /* WorkoutGenerator.swift */; };
 		52C26A7223923DB400F809E6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C26A7123923DB400F809E6 /* AppDelegate.swift */; };
 		52C26A7423923DB400F809E6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C26A7323923DB400F809E6 /* SceneDelegate.swift */; };
@@ -66,7 +65,6 @@
 		1CF4920964E04643086D8FC3 /* Pods_HiitGeneratorTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HiitGeneratorTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		522F039223943C5600D743F7 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		5257708A23BC54F90042F0DF /* DrawerMenu.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = DrawerMenu.xcodeproj; path = ../DrawerMenu/DrawerMenu.xcodeproj; sourceTree = "<group>"; };
-		525A20F224379354001E6568 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		5299C80723AACB8D00074E6A /* WorkoutGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutGenerator.swift; sourceTree = "<group>"; };
 		52C26A6E23923DB400F809E6 /* HiitGenerator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HiitGenerator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		52C26A7123923DB400F809E6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -160,7 +158,6 @@
 				52C26A9323923DEE00F809E6 /* WorkoutDataModels.swift */,
 				522F039223943C5600D743F7 /* ViewModel.swift */,
 				5299C80723AACB8D00074E6A /* WorkoutGenerator.swift */,
-				525A20F224379354001E6568 /* GoogleService-Info.plist */,
 			);
 			path = HiitGenerator;
 			sourceTree = "<group>";
@@ -294,7 +291,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				525A20F524379354001E6568 /* GoogleService-Info.plist in Resources */,
 				52C26A7E23923DBD00F809E6 /* LaunchScreen.storyboard in Resources */,
 				52C26A7B23923DBD00F809E6 /* Assets.xcassets in Resources */,
 				52C26A7923923DB400F809E6 /* Main.storyboard in Resources */,
