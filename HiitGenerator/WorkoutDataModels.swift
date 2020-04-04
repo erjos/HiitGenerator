@@ -7,75 +7,15 @@
 //
 
 import Foundation
+import FirebaseFirestore
 
-//need an efficient way to get and modify these workouts :/
-
-//An idea would be to create a crowd-source component - let users add workouts of their own
-//Save workouts that individuals create and we can send them out to others...
-
-//offer a disclaimer before allowing users to interact with the app...
-
-//Quick Description of workout structures
-//Workouts are made up of Rounds - (1-3 depending on length)
-//Each round represents 3 cycles through sets of 3 different workouts (so you complete each workout 9 times in a round)
-//One cycle consists of 3 workouts with 30 seconds of rest in between each workout and 45 seconds of work for each excercise
-//in between cycles you rest for 1 minute
-//then repeat
-
-//in between rounds you rest for 2-3 minutes before starting a new round with new excercises
-
-//to start we'll just make it a standard work/rest time...
-//things to customize - shorter/longer rest times in between excercises, sets and cycles... longer work periods?
-
-//Complete workout avtivity
-struct Routine {
-    var cycles: [Cycle]!
-    var activeTime: Int!
-    var restTime: Int!
-    var difficulty: Difficulty!
-    var routineDuration: Int!
-}
-
-//need to keep track of where we are
-//cycle 1 - excercise 1... how do we keep track of progess?
-
-//3 make up a routine - need different times in between excercises and in between cycles
-struct Cycle {
-    var workouts: [Exercise]!
-    var activeTime: Int!
-    //rest time in between excercises
-    var restTime: Int!
-    //break in between sets
-    var setBreak: Int!
-    var cycleDuration: Int!
-    var difficulty: Difficulty!
-    var summary: String!
-}
-
-protocol WorkoutStorageProtocol {
-    func getWorkouts() -> [Exercise]
-}
-
-class WorkoutDataModels : WorkoutStorageProtocol {
+class WorkoutDataModels {
     
-    //legs focus
-    func getTypeOne() -> [Exercise] {
-        return [jumpSquats, splitLunges, runUps]
+    
+    func writeDataToFirestore() {
+        
     }
     
-    //arms/upper body focus
-    func getTypeTwo() -> [Exercise] {
-        return [shoulderPress, pushups, bicepCurl]
-    }
-    
-    //core, whole body, etc.
-    func getTypeThree() -> [Exercise] {
-        return []
-    }
-    
-    func getWorkouts() -> [Exercise] {
-        return [shoulderPress, pushups, jumpSquats, shoulderTaps, splitLunges, bicepCurl, burpee, downUps, runUps]
-    }
     
     //Warm Up
     //jumping jacks, squats, scoops, lunges, inchworms, leg raises
@@ -100,14 +40,6 @@ class WorkoutDataModels : WorkoutStorageProtocol {
     //Not sure if that's the correct name for this
     let downUps = Exercise(name: "Down/Ups", description: "Start in plank position. One arm at a time move from your hand to your elbow plank position. Then move back to your hand position in the reverse order.", targetAreas: [.Core, .Abs], difficulty: .Easy)
     let runUps = Exercise(name: "Run ups", description: "Using a platform, place one foot on the platform and rapidly remove it, replacing it with the opposite foot. This should create a running motion as you switch which foot is on the platform.", targetAreas: [.Legs, .Cardio], difficulty: .Easy)
-    
-    // Generate will randomly pull in workouts and wont repeat...
-    
-    // Build / Customize would allow you to search the workout database and add to your workout orrrr create your own
-    // Users can add workouts to the database whenever they want and immediately use them in their own workouts... we just need to moderate if what gets added to the main workout bank.
-    
-    
-    //This workout the first three are legs...
     
     // squat with ab twist
     // ski hops
@@ -147,8 +79,6 @@ class WorkoutDataModels : WorkoutStorageProtocol {
     //
 }
 
-
-//Individual workout activity
 struct Exercise {
     var name: String!
     var description: String!
@@ -156,14 +86,12 @@ struct Exercise {
     var difficulty: Difficulty!
 }
 
-//Difficulty level of activities
 enum Difficulty: Int {
     case Easy = 1
     case Medium = 2
     case Hard = 3
 }
 
-//Potential muscle groups that workouts may engage
 enum TargetArea: String {
     case Abs = "Abs"
     case Arms = "Arms"

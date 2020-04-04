@@ -59,6 +59,8 @@ PODS:
     - leveldb-library (~> 1.22)
     - nanopb (~> 0.3.901)
     - Protobuf (>= 3.9.2, ~> 3.9)
+  - FirebaseFirestoreSwift (0.2):
+    - FirebaseFirestore (>= 1.6.1, ~> 1.6)
   - FirebaseInstanceID (4.2.7):
     - FirebaseCore (~> 6.0)
     - GoogleUtilities/Environment (~> 6.0)
@@ -128,6 +130,7 @@ PODS:
 DEPENDENCIES:
   - Firebase/Core
   - Firebase/Firestore
+  - FirebaseFirestoreSwift
   - FirebaseUI/Auth
   - FirebaseUI/Email
   - FirebaseUI/OAuth
@@ -144,6 +147,7 @@ SPEC REPOS:
     - FirebaseCoreDiagnostics
     - FirebaseCoreDiagnosticsInterop
     - FirebaseFirestore
+    - FirebaseFirestoreSwift
     - FirebaseInstanceID
     - FirebaseUI
     - GoogleAppMeasurement
@@ -167,6 +171,7 @@ SPEC CHECKSUMS:
   FirebaseCoreDiagnostics: af29e43048607588c050889d19204f4d7b758c9f
   FirebaseCoreDiagnosticsInterop: e9b1b023157e3a2fc6418b5cb601e79b9af7b3a0
   FirebaseFirestore: 1c7ed32c09d6b0148034e035d0c07783ca45bac3
+  FirebaseFirestoreSwift: 0437bb10d83f8161a9131da1739998254c78fdf5
   FirebaseInstanceID: ebd2ea79ee38db0cb5f5167b17a0d387e1cc7b6e
   FirebaseUI: 826359d83af7cd76bfe0d43a8aab11eabac65558
   GoogleAppMeasurement: 037f46d1d8ae8b312720f1042585ab961a1289e3
@@ -180,6 +185,6 @@ SPEC CHECKSUMS:
   nanopb: 18003b5e52dab79db540fe93fe9579f399bd1ccd
   Protobuf: a4dc852ad69c027ca2166ed287b856697814375b
 
-PODFILE CHECKSUM: 932ca9e92467ff1d7849b0e4ce7419ae772af512
+PODFILE CHECKSUM: 3737e5a62554d3906a9bb4358908ddd4dd97fd74
 
 COCOAPODS: 1.5.3

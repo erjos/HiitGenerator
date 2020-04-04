@@ -8,6 +8,7 @@ target 'HiitGenerator' do
   # Pods for HiitGenerator
   pod 'Firebase/Core'
   pod 'Firebase/Firestore'
+  pod 'FirebaseFirestoreSwift'
   pod 'FirebaseUI/Auth'
   pod 'FirebaseUI/Email'
   pod 'FirebaseUI/Phone'

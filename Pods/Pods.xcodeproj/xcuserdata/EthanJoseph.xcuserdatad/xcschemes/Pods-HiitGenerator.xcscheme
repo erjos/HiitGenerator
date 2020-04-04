@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "B9DCDC15D43DE0B90CF794AE1786CC06"
+               BlueprintIdentifier = "28000766BDE738809F1CF51A40EA2268"
                BuildableName = "Pods_HiitGenerator.framework"
                BlueprintName = "Pods-HiitGenerator"
                ReferencedContainer = "container:Pods.xcodeproj">
