@@ -394,14 +394,14 @@
                     </view>
                     <navigationItem key="navigationItem" id="wvb-iF-HQd"/>
                     <connections>
-                        <outlet property="InstructionsOne" destination="q16-jV-DjV" id="wf9-sH-zf8"/>
-                        <outlet property="InstructionsThree" destination="smp-z8-l9a" id="wsv-as-wcY"/>
-                        <outlet property="InstructionsTwo" destination="psl-0C-bCk" id="uC0-nP-MHT"/>
                         <outlet property="armsSwitch" destination="tnd-VF-fC7" id="SWX-QZ-yjR"/>
                         <outlet property="cardioSwitch" destination="xlq-2h-8Wd" id="AwN-Mq-EXb"/>
                         <outlet property="coreSwitch" destination="Lr2-EF-M4h" id="T0g-QL-nwM"/>
                         <outlet property="descriptionTextView" destination="eDI-X6-8qS" id="oCC-rd-veL"/>
                         <outlet property="difficultyField" destination="IDM-10-UYm" id="WJW-f5-hL4"/>
+                        <outlet property="instructionsOne" destination="q16-jV-DjV" id="wf9-sH-zf8"/>
+                        <outlet property="instructionsThree" destination="smp-z8-l9a" id="wsv-as-wcY"/>
+                        <outlet property="instructionsTwo" destination="psl-0C-bCk" id="uC0-nP-MHT"/>
                         <outlet property="legsSwitch" destination="eOF-1H-BKT" id="USa-XA-VwA"/>
                         <outlet property="nameField" destination="luv-gq-uAw" id="dod-as-MuJ"/>
                     </connections>

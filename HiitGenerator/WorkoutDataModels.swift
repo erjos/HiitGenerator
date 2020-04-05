@@ -26,7 +26,7 @@ struct Exercise {
 //tips/pointers - // modifications?
 //equipment needed - to adapt to what users may have on hand
 
-enum WorkoutType: String {
+enum WorkoutType: String, CaseIterable {
     case Arms = "arms"
     case Legs = "legs"
     case Cardio = "cardio"
