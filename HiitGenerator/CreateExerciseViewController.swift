@@ -52,8 +52,7 @@ class CreateExerciseViewController: UIViewController {
         
         let exercise = Exercise(name: name, description: description, instructions: instructions, workoutTypes: types, difficulty: difficulty)
         
-        //TODO: save the exercise to the firestore
-        
+        WorkoutDataModels.writeExerciseToFirestore(exercise: exercise)
     }
     
     func getTypes() -> [WorkoutType] {

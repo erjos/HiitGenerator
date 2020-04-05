@@ -271,7 +271,7 @@ class WorkoutDataModels {
     }
     
     /// Stores excercise data model in firestore as a new document
-    func writeExerciseToFirestore(exercise: Exercise) {
+    static func writeExerciseToFirestore(exercise: Exercise) {
         
         // Adds document and generates UUID automatically
         let workout_types_array = exercise.workoutTypes.map { (type) -> String in
@@ -282,7 +282,7 @@ class WorkoutDataModels {
                              "description": exercise.description,
                              "instructions": exercise.instructions,
                              "workout_types": workout_types_array,
-                             "difficulty": exercise.difficulty] as [String: Any]
+                             "difficulty": exercise.difficulty.rawValue] as [String: Any]
         let _ = Firestore.firestore().collection("exercises").addDocument(data: exercise_data) { (error_optional) in
             // TODO: add error handler and any completion actions
         }
