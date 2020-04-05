@@ -51,8 +51,8 @@ class ViewController: UIViewController {
     func setExerciseInfo(_ exercise: Exercise) {
         workoutName.text = exercise.name
         workoutDescription.text = exercise.description
-        workoutType.text = exercise.targetAreas.compactMap({ targetArea -> String in targetArea.rawValue })
-            .joined(separator: ", ")
+        //workoutType.text = exercise.targetAreas.compactMap({ targetArea -> String in targetArea.rawValue })
+            //.joined(separator: ", ")
     }
     
     //IDK if we'll end up using this

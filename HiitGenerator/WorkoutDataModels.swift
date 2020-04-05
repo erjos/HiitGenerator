@@ -14,43 +14,42 @@ import FirebaseFirestore
 //Themes
 //Could utilize the retro, analog vibes of a classic no frills gym
 
-class WorkoutDataModels {
-    
-    struct Exercise {
-        var name: String
-        var description: String
-        var instructions: [String]
-        var workoutTypes: [WorkoutType]
-        var difficulty: Difficulty
-    }
-    
-    //TODO: other beneficial pieces of data:
-    //tips/pointers - // modifications?
-    //equipment needed - to adapt to what users may have on hand
-    
-    enum WorkoutType: String {
-        case Arms = "arms"
-        case Legs = "legs"
-        case Cardio = "cardio"
-        case Core = "core"
-    }
-    
-    /// Exercise difficulty and complexity scale with 1 being the easiest
-    enum Difficulty: Int {
-        case One = 1
-        case Two
-        case Three
-    }
-    
-    enum Equipment: String {
-        case ResistanceBands
-        case PullupBar
-        case Dumbells
-        case KettleBells
-        case JumpRope
-        case BoxJump //could be any sturdy surface or bench
-    }
+struct Exercise {
+    var name: String
+    var description: String
+    var instructions: [String]
+    var workoutTypes: [WorkoutType]
+    var difficulty: Difficulty
+}
 
+//TODO: other beneficial pieces of data:
+//tips/pointers - // modifications?
+//equipment needed - to adapt to what users may have on hand
+
+enum WorkoutType: String {
+    case Arms = "arms"
+    case Legs = "legs"
+    case Cardio = "cardio"
+    case Core = "core"
+}
+
+/// Exercise difficulty and complexity scale with 1 being the easiest
+enum Difficulty: Int {
+    case One = 1
+    case Two
+    case Three
+}
+
+enum Equipment: String {
+    case ResistanceBands
+    case PullupBar
+    case Dumbells
+    case KettleBells
+    case JumpRope
+    case BoxJump //could be any sturdy surface or bench
+}
+
+class WorkoutDataModels {
     
     // Need a way to edit these instructions and add new ones
     

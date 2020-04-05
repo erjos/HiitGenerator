@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		3E4EAF7927E667309BBC5D50 /* Pods_HiitGeneratorTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CF4920964E04643086D8FC3 /* Pods_HiitGeneratorTests.framework */; };
 		5201E814243840BB00E09A0B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5201E813243840BB00E09A0B /* GoogleService-Info.plist */; };
+		5201E8172439935000E09A0B /* CreateExerciseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5201E8162439935000E09A0B /* CreateExerciseViewController.swift */; };
 		522D275623BC5709003E76F8 /* DrawerMenu.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5257709023BC54F90042F0DF /* DrawerMenu.framework */; };
 		522D275723BC5709003E76F8 /* DrawerMenu.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5257709023BC54F90042F0DF /* DrawerMenu.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		522F039323943C5600D743F7 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 522F039223943C5600D743F7 /* ViewModel.swift */; };
@@ -65,6 +66,7 @@
 /* Begin PBXFileReference section */
 		1CF4920964E04643086D8FC3 /* Pods_HiitGeneratorTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HiitGeneratorTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5201E813243840BB00E09A0B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		5201E8162439935000E09A0B /* CreateExerciseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateExerciseViewController.swift; sourceTree = "<group>"; };
 		522F039223943C5600D743F7 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		5257708A23BC54F90042F0DF /* DrawerMenu.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = DrawerMenu.xcodeproj; path = ../DrawerMenu/DrawerMenu.xcodeproj; sourceTree = "<group>"; };
 		5299C80723AACB8D00074E6A /* WorkoutGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutGenerator.swift; sourceTree = "<group>"; };
@@ -161,6 +163,7 @@
 				522F039223943C5600D743F7 /* ViewModel.swift */,
 				5299C80723AACB8D00074E6A /* WorkoutGenerator.swift */,
 				5201E813243840BB00E09A0B /* GoogleService-Info.plist */,
+				5201E8162439935000E09A0B /* CreateExerciseViewController.swift */,
 			);
 			path = HiitGenerator;
 			sourceTree = "<group>";
@@ -411,6 +414,7 @@
 				522F039323943C5600D743F7 /* ViewModel.swift in Sources */,
 				5299C80823AACB8E00074E6A /* WorkoutGenerator.swift in Sources */,
 				52C26A7623923DB400F809E6 /* ViewController.swift in Sources */,
+				5201E8172439935000E09A0B /* CreateExerciseViewController.swift in Sources */,
 				52C26A7223923DB400F809E6 /* AppDelegate.swift in Sources */,
 				52C26A7423923DB400F809E6 /* SceneDelegate.swift in Sources */,
 				52C26A9423923DEE00F809E6 /* WorkoutDataModels.swift in Sources */,
