@@ -347,6 +347,9 @@
                                     <constraint firstAttribute="width" constant="130" id="00y-8Y-55f"/>
                                 </constraints>
                                 <state key="normal" title="Save"/>
+                                <connections>
+                                    <action selector="didPressSave:" destination="bff-a2-xHr" eventType="touchUpInside" id="eUv-GE-kge"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add New Workout" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0gi-Id-05O">
                                 <rect key="frame" x="50" y="20" width="139" height="21"/>
@@ -357,6 +360,9 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mkl-3w-fPY">
                                 <rect key="frame" x="370" y="10" width="34" height="30"/>
                                 <state key="normal" title="Back"/>
+                                <connections>
+                                    <action selector="didPressBack:" destination="bff-a2-xHr" eventType="touchUpInside" id="iJ2-Ur-I8o"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -387,6 +393,18 @@
                         <viewLayoutGuide key="safeArea" id="adB-VW-1gf"/>
                     </view>
                     <navigationItem key="navigationItem" id="wvb-iF-HQd"/>
+                    <connections>
+                        <outlet property="InstructionsOne" destination="q16-jV-DjV" id="wf9-sH-zf8"/>
+                        <outlet property="InstructionsThree" destination="smp-z8-l9a" id="wsv-as-wcY"/>
+                        <outlet property="InstructionsTwo" destination="psl-0C-bCk" id="uC0-nP-MHT"/>
+                        <outlet property="armsSwitch" destination="tnd-VF-fC7" id="SWX-QZ-yjR"/>
+                        <outlet property="cardioSwitch" destination="xlq-2h-8Wd" id="AwN-Mq-EXb"/>
+                        <outlet property="coreSwitch" destination="Lr2-EF-M4h" id="T0g-QL-nwM"/>
+                        <outlet property="descriptionTextView" destination="eDI-X6-8qS" id="oCC-rd-veL"/>
+                        <outlet property="difficultyField" destination="IDM-10-UYm" id="WJW-f5-hL4"/>
+                        <outlet property="legsSwitch" destination="eOF-1H-BKT" id="USa-XA-VwA"/>
+                        <outlet property="nameField" destination="luv-gq-uAw" id="dod-as-MuJ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2FE-eM-3ej" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
