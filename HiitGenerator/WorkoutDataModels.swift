@@ -43,8 +43,17 @@ class WorkoutDataModels {
     /// Exercise difficulty and complexity scale with 1 being the easiest
     enum Difficulty: Int {
         case One = 1
-        case Two = 2
-        case Three = 3
+        case Two
+        case Three
+    }
+    
+    enum Equipment: String {
+        case ResistanceBands
+        case PullupBar
+        case Dumbells
+        case KettleBells
+        case JumpRope
+        case BoxJump //could be any sturdy surface or bench
     }
 
     
@@ -57,7 +66,9 @@ class WorkoutDataModels {
                      "instructions" : ["Begin with your feet shoulder width apart.",
                                        "Sit back into a squat position, breaking at the hips first.",
                                        "Extend upwards into a jump. Repeat."],
-                     "workout_types" : ["cardio","legs","core"],
+                     "workout_types" : ["cardio",
+                                        "legs",
+                                        "core"],
                      "difficulty" : 2] as [String: Any]
     
     let moutainClimber = ["name" : "Mountain Climber",
@@ -65,23 +76,28 @@ class WorkoutDataModels {
                           "instructions" : ["Start in a plank position.",
                                             "Keeping the rest of your body stationary, bend one leg at the knee bringing it up to your chest.",
                                             "Alternate between legs."],
-                          "workout_types" : ["cardio","core","arms"],
+                          "workout_types" : ["cardio",
+                                             "core",
+                                             "arms"],
                           "difficulty" : 2] as [String: Any]
     
-    let burpee = ["name" : "Burpee",
+    let squatThrust = ["name" : "Squat Thrust",
                   "description" : "Combination of a plank and a squat jump.",
                   "instructions" : ["Bend at the knees and plant your hands on the ground.",
                                     "Jump your feet back moving into a plank position.",
                                     "Jump your feet back up to your hands and perform a jump squat raising your hands above your head."],
-                  "workout_types" : ["cardio","core","legs"],
+                  "workout_types" : ["cardio",
+                                     "core",
+                                     "legs"],
                   "difficulty" : 2] as [String: Any]
     
     let inchworm = ["name" : "Inchworm",
                     "description" : "Great core workout or warmup.",
-                    "instructions" : ["Bend at the waist and place your hands on the ground.",
+                    "instructions" : ["Bend at the waist, placing your hands on the ground.",
                                       "Using your hands, walk yourself out until you reach plank position.",
                                       "Walk yourself back to your starting position."],
-                    "workout_types" : ["core","arms"],
+                    "workout_types" : ["core",
+                                       "arms"],
                     "difficulty" : 2] as [String: Any]
     
     let lungeJump = ["name" : "Lunge Jump",
@@ -89,7 +105,8 @@ class WorkoutDataModels {
                      "instructions" : ["Begin by stepping one leg forward into a lunge.",
                                        "Explode upwards into a jump.",
                                        "Switch your feet before you land entering a lunge with the opposite foot."],
-                     "workout_types" : ["cardio","legs"],
+                     "workout_types" : ["cardio",
+                                        "legs"],
                      "difficulty" : 3] as [String: Any]
     
     let toeTap = ["name" : "Toe Tap",
@@ -97,7 +114,8 @@ class WorkoutDataModels {
                   "instructions" : ["Use a sturdy surface around knee height or below.",
                                     "Bring the toe of your foot onto the surface until it lightly touches.",
                                     "Rapidly return your foot to starting position and switch feet, creating a running motion."],
-                  "workout_types" : ["cardio","legs"],
+                  "workout_types" : ["cardio",
+                                     "legs"],
                   "difficulty" : 1] as [String: Any]
     
     let jumpingJack = ["name" : "Jumping Jack",
@@ -111,7 +129,8 @@ class WorkoutDataModels {
                   "instructions" : ["Ensure you have room to jump side to side. Crouch down with your one leg reaching the opposite leg out behind you for balance while coming across your body to touch your foot. ",
                                     "Jump sideways off your crouched foot onto your other leg and bend the knee to absorb the impact.",
                                     "Ensure your are balanced and steady, then repeat."],
-                  "workout_types" : ["cardio","legs"],
+                  "workout_types" : ["cardio",
+                                     "legs"],
                   "difficulty" : 2] as [String: Any]
     
     let squatAbTwist = ["name" : "Squat with Ab Twist",
@@ -119,7 +138,9 @@ class WorkoutDataModels {
                         "instructions" : ["Start with feet shoulder width apart.",
                                           "Sit back in a squat and extend upwards engaging your legs.",
                                           "When you reach the top of your squat tighten your abs to bring one knee up and touch the opposite elbow. Repeat."],
-                        "workout_types" : ["cardio","legs","core"],
+                        "workout_types" : ["cardio",
+                                           "legs",
+                                           "core"],
                         "difficulty" : 2] as [String: Any]
     
     let sideShuffle = ["name" : "Side Shuffle",
@@ -135,7 +156,8 @@ class WorkoutDataModels {
                      "instructions" : ["Raise your knees straight up in the air.",
                                        "Alternate quickly, driving each knee high into the air.",
                                        "Repeat."],
-                     "workout_types" : ["cardio","legs"],
+                     "workout_types" : ["cardio",
+                                        "legs"],
                      "difficulty" : 2] as [String: Any]
     
     let jumpRope = ["name" : "Jump Rope",
@@ -149,7 +171,9 @@ class WorkoutDataModels {
                                 "instructions" : ["Similar to a normal mountain climber begin in plank position.",
                                                   "Bring your knee up to the opposite elbow.",
                                                   "Repeat with opposite side."],
-                                "workout_types" : ["cardio","core","arms"],
+                                "workout_types" : ["cardio",
+                                                   "core",
+                                                   "arms"],
                                 "difficulty" : 3] as [String: Any]
     
     let plankKneeTap = ["name" : "Plank Knee Tap",
@@ -157,7 +181,9 @@ class WorkoutDataModels {
                         "instructions" : ["Start in the plank position.",
                                           "Bending at the waist, while keeping your back straight, bring one arm down and tap the opposite knee.",
                                           "Extend at the waist returning to a normal plank position and repeat with the opposite side."],
-                        "workout_types" : ["cardio","core","arms"],
+                        "workout_types" : ["cardio",
+                                           "core",
+                                           "arms"],
                         "difficulty" : 3] as [String: Any]
     
     let longJumpJogBack = ["name" : "Long Jump with Jog Back",
@@ -165,20 +191,76 @@ class WorkoutDataModels {
                            "instructions" : ["Keeping your feet together, take a long jump forward.",
                                              "After you land, jog backwards to your starting position.",
                                              "Repeat."],
-                           "workout_types" : ["cardio","legs"],
+                           "workout_types" : ["cardio",
+                                              "legs"],
                            "difficulty" : 2] as [String: Any]
+    
+    let plankJacks = ["name" : "Plank Jack",
+                      "description" : "Simple modification to the plank to increase cardio and core engagement.",
+                      "instructions" : ["Start in a normal plank position.",
+                                        "At the same time jump both of your feet outwards into a wide stance.",
+                                        "Pause briefly before quickly jumping them back in. Repeat"],
+                      "workout_types" : ["cardio",
+                                         "core",
+                                         "arms"],
+                      "difficulty" : 2 ] as [String: Any]
+    
+    let reverseLungeHop = ["name" : "Reverse Lunge with Hop",
+                           "description" : "Another plyometric variation of the lunge.",
+                           "instructions" : ["Step one foot backwards engaging your front leg in a traditional lunge.",
+                                             "When you reach the bottom of your lunge, extend upwards bringing your back knee into the air and ending with a hop.",
+                                             "Repeat with the other leg."],
+                           "workout_types" : ["cardio",
+                                              "core",
+                                              "legs"],
+                           "difficulty": 2 ] as [String: Any]
+    
+    let shoulderTaps = ["name" : "Shoulder Tap",
+                        "description" : "Core with something extra for the arms.",
+                        "instructions" : ["Start in a standard plank position",
+                                          "Lift one hand off the ground, and tap your opposite shoulder.",
+                                          "Place your hand back on the ground and repeat with the opposite side"],
+                        "workout_types" : [ "core",
+                                            "arms"],
+                        "difficulty" : 2] as [String: Any]
+    
+    let pushup = ["name" : "Pushup",
+                  "description" : "Ever heard of it?",
+                  "instructions" : ["Do a pushup."],
+                  "workout_types": ["core",
+                                    "arms"],
+                  "difficulty" : 2] as [String: Any]
+    
+    let inchwormPushup = ["name" : "Inchworm with Pushup",
+                          "description" : "Normal inchworm with a pushup added.",
+                          "instructions" : ["Bend at the waist, placing your hands on the ground.",
+                                            "Using your hands, walk yourself out until you reach plank position and then do a pushup.",
+                                            "Walk yourself back to your starting position and repeat."],
+                          "workout_types" : ["core",
+                                             "arms"],
+                          "difficulty" : 3] as [String: Any]
+    
+    let burpee = ["name" : "Burpee",
+                  "description" : "Combination of a plank, pushup and a squat jump.",
+                  "instructions" : ["Bend at the knees and plant your hands on the ground.",
+                                    "Jump your feet back moving into a plank position and do a pushup.",
+                                    "Jump your feet back up to your hands and perform a jump squat raising your hands above your head. Repeat."],
+                  "workout_types" : ["cardio",
+                                     "core",
+                                     "legs"],
+                  "difficulty" : 3] as [String: Any]
+    
     
     
     
 //    "Step Up"
-//    "Reverse Lunge with Hop"
 //    "Triceps Pushup with Mountain Climber"
 //    "Donkey Kick"
 //    "Pushup with Knee Touch"
-//    "Burpee with Pushup"
-//    "Inchworm with Pushup"
 //    "Plank with Knee Dips"
     
+    
+//    "Box Jumps"
     
     func createExerciseCollection(collection: [[String: Any]]) {
         
