@@ -49,6 +49,9 @@ enum Equipment: String {
     case BoxJump //could be any sturdy surface or bench
 }
 
+/// Completion that takes an optional error
+typealias CompletionOptional = ((Error?)->())?
+
 class WorkoutDataModels {
     
     // Need a way to edit these instructions and add new ones
@@ -271,7 +274,7 @@ class WorkoutDataModels {
     }
     
     /// Stores excercise data model in firestore as a new document
-    static func writeExerciseToFirestore(exercise: Exercise) {
+    static func writeExerciseToFirestore(exercise: Exercise, completion: CompletionOptional = nil) {
         
         // Adds document and generates UUID automatically
         let workout_types_array = exercise.workoutTypes.map { (type) -> String in
@@ -284,7 +287,7 @@ class WorkoutDataModels {
                              "workout_types": workout_types_array,
                              "difficulty": exercise.difficulty.rawValue] as [String: Any]
         let _ = Firestore.firestore().collection("exercises").addDocument(data: exercise_data) { (error_optional) in
-            // TODO: add error handler and any completion actions
+            completion?(error_optional)
         }
     }
     

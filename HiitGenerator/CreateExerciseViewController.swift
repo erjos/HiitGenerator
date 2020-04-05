@@ -22,6 +22,14 @@ class CreateExerciseViewController: UIViewController {
     @IBOutlet weak var coreSwitch: UISwitch!
     @IBOutlet weak var difficultyField: UITextField!
     
+    lazy var completion : CompletionOptional = { [unowned self] error_optional in
+        guard let error = error_optional else { return }
+        let alertViewController = UIAlertController(title: "Something went wrong.", message: error.localizedDescription, preferredStyle: .alert)
+        let dismissUIAlertAction = UIAlertAction(title: "Dismiss", style: .default, handler: nil)
+        alertViewController.addAction(dismissUIAlertAction)
+        self.present(alertViewController, animated: true, completion: nil)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -45,14 +53,11 @@ class CreateExerciseViewController: UIViewController {
         }
         
         let types = self.getTypes()
-        
         guard let difficulty_string = self.difficultyField.text else { return }
-        
         let difficulty = self.getDifficulty(difficultyString: difficulty_string)
-        
         let exercise = Exercise(name: name, description: description, instructions: instructions, workoutTypes: types, difficulty: difficulty)
         
-        WorkoutDataModels.writeExerciseToFirestore(exercise: exercise)
+        WorkoutDataModels.writeExerciseToFirestore(exercise: exercise, completion: self.completion)
     }
     
     func getTypes() -> [WorkoutType] {
