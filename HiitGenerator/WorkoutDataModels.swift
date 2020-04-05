@@ -30,11 +30,6 @@ class WorkoutDataModels {
     
     enum WorkoutType: String {
         case Arms = "arms"
-        case Shoulders = "shoulders"
-        case Biceps = "biceps"
-        case Triceps = "triceps"
-        case Chest = "chest"
-        case Back = "back"
         case Legs = "legs"
         case Cardio = "cardio"
         case Core = "core"
