@@ -9,7 +9,7 @@
 import UIKit
 import DrawerMenu
 
-class ViewController: UIViewController {
+class ShowWorkoutViewController: UIViewController {
     var viewModel = ViewModel()
     
     @IBOutlet weak var drawerMenu: DrawerMenu!
@@ -108,7 +108,7 @@ class ViewController: UIViewController {
     
 }
 
-extension ViewController: MenuInteractorDelegate {
+extension ShowWorkoutViewController: MenuInteractorDelegate {
     func didSelectItem(indexPath: IndexPath, label: String) {
         //handle select
     }

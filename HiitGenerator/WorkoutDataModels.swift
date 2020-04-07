@@ -20,6 +20,35 @@ struct Exercise {
     var instructions: [String]
     var workoutTypes: [WorkoutType]
     var difficulty: Difficulty
+    
+    init(name: String, description: String, instructions: [String], workoutTypes: [WorkoutType], difficulty: Difficulty) {
+        self.name = name
+        self.description = description
+        self.instructions = instructions
+        self.workoutTypes = workoutTypes
+        self.difficulty = difficulty
+    }
+    
+    init?(fromData data: [String: Any]) {
+        guard let name = data["name"]as? String,
+        let description = data["description"] as? String,
+        let instructions = data["instructions"] as? [String],
+        let types_array = data["workout_types"] as? [String],
+        let difficulty_number = data["difficulty"] as? Int else { return nil }
+        
+        let types_enum = types_array.map { (string) -> WorkoutType in
+            guard let type_enum = WorkoutType(rawValue: string) else { fatalError("Raw value \(string) failed to convert to type WorkoutType.") }
+            return type_enum
+        }
+        
+        guard let difficulty = Difficulty(rawValue: difficulty_number) else { return nil }
+        
+        self.name = name
+        self.description = description
+        self.instructions = instructions
+        self.workoutTypes = types_enum
+        self.difficulty = difficulty
+    }
 }
 
 //TODO: other beneficial pieces of data:
@@ -49,16 +78,14 @@ enum Equipment: String {
     case BoxJump //could be any sturdy surface or bench
 }
 
-/// Completion that takes an optional error
+/// Completion that takes an optional error - all optional closures are escaping by default
 typealias CompletionOptional = ((Error?)->())?
 
+//The idea would be to make it simple to swap out firebase with and alternative solution so that the implementation of the methods doesnt change
 class WorkoutDataModels {
     
-    // Need a way to edit these instructions and add new ones
-    
-    //Solution would be to create a CMS for the workouts on the client to edit and add.
-    
-    let jumpSquat = ["name" : "Jump Squat",
+    // All this data has been uploaded to the backend
+    static let jumpSquat = ["name" : "Jump Squat",
                      "description" : "Normal squat with an explosive ending.",
                      "instructions" : ["Begin with your feet shoulder width apart.",
                                        "Sit back into a squat position, breaking at the hips first.",
@@ -68,7 +95,7 @@ class WorkoutDataModels {
                                         "core"],
                      "difficulty" : 2] as [String: Any]
     
-    let moutainClimber = ["name" : "Mountain Climber",
+    static let mountainClimber = ["name" : "Mountain Climber",
                           "description" : "Full-body core exercise.",
                           "instructions" : ["Start in a plank position.",
                                             "Keeping the rest of your body stationary, bend one leg at the knee bringing it up to your chest.",
@@ -78,7 +105,7 @@ class WorkoutDataModels {
                                              "arms"],
                           "difficulty" : 2] as [String: Any]
     
-    let squatThrust = ["name" : "Squat Thrust",
+   static let squatThrust = ["name" : "Squat Thrust",
                   "description" : "Combination of a plank and a squat jump.",
                   "instructions" : ["Bend at the knees and plant your hands on the ground.",
                                     "Jump your feet back moving into a plank position.",
@@ -88,7 +115,7 @@ class WorkoutDataModels {
                                      "legs"],
                   "difficulty" : 2] as [String: Any]
     
-    let inchworm = ["name" : "Inchworm",
+    static let inchworm = ["name" : "Inchworm",
                     "description" : "Great core workout or warmup.",
                     "instructions" : ["Bend at the waist, placing your hands on the ground.",
                                       "Using your hands, walk yourself out until you reach plank position.",
@@ -97,7 +124,7 @@ class WorkoutDataModels {
                                        "arms"],
                     "difficulty" : 2] as [String: Any]
     
-    let lungeJump = ["name" : "Lunge Jump",
+    static let lungeJump = ["name" : "Lunge Jump",
                      "description" : "Advanced plyometric version of the basic lunge.",
                      "instructions" : ["Begin by stepping one leg forward into a lunge.",
                                        "Explode upwards into a jump.",
@@ -106,7 +133,7 @@ class WorkoutDataModels {
                                         "legs"],
                      "difficulty" : 3] as [String: Any]
     
-    let toeTap = ["name" : "Toe Tap",
+    static let toeTap = ["name" : "Toe Tap",
                   "description" : "Gets the heart pumping.",
                   "instructions" : ["Use a sturdy surface around knee height or below.",
                                     "Bring the toe of your foot onto the surface until it lightly touches.",
@@ -115,13 +142,13 @@ class WorkoutDataModels {
                                      "legs"],
                   "difficulty" : 1] as [String: Any]
     
-    let jumpingJack = ["name" : "Jumping Jack",
+    static let jumpingJack = ["name" : "Jumping Jack",
                        "description" : "A gymclass favorite.",
                        "instructions" : ["Do a jumping jack."],
                        "workout_types" : ["cardio"],
                        "difficulty" : 1] as [String: Any]
     
-    let skater = ["name" : "Skater",
+    static let skater = ["name" : "Skater",
                   "description" : "Skate in place, jump side-to-side. Great for strength and agility.",
                   "instructions" : ["Ensure you have room to jump side to side. Crouch down with your one leg reaching the opposite leg out behind you for balance while coming across your body to touch your foot. ",
                                     "Jump sideways off your crouched foot onto your other leg and bend the knee to absorb the impact.",
@@ -130,7 +157,7 @@ class WorkoutDataModels {
                                      "legs"],
                   "difficulty" : 2] as [String: Any]
     
-    let squatAbTwist = ["name" : "Squat with Ab Twist",
+    static let squatAbTwist = ["name" : "Squat with Ab Twist",
                         "description" : "Normal squat with a twist to help engage the abs.",
                         "instructions" : ["Start with feet shoulder width apart.",
                                           "Sit back in a squat and extend upwards engaging your legs.",
@@ -140,7 +167,7 @@ class WorkoutDataModels {
                                            "core"],
                         "difficulty" : 2] as [String: Any]
     
-    let sideShuffle = ["name" : "Side Shuffle",
+    static let sideShuffle = ["name" : "Side Shuffle",
                        "description" : "A simple exercise to elevate the heart-rate.",
                        "instructions" : ["Ensure you have enough room on either side.",
                                          "Step out to the side with one foot shuffling your opposite foot in to touch the inside of your stepping foot.",
@@ -148,7 +175,7 @@ class WorkoutDataModels {
                        "workout_types" : ["cardio"],
                        "difficulty" : 1] as [String: Any]
     
-    let highKnees = ["name" : "High Knee",
+    static let highKnees = ["name" : "High Knee",
                      "description" : "Reminds me of soccer practice.",
                      "instructions" : ["Raise your knees straight up in the air.",
                                        "Alternate quickly, driving each knee high into the air.",
@@ -157,13 +184,13 @@ class WorkoutDataModels {
                                         "legs"],
                      "difficulty" : 2] as [String: Any]
     
-    let jumpRope = ["name" : "Jump Rope",
+    static let jumpRope = ["name" : "Jump Rope",
                     "description" : "Classic, what can I say.",
                     "instructions" : ["Jump some rope","",""],
                     "workout_types" : ["cardio"],
                     "difficulty" : 2] as [String: Any]
     
-    let mountainClimberTwist = ["name" : "Mountain Climbers with Twist",
+    static let mountainClimberTwist = ["name" : "Mountain Climbers with Twist",
                                 "description" : "Mountain climbers with added ab twist for difficulty.",
                                 "instructions" : ["Similar to a normal mountain climber begin in plank position.",
                                                   "Bring your knee up to the opposite elbow.",
@@ -173,7 +200,7 @@ class WorkoutDataModels {
                                                    "arms"],
                                 "difficulty" : 3] as [String: Any]
     
-    let plankKneeTap = ["name" : "Plank Knee Tap",
+    static let plankKneeTap = ["name" : "Plank Knee Tap",
                         "description" : "As if planks weren't hard enough.",
                         "instructions" : ["Start in the plank position.",
                                           "Bending at the waist, while keeping your back straight, bring one arm down and tap the opposite knee.",
@@ -183,7 +210,7 @@ class WorkoutDataModels {
                                            "arms"],
                         "difficulty" : 3] as [String: Any]
     
-    let longJumpJogBack = ["name" : "Long Jump with Jog Back",
+    static let longJumpJogBack = ["name" : "Long Jump with Jog Back",
                            "description" : "Great for legs and cardio.",
                            "instructions" : ["Keeping your feet together, take a long jump forward.",
                                              "After you land, jog backwards to your starting position.",
@@ -192,7 +219,7 @@ class WorkoutDataModels {
                                               "legs"],
                            "difficulty" : 2] as [String: Any]
     
-    let plankJacks = ["name" : "Plank Jack",
+    static let plankJacks = ["name" : "Plank Jack",
                       "description" : "Simple modification to the plank to increase cardio and core engagement.",
                       "instructions" : ["Start in a normal plank position.",
                                         "At the same time jump both of your feet outwards into a wide stance.",
@@ -202,7 +229,7 @@ class WorkoutDataModels {
                                          "arms"],
                       "difficulty" : 2 ] as [String: Any]
     
-    let reverseLungeHop = ["name" : "Reverse Lunge with Hop",
+    static let reverseLungeHop = ["name" : "Reverse Lunge with Hop",
                            "description" : "Another plyometric variation of the lunge.",
                            "instructions" : ["Step one foot backwards engaging your front leg in a traditional lunge.",
                                              "When you reach the bottom of your lunge, extend upwards bringing your back knee into the air and ending with a hop.",
@@ -212,7 +239,7 @@ class WorkoutDataModels {
                                               "legs"],
                            "difficulty": 2 ] as [String: Any]
     
-    let shoulderTaps = ["name" : "Shoulder Tap",
+    static let shoulderTaps = ["name" : "Shoulder Tap",
                         "description" : "Core with something extra for the arms.",
                         "instructions" : ["Start in a standard plank position",
                                           "Lift one hand off the ground, and tap your opposite shoulder.",
@@ -221,14 +248,14 @@ class WorkoutDataModels {
                                             "arms"],
                         "difficulty" : 2] as [String: Any]
     
-    let pushup = ["name" : "Pushup",
+    static let pushup = ["name" : "Pushup",
                   "description" : "Ever heard of it?",
                   "instructions" : ["Do a pushup."],
                   "workout_types": ["core",
                                     "arms"],
                   "difficulty" : 2] as [String: Any]
     
-    let inchwormPushup = ["name" : "Inchworm with Pushup",
+    static let inchwormPushup = ["name" : "Inchworm with Pushup",
                           "description" : "Normal inchworm with a pushup added.",
                           "instructions" : ["Bend at the waist, placing your hands on the ground.",
                                             "Using your hands, walk yourself out until you reach plank position and then do a pushup.",
@@ -237,7 +264,7 @@ class WorkoutDataModels {
                                              "arms"],
                           "difficulty" : 3] as [String: Any]
     
-    let burpee = ["name" : "Burpee",
+    static let burpee = ["name" : "Burpee",
                   "description" : "Combination of a plank, pushup and a squat jump.",
                   "instructions" : ["Bend at the knees and plant your hands on the ground.",
                                     "Jump your feet back moving into a plank position and do a pushup.",
@@ -255,16 +282,28 @@ class WorkoutDataModels {
 //    "Donkey Kick"
 //    "Pushup with Knee Touch"
 //    "Plank with Knee Dips"
+// "Squat pulses with jump" //different increments to increase difficulty? - modification of jump squat?
     
     
 //    "Box Jumps"
+        
+    /// One time data export for the workout data stored on the device
+    static func exportData() {
+        let exercise_array = [jumpSquat, mountainClimber, squatThrust, inchworm, lungeJump, toeTap, jumpingJack, skater, squatAbTwist, sideShuffle, highKnees, jumpRope, mountainClimberTwist, plankKneeTap, longJumpJogBack, plankJacks, reverseLungeHop, shoulderTaps, pushup, inchwormPushup, burpee]
+        
+        self.createExerciseCollection(collection: exercise_array)
+    }
     
-    func createExerciseCollection(collection: [[String: Any]]) {
+    static func updateExercise(exercise: Exercise) {
+        let _ = Firestore.firestore().collection("exercise")
+    }
+    
+    static func createExerciseCollection(collection: [[String: Any]]) {
         
         let firestore = Firestore.firestore()
         
         for exercise_data in collection {
-            firestore.collection("exercise").addDocument(data: exercise_data) { (error_optional) in
+            firestore.collection("exercises").addDocument(data: exercise_data) { (error_optional) in
                 if let _ = error_optional {
                     // TODO: handle error
                 }
@@ -274,6 +313,8 @@ class WorkoutDataModels {
     }
     
     /// Stores excercise data model in firestore as a new document
+    
+    //TODO: this does too much - make your functions do one thing and one thing only
     static func writeExerciseToFirestore(exercise: Exercise, completion: CompletionOptional = nil) {
         
         // Adds document and generates UUID automatically
@@ -288,6 +329,13 @@ class WorkoutDataModels {
                              "difficulty": exercise.difficulty.rawValue] as [String: Any]
         let _ = Firestore.firestore().collection("exercises").addDocument(data: exercise_data) { (error_optional) in
             completion?(error_optional)
+        }
+    }
+    
+    /// Gets all exercises in the collection
+    static func getAllExercises(completion: @escaping (_ snapshot: QuerySnapshot?, _ error: Error?)->Void) {
+        let _ = Firestore.firestore().collection("exercises").getDocuments { (query_snapshot, error_optional) in
+            completion(query_snapshot,error_optional)
         }
     }
     

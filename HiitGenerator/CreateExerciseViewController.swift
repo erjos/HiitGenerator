@@ -38,17 +38,25 @@ class CreateExerciseViewController: UIViewController {
     
     @IBAction func didPressSave(_ sender: Any) {
         
-        guard let name = self.nameField.text else { return}
-        guard let description = self.descriptionTextView.text else { return }
+        guard let name = self.nameField.text,
+            !name.isEmpty else { return }
+        
+        guard let description = self.descriptionTextView.text,
+            !description.isEmpty else { return }
         
         // Only require the first instruction, the second and third are optional
-        guard let stepOne = self.instructionsOne.text else { return }
+        guard let stepOne = self.instructionsOne.text,
+            !stepOne.isEmpty else { return }
+        
         var instructions = [stepOne]
         
-        if let stepTwo = self.instructionsTwo.text {
+        if let stepTwo = self.instructionsTwo.text,
+            !stepTwo.isEmpty {
             instructions.append(stepTwo)
         }
-        if let stepThree = self.instructionsThree.text {
+        
+        if let stepThree = self.instructionsThree.text,
+            !stepThree.isEmpty {
             instructions.append(stepThree)
         }
         
@@ -94,16 +102,4 @@ class CreateExerciseViewController: UIViewController {
             //completion
         }
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
