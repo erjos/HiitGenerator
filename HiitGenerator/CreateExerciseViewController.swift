@@ -73,6 +73,8 @@ class CreateExerciseViewController: UIViewController {
                 
             }
         }
+        
+        self.difficultyField.text = exercise.difficulty.rawValue.description
     }
     
     @IBAction func didPressSave(_ sender: Any) {
