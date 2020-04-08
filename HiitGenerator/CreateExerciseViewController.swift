@@ -70,7 +70,6 @@ class CreateExerciseViewController: UIViewController {
                 self.legsSwitch.isOn = true
             case .Core:
                 self.coreSwitch.isOn = true
-                
             }
         }
         
@@ -104,9 +103,33 @@ class CreateExerciseViewController: UIViewController {
         let types = self.getTypes()
         guard let difficulty_string = self.difficultyField.text else { return }
         let difficulty = self.getDifficulty(difficultyString: difficulty_string)
-        let exercise = Exercise(name: name, description: description, instructions: instructions, workoutTypes: types, difficulty: difficulty)
         
-        WorkoutDataModels.writeExerciseToFirestore(exercise: exercise, completion: self.completion)
+        var new_exercise = Exercise(name: name, description: description, instructions: instructions, workoutTypes: types, difficulty: difficulty)
+        
+        guard let existing_exercise = self.exercise else {
+            WorkoutDataModels.writeExerciseToFirestore(exercise: new_exercise, completion: self.completion)
+            return
+        }
+        
+        // save to existing exercise path
+        //TODO: find a better way to do this
+        new_exercise.uuid = existing_exercise.uuid
+        
+        let alert = UIAlertController(title: "Are you sure you want to overwrite?", message: "You are about to overwrite this data. Are you sure you want to save?", preferredStyle: .alert)
+            
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        let save = UIAlertAction(title: "Save", style: .default) { [unowned self] (action) in
+            self.dismiss(animated: true) {
+                WorkoutDataModels.updateExercise(exercise: new_exercise) { (error_optional) in
+                    //TODO: handle the error
+                }
+            }
+        }
+        
+        alert.addAction(cancel)
+        alert.addAction(save)
+            
+        self.present(alert, animated: true, completion: nil)
     }
     
     func getTypes() -> [WorkoutType] {

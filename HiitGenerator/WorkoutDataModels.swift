@@ -342,6 +342,23 @@ class WorkoutDataModels {
         }
     }
     
+    static func updateExercise(exercise: Exercise, completion: CompletionOptional = nil) {
+        // Adds document and generates UUID automatically
+        let workout_types_array = exercise.workoutTypes.map { (type) -> String in
+            return type.rawValue
+        }
+        
+        let exercise_data = ["name": exercise.name,
+                             "description": exercise.description,
+                             "instructions": exercise.instructions,
+                             "workout_types": workout_types_array,
+                             "difficulty": exercise.difficulty.rawValue] as [String: Any]
+        let path = exercise.uuid
+        let _ = Firestore.firestore().collection("exercises").document(path).setData(exercise_data) { (error_optional) in
+            completion?(error_optional)
+        }
+    }
+    
     
     //Warm Up
     //jumping jacks, squats, scoops, lunges, inchworms, leg raises
