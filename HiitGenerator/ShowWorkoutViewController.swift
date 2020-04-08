@@ -12,7 +12,7 @@ import DrawerMenu
 class ShowWorkoutViewController: UIViewController {
     var viewModel = ViewModel()
     
-    @IBOutlet weak var drawerMenu: DrawerMenu!
+    //@IBOutlet weak var drawerMenu: DrawerMenu!
     
     @IBOutlet weak var workoutName: UILabel!
     @IBOutlet weak var workoutDescription: UILabel!
@@ -23,6 +23,9 @@ class ShowWorkoutViewController: UIViewController {
     
     @IBOutlet weak var button: UIButton!
     
+    var exercise: Exercise!
+    
+    //Not sure I remember what this guy does
     @IBAction func didPress(_ sender: Any) {
         
     }
@@ -31,21 +34,30 @@ class ShowWorkoutViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.setupPage(exercise: self.exercise)
         setView(.Stopped)
-        self.runTimer()
-        startFirstWorkout()
+        //self.runTimer()
         
-        drawerMenu.delegate = self
-        drawerMenu.loadMenu()
+        //drawerMenu.delegate = self
+        //drawerMenu.loadMenu()
     }
     
-    func startFirstWorkout() {
-        //guard let firstCycle = viewModel.routine.cycles.first else { return }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "edit_exercise",
+            let vc = segue.destination as? CreateExerciseViewController {
+            vc.exercise = self.exercise
+        }
         
-        //set the workout info on the screen
-        //start the timer - countdown from 45 seconds
-        //change the screen state to active
-        //need a specifc callback once the first workout timer is over to begin the rest period
+        if segue.identifier == "new_exercise" {
+            
+        }
+    }
+    
+    func setupPage(exercise: Exercise) {
+        self.workoutName.text = exercise.name
+        self.workoutDescription.text = exercise.description
+        self.workoutType.text = exercise.workoutTypes.map{$0.rawValue}.joined(separator: " - ")
+        self.workoutDifficulty.text = String(exercise.difficulty.rawValue)
     }
     
     func setExerciseInfo(_ exercise: Exercise) {

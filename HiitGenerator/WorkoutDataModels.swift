@@ -15,6 +15,7 @@ import FirebaseFirestore
 //Could utilize the retro, analog vibes of a classic no frills gym
 
 struct Exercise {
+    var uuid: String
     var name: String
     var description: String
     var instructions: [String]
@@ -22,6 +23,7 @@ struct Exercise {
     var difficulty: Difficulty
     
     init(name: String, description: String, instructions: [String], workoutTypes: [WorkoutType], difficulty: Difficulty) {
+        self.uuid = UUID().description
         self.name = name
         self.description = description
         self.instructions = instructions
@@ -29,7 +31,7 @@ struct Exercise {
         self.difficulty = difficulty
     }
     
-    init?(fromData data: [String: Any]) {
+    init?(fromData data: [String: Any], id: String) {
         guard let name = data["name"]as? String,
         let description = data["description"] as? String,
         let instructions = data["instructions"] as? [String],
@@ -43,6 +45,7 @@ struct Exercise {
         
         guard let difficulty = Difficulty(rawValue: difficulty_number) else { return nil }
         
+        self.uuid = id
         self.name = name
         self.description = description
         self.instructions = instructions

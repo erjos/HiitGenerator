@@ -22,6 +22,17 @@ class CreateExerciseViewController: UIViewController {
     @IBOutlet weak var coreSwitch: UISwitch!
     @IBOutlet weak var difficultyField: UITextField!
     
+    private var typeSwitches : [UISwitch] {
+        return [self.cardioSwitch, self.armsSwitch, self.legsSwitch, self.coreSwitch]
+    }
+    
+    private var instructionFields : [UITextField] {
+        return [self.instructionsOne, self.instructionsTwo, self.instructionsThree]
+    }
+    
+    // Only exists when editing an existing exercise
+    var exercise: Exercise?
+    
     lazy var completion : CompletionOptional = { [unowned self] error_optional in
         guard let error = error_optional else { return }
         let alertViewController = UIAlertController(title: "Something went wrong.", message: error.localizedDescription, preferredStyle: .alert)
@@ -32,8 +43,36 @@ class CreateExerciseViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        if let exercise = self.exercise {
+            self.setupPageFor(exercise: exercise)
+        }
+    }
+    
+    func setupPageFor(exercise: Exercise) {
+        self.nameField.text = exercise.name
+        self.descriptionTextView.text = exercise.description
+        
+        // Setup instructions
+        let fieldsArray = [instructionsOne,instructionsTwo,instructionsThree]
+        for (step, field) in zip(exercise.instructions, fieldsArray) {
+            field?.text = step
+        }
+        
+        // Setup the switches
+        for type in exercise.workoutTypes {
+            switch type {
+            case .Cardio:
+                self.cardioSwitch.isOn = true
+            case .Arms:
+                self.armsSwitch.isOn = true
+            case .Legs:
+                self.legsSwitch.isOn = true
+            case .Core:
+                self.coreSwitch.isOn = true
+                
+            }
+        }
     }
     
     @IBAction func didPressSave(_ sender: Any) {
@@ -75,15 +114,15 @@ class CreateExerciseViewController: UIViewController {
         let array = WorkoutType.allCases
         
         var types = [WorkoutType]()
-        for (toggle, type) in zip(switchArray, array) {
-            if toggle!.isOn {
+        for (toggle, type) in zip(self.typeSwitches, array) {
+            if toggle.isOn {
                 types.append(type)
             }
         }
         return types
     }
     
-    func getDifficulty (difficultyString: String) -> Difficulty {
+    func getDifficulty(difficultyString: String) -> Difficulty {
         
         switch difficultyString {
         case "1" :

@@ -18,7 +18,7 @@ class GetWorkoutsViewController: UIViewController {
                 // TODO: Handle Error
             } else {
                 let collection = snapshot_opt!.documents.map({ (document_snapshot) -> Exercise in
-                    guard let exercise = Exercise(fromData: document_snapshot.data()) else {
+                    guard let exercise = Exercise(fromData: document_snapshot.data(), id: document_snapshot.documentID) else {
                         fatalError("Struct init returned nil. Check incoming data")
                     }
                     return exercise
@@ -41,6 +41,14 @@ class GetWorkoutsViewController: UIViewController {
         self.workoutsTable.dataSource = self
         self.workoutsTable.register(UITableViewCell.self, forCellReuseIdentifier: "normal_cell")
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "view_workout" {
+            guard let vc = segue.destination as? ShowWorkoutViewController,
+                let indexPath = sender as? IndexPath else { return }
+            vc.exercise = self.dataSource[indexPath.row]
+        }
+    }
 }
 
 extension GetWorkoutsViewController: UITableViewDataSource {
@@ -60,5 +68,7 @@ extension GetWorkoutsViewController: UITableViewDataSource {
 }
 
 extension GetWorkoutsViewController: UITableViewDelegate {
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.performSegue(withIdentifier: "view_workout", sender: indexPath)
+    }
 }
