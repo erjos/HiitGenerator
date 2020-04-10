@@ -17,7 +17,7 @@
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zBO-Yq-Lt6">
                                 <rect key="frame" x="160" y="94" width="94" height="30"/>
-                                <state key="normal" title="Get Workouts"/>
+                                <state key="normal" title="Get Exercises"/>
                                 <connections>
                                     <action selector="didPressGetWorkouts:" destination="2Ub-6E-e7c" eventType="touchUpInside" id="7SI-8R-nCD"/>
                                 </connections>
@@ -26,15 +26,24 @@
                                 <rect key="frame" x="20" y="174" width="374" height="638"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rpg-Z4-x4S">
+                                <rect key="frame" x="144.5" y="134" width="125" height="30"/>
+                                <state key="normal" title="Generate Workout"/>
+                                <connections>
+                                    <action selector="didPressGenerateWorkout:" destination="2Ub-6E-e7c" eventType="touchUpInside" id="7iF-ux-vwJ"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="dsy-at-ThE" firstAttribute="bottom" secondItem="4oa-g5-EhX" secondAttribute="bottom" constant="50" id="8zZ-TT-un8"/>
                             <constraint firstItem="dsy-at-ThE" firstAttribute="trailing" secondItem="4oa-g5-EhX" secondAttribute="trailing" constant="20" id="T0h-AY-MW9"/>
                             <constraint firstItem="zBO-Yq-Lt6" firstAttribute="centerX" secondItem="NUU-d0-HSs" secondAttribute="centerX" id="YeU-xF-SQq"/>
+                            <constraint firstItem="rpg-Z4-x4S" firstAttribute="centerX" secondItem="NUU-d0-HSs" secondAttribute="centerX" id="bde-8e-efD"/>
                             <constraint firstItem="4oa-g5-EhX" firstAttribute="top" secondItem="zBO-Yq-Lt6" secondAttribute="bottom" constant="50" id="dGO-6y-EQe"/>
                             <constraint firstItem="zBO-Yq-Lt6" firstAttribute="top" secondItem="dsy-at-ThE" secondAttribute="top" constant="50" id="h5F-eo-Smm"/>
                             <constraint firstItem="4oa-g5-EhX" firstAttribute="leading" secondItem="dsy-at-ThE" secondAttribute="leading" constant="20" id="jI0-NZ-ni4"/>
+                            <constraint firstItem="rpg-Z4-x4S" firstAttribute="top" secondItem="zBO-Yq-Lt6" secondAttribute="bottom" constant="10" id="jfI-z9-2yZ"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="dsy-at-ThE"/>
                     </view>

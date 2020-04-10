@@ -14,7 +14,8 @@ import FirebaseFirestore
 //Themes
 //Could utilize the retro, analog vibes of a classic no frills gym
 
-struct Exercise {
+struct Exercise: Hashable {
+    
     var uuid: String
     var name: String
     var description: String

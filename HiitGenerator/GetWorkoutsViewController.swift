@@ -8,6 +8,7 @@
 
 import UIKit
 
+//TODO: need a solution to help prevent adding workouts that are too similar ie. inchworm / inchworm + pushup
 class GetWorkoutsViewController: UIViewController {
 
     @IBOutlet weak var workoutsTable: UITableView!
@@ -17,19 +18,53 @@ class GetWorkoutsViewController: UIViewController {
             if let _ = error_opt {
                 // TODO: Handle Error
             } else {
-                let collection = snapshot_opt!.documents.map({ (document_snapshot) -> Exercise in
+                
+                var exercise_set = Set<Exercise>()
+                
+                snapshot_opt!.documents.forEach { (document_snapshot) in
                     guard let exercise = Exercise(fromData: document_snapshot.data(), id: document_snapshot.documentID) else {
                         fatalError("Struct init returned nil. Check incoming data")
                     }
-                    return exercise
-                })
+                    
+                    exercise_set.insert(exercise)
+                }
                 
-                self.dataSource = collection
+                // Store the set and the array
+                self.exerciseSet = exercise_set
+                self.dataSource = Array(exercise_set)
             }
         }
     }
     
-    var dataSource: [Exercise] = [] {
+    @IBAction func didPressGenerateWorkout(_ sender: Any) {
+        if let workout = self.generateWorkout(circuitType: .large) {
+            self.dataSource = workout
+        }
+    }
+    
+    enum CircuitType: Int {
+        case small = 3
+        case medium = 5
+        case large = 8
+    }
+    
+    // Uses a set so we can quickly tell whether we already have a workout
+    private func generateWorkout(circuitType: CircuitType) -> [Exercise]? {
+        var workout = [Exercise]()
+        var set_snapshot = self.exerciseSet
+        
+        for _ in 0..<circuitType.rawValue {
+            guard let random_exercise = set_snapshot.randomElement() else { return nil }
+            // Remove that element from the set so we do not pull it again
+            set_snapshot.remove(random_exercise)
+            workout.append(random_exercise)
+        }
+        return workout
+    }
+    
+    private var exerciseSet = Set<Exercise>()
+    
+    private var dataSource: [Exercise] = [] {
         didSet{
             self.workoutsTable.reloadData()
         }

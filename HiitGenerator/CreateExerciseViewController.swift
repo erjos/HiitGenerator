@@ -8,6 +8,7 @@
 import UIKit
 import Foundation
 
+//TODO: would be good to not have to refresh the data - need a way to get the most updated stuff everywhere
 class CreateExerciseViewController: UIViewController {
     
     @IBOutlet weak var nameField: UITextField!
