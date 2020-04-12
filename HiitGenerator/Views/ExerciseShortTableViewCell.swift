@@ -43,6 +43,7 @@ class ExerciseShortTableViewCell: ExerciseTableViewCell {
         }
     }
 
+    @IBOutlet weak var heightConstraint: NSLayoutConstraint!
     @IBOutlet weak var roundedView: UIView!
     @IBOutlet weak var cellTitle: UILabel!
     
@@ -51,6 +52,10 @@ class ExerciseShortTableViewCell: ExerciseTableViewCell {
         
         self.roundedView.roundCorners(radius: 27.0)
         self.roundedView.setBorder(width: 2.0, color: UIColor.blue)
+    }
+    
+    func animateExpand() {
+        self.heightConstraint.constant = 180
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
