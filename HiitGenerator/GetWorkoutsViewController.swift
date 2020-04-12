@@ -93,8 +93,7 @@ class GetWorkoutsViewController: UIViewController {
         super.viewDidLoad()
         self.workoutsTable.delegate = self
         self.workoutsTable.dataSource = self
-        self.workoutsTable.register(UINib.init(nibName: "ExerciseShortTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "exercise_short_cell")
-        self.workoutsTable.register(UINib(nibName: "ExerciseExpandedTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "exercise_expanded_cell")
+        self.workoutsTable.register(UINib.init(nibName: "ExerciseExpandableTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "exercise_expandable_cell")
         self.workoutsTable.separatorStyle = .none
     }
     
@@ -120,11 +119,7 @@ extension GetWorkoutsViewController: UITableViewDataSource {
         
         var cell = ExerciseTableViewCell()
         
-        if indexPath == self.expandedCell {
-            cell = tableView.dequeueReusableCell(withIdentifier: "exercise_expanded_cell") as! ExerciseExpandedTableViewCell
-        } else {
-            cell = tableView.dequeueReusableCell(withIdentifier: "exercise_short_cell") as! ExerciseShortTableViewCell
-        }
+        cell = tableView.dequeueReusableCell(withIdentifier: "exercise_expandable_cell") as! ExerciseExpandableTableViewCell
 
         cell.exerciseTitle.text = self.dataSource[indexPath.row].name
         cell.selectionStyle = .none
