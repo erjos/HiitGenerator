@@ -11,9 +11,14 @@
 		5201E814243840BB00E09A0B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5201E813243840BB00E09A0B /* GoogleService-Info.plist */; };
 		5201E8172439935000E09A0B /* CreateExerciseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5201E8162439935000E09A0B /* CreateExerciseViewController.swift */; };
 		5201E81B243C185F00E09A0B /* GetWorkoutsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5201E81A243C185F00E09A0B /* GetWorkoutsViewController.swift */; };
+		520783DF2442F4BE00E2D789 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 520783DE2442F4BE00E2D789 /* Extensions.swift */; };
+		520783E22443A4B800E2D789 /* ExerciseExpandedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 520783E02443A4B800E2D789 /* ExerciseExpandedTableViewCell.swift */; };
+		520783E32443A4B800E2D789 /* ExerciseExpandedTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 520783E12443A4B800E2D789 /* ExerciseExpandedTableViewCell.xib */; };
 		522D275623BC5709003E76F8 /* DrawerMenu.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5257709023BC54F90042F0DF /* DrawerMenu.framework */; };
 		522D275723BC5709003E76F8 /* DrawerMenu.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5257709023BC54F90042F0DF /* DrawerMenu.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		522F039323943C5600D743F7 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 522F039223943C5600D743F7 /* ViewModel.swift */; };
+		524D93462442EE6D002834C3 /* ExerciseShortTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524D93442442EE6D002834C3 /* ExerciseShortTableViewCell.swift */; };
+		524D93472442EE6D002834C3 /* ExerciseShortTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 524D93452442EE6D002834C3 /* ExerciseShortTableViewCell.xib */; };
 		5299C80823AACB8E00074E6A /* WorkoutGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5299C80723AACB8D00074E6A /* WorkoutGenerator.swift */; };
 		52C26A7223923DB400F809E6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C26A7123923DB400F809E6 /* AppDelegate.swift */; };
 		52C26A7423923DB400F809E6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C26A7323923DB400F809E6 /* SceneDelegate.swift */; };
@@ -69,7 +74,12 @@
 		5201E813243840BB00E09A0B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		5201E8162439935000E09A0B /* CreateExerciseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateExerciseViewController.swift; sourceTree = "<group>"; };
 		5201E81A243C185F00E09A0B /* GetWorkoutsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetWorkoutsViewController.swift; sourceTree = "<group>"; };
+		520783DE2442F4BE00E2D789 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		520783E02443A4B800E2D789 /* ExerciseExpandedTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseExpandedTableViewCell.swift; sourceTree = "<group>"; };
+		520783E12443A4B800E2D789 /* ExerciseExpandedTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ExerciseExpandedTableViewCell.xib; sourceTree = "<group>"; };
 		522F039223943C5600D743F7 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
+		524D93442442EE6D002834C3 /* ExerciseShortTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseShortTableViewCell.swift; sourceTree = "<group>"; };
+		524D93452442EE6D002834C3 /* ExerciseShortTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ExerciseShortTableViewCell.xib; sourceTree = "<group>"; };
 		5257708A23BC54F90042F0DF /* DrawerMenu.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = DrawerMenu.xcodeproj; path = ../DrawerMenu/DrawerMenu.xcodeproj; sourceTree = "<group>"; };
 		5299C80723AACB8D00074E6A /* WorkoutGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutGenerator.swift; sourceTree = "<group>"; };
 		52C26A6E23923DB400F809E6 /* HiitGenerator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HiitGenerator.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -112,6 +122,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		520783DB2442F4A400E2D789 /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				520783DE2442F4BE00E2D789 /* Extensions.swift */,
+			);
+			path = Util;
+			sourceTree = "<group>";
+		};
 		522D275023BC559D003E76F8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -119,6 +137,17 @@
 				1CF4920964E04643086D8FC3 /* Pods_HiitGeneratorTests.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		524D93482442EE75002834C3 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				524D93442442EE6D002834C3 /* ExerciseShortTableViewCell.swift */,
+				524D93452442EE6D002834C3 /* ExerciseShortTableViewCell.xib */,
+				520783E02443A4B800E2D789 /* ExerciseExpandedTableViewCell.swift */,
+				520783E12443A4B800E2D789 /* ExerciseExpandedTableViewCell.xib */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		5257708B23BC54F90042F0DF /* Products */ = {
@@ -154,6 +183,8 @@
 		52C26A7023923DB400F809E6 /* HiitGenerator */ = {
 			isa = PBXGroup;
 			children = (
+				520783DB2442F4A400E2D789 /* Util */,
+				524D93482442EE75002834C3 /* Views */,
 				52C26A7123923DB400F809E6 /* AppDelegate.swift */,
 				52C26A7323923DB400F809E6 /* SceneDelegate.swift */,
 				52C26A7723923DB400F809E6 /* Main.storyboard */,
@@ -300,7 +331,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				524D93472442EE6D002834C3 /* ExerciseShortTableViewCell.xib in Resources */,
 				5201E814243840BB00E09A0B /* GoogleService-Info.plist in Resources */,
+				520783E32443A4B800E2D789 /* ExerciseExpandedTableViewCell.xib in Resources */,
 				52C26A7E23923DBD00F809E6 /* LaunchScreen.storyboard in Resources */,
 				52C26A7B23923DBD00F809E6 /* Assets.xcassets in Resources */,
 				52C26A7923923DB400F809E6 /* Main.storyboard in Resources */,
@@ -419,9 +452,12 @@
 				52C26A7623923DB400F809E6 /* ShowWorkoutViewController.swift in Sources */,
 				5201E8172439935000E09A0B /* CreateExerciseViewController.swift in Sources */,
 				52C26A7223923DB400F809E6 /* AppDelegate.swift in Sources */,
+				520783DF2442F4BE00E2D789 /* Extensions.swift in Sources */,
 				52C26A7423923DB400F809E6 /* SceneDelegate.swift in Sources */,
 				52C26A9423923DEE00F809E6 /* WorkoutDataModels.swift in Sources */,
+				520783E22443A4B800E2D789 /* ExerciseExpandedTableViewCell.swift in Sources */,
 				5201E81B243C185F00E09A0B /* GetWorkoutsViewController.swift in Sources */,
+				524D93462442EE6D002834C3 /* ExerciseShortTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

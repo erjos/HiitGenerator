@@ -9,9 +9,27 @@
 import UIKit
 
 //TODO: need a solution to help prevent adding workouts that are too similar ie. inchworm / inchworm + pushup
+
+//TODO: a button to just randomly replace a single workout if you dont like it - like a request new function...
+//Do we want to give the app a dark mode and a light mode
+
 class GetWorkoutsViewController: UIViewController {
 
     @IBOutlet weak var workoutsTable: UITableView!
+    
+    /// This variable is used to keep a reference to which cell is currently expanded. No more than one cell may be expanded at any time, if this variable is nil then all cells are collapsed.
+    private var expandedCell: IndexPath? {
+        didSet {
+            if let expanded = self.expandedCell {
+                UIView.animate(withDuration: 0.5) {
+                    //reload the visible cell
+                    if let visibleCells = self.workoutsTable.indexPathsForVisibleRows {
+                        self.workoutsTable.reloadRows(at: visibleCells, with: .none)
+                    }
+                }
+            }
+        }
+    }
     
     @IBAction func didPressGetWorkouts(_ sender: Any) {
         WorkoutDataModels.getAllExercises { (snapshot_opt, error_opt) in
@@ -74,7 +92,9 @@ class GetWorkoutsViewController: UIViewController {
         super.viewDidLoad()
         self.workoutsTable.delegate = self
         self.workoutsTable.dataSource = self
-        self.workoutsTable.register(UITableViewCell.self, forCellReuseIdentifier: "normal_cell")
+        self.workoutsTable.register(UINib.init(nibName: "ExerciseShortTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "exercise_short_cell")
+        self.workoutsTable.register(UINib(nibName: "ExerciseExpandedTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "exercise_expanded_cell")
+        self.workoutsTable.separatorStyle = .none
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -92,10 +112,17 @@ extension GetWorkoutsViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "normal_cell") else {
-            return UITableViewCell()
+        
+        var cell = ExerciseTableViewCell()
+        
+        if indexPath == self.expandedCell {
+            cell = tableView.dequeueReusableCell(withIdentifier: "exercise_expanded_cell") as! ExerciseExpandedTableViewCell
+        } else {
+            cell = tableView.dequeueReusableCell(withIdentifier: "exercise_short_cell") as! ExerciseShortTableViewCell
         }
-        cell.textLabel?.text = self.dataSource[indexPath.row].name
+
+        cell.exerciseTitle.text = self.dataSource[indexPath.row].name
+        cell.selectionStyle = .none
         return cell
     }
     
@@ -103,7 +130,15 @@ extension GetWorkoutsViewController: UITableViewDataSource {
 }
 
 extension GetWorkoutsViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath == self.expandedCell {
+            return 160
+        }
+        return 80
+    }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.performSegue(withIdentifier: "view_workout", sender: indexPath)
+        self.expandedCell = indexPath
+        //self.performSegue(withIdentifier: "view_workout", sender: indexPath)
     }
 }
