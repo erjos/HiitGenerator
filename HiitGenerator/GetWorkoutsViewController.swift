@@ -17,17 +17,15 @@ class GetWorkoutsViewController: UIViewController {
 
     @IBOutlet weak var workoutsTable: UITableView!
     
-    // One idea would be to have separate view controllers and that the animation is really just a transition from one to the other - but the swipe down could be difficult becuase it would have to slowly collapse and then eventually transition back to the table view when it reaches a certain height
-    
-    // I think it's ok to do the transition between screens because they will be kinda differnet. But we'll need to be able to move to the next one
-    
     /// This variable is used to keep a reference to which cell is currently expanded. No more than one cell may be expanded at any time, if this variable is nil then all cells are collapsed.
+    
+    //TODO: this presents problems if the indexPath changes - any change to the table should only be able to be done when this is set to nil
     private var expandedCell: IndexPath? {
         didSet {
             self.workoutsTable.beginUpdates()
             self.workoutsTable.endUpdates()
             
-            //This should update the cell the way we want it to, so can experiment with some more complex state updates
+            //TODO: not sure if this does anything right now :/
             self.workoutsTable.layoutSubviews()
         }
     }
@@ -131,7 +129,7 @@ extension GetWorkoutsViewController: UITableViewDataSource {
 extension GetWorkoutsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath == self.expandedCell {
-            return 160
+            return 332
         }
         return 80
     }

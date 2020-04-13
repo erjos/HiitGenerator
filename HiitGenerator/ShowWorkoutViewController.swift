@@ -36,6 +36,7 @@ class ShowWorkoutViewController: UIViewController {
         super.viewDidLoad()
         self.setupPage(exercise: self.exercise)
         setView(.Stopped)
+        
         //self.runTimer()
         
         //drawerMenu.delegate = self
