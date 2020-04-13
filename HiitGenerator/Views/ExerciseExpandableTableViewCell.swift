@@ -8,55 +8,47 @@
 
 import UIKit
 
-class ExerciseTableViewCell : UITableViewCell {
-    var cellContent: UIView {
-        get {
-            return UIView()
-        }
-        set { }
-    }
-    var exerciseTitle: UILabel {
-        get {
-            return UILabel()
-        }
-        set { }
-    }
-}
-
-class ExerciseExpandableTableViewCell: ExerciseTableViewCell {
-    
-    override var cellContent: UIView {
-        get {
-            return self.roundedView
-        }
-        set {
-            self.roundedView = newValue
-        }
-    }
-    
-    override var exerciseTitle: UILabel {
-        get {
-            return self.cellTitle
-        }
-        set{
-            self.cellTitle = newValue
-        }
-    }
+class ExerciseExpandableTableViewCell: UITableViewCell {
 
     @IBOutlet weak var roundedView: UIView!
     @IBOutlet weak var cellTitle: UILabel!
+    @IBOutlet weak var descriptionLabel: UILabel!
+    @IBOutlet weak var typesLabel: UILabel!
+    @IBOutlet weak var difficultyLabel: UILabel!
+    @IBOutlet weak var instructionsOneLabel: UILabel!
+    @IBOutlet weak var instructionsTwoLabel: UILabel!
+    @IBOutlet weak var instructionsThreeLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
         
         self.roundedView.roundCorners(radius: 27.0)
         self.roundedView.setBorder(width: 2.0, color: UIColor.blue)
+        
+        self.instructionsTwoLabel.text = ""
+        self.instructionsThreeLabel.text = ""
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
         // Configure the view for the selected state
     }
     
+    //TODO: determine if we need to use this
+    override func prepareForReuse() {
+        super.prepareForReuse()
+    }
+    
+    func configure(for exercise: Exercise){
+        self.cellTitle.text = exercise.name
+        self.descriptionLabel.text = exercise.description
+        self.typesLabel.text = exercise.workoutTypes.map{$0.rawValue}.joined(separator: " - ")
+        self.difficultyLabel.text = String(exercise.difficulty.rawValue)
+        
+        // Setup instructions
+        let labelArray = [instructionsOneLabel, instructionsTwoLabel, instructionsThreeLabel]
+        for (step, label) in zip(exercise.instructions, labelArray) {
+            label?.text = "• \(step)"
+        }
+    }
 }

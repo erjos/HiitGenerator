@@ -21,28 +21,22 @@
                         <color key="backgroundColor" systemColor="tertiarySystemGroupedBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cell Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qVN-AA-Ora">
-                        <rect key="frame" x="40" y="29.5" width="66.5" height="20.5"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <rect key="frame" x="40" y="29.5" width="76" height="24"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c9E-fU-8VF" userLabel="Info View">
                         <rect key="frame" x="40" y="70" width="267" height="231"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o04-bV-uax">
-                                <rect key="frame" x="0.0" y="0.0" width="133.5" height="20.5"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description label could potentially have two lines." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o04-bV-uax">
+                                <rect key="frame" x="0.0" y="0.0" width="267" height="36"/>
+                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Types Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6la-XC-xHd">
-                                <rect key="frame" x="0.0" y="30.5" width="92" height="20.5"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Difficulty Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gJS-ON-ukF">
-                                <rect key="frame" x="0.0" y="61" width="114.5" height="20.5"/>
+                                <rect key="frame" x="0.0" y="44" width="92" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -70,18 +64,25 @@
                                     </label>
                                 </subviews>
                             </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Difficulty Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gJS-ON-ukF">
+                                <rect key="frame" x="152.5" y="44" width="114.5" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="tertiarySystemGroupedBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="cwQ-OA-Sx9" firstAttribute="top" secondItem="6la-XC-xHd" secondAttribute="bottom" constant="30.5" id="4pF-Fk-fSH"/>
+                            <constraint firstItem="gJS-ON-ukF" firstAttribute="top" secondItem="6la-XC-xHd" secondAttribute="top" id="7MZ-Ld-4c4"/>
                             <constraint firstItem="o04-bV-uax" firstAttribute="top" secondItem="c9E-fU-8VF" secondAttribute="top" id="9gE-UP-EAD"/>
+                            <constraint firstAttribute="trailing" secondItem="gJS-ON-ukF" secondAttribute="trailing" id="ENF-0a-eqw"/>
                             <constraint firstItem="6la-XC-xHd" firstAttribute="leading" secondItem="c9E-fU-8VF" secondAttribute="leading" id="IgY-c9-gUg"/>
-                            <constraint firstItem="6la-XC-xHd" firstAttribute="top" secondItem="o04-bV-uax" secondAttribute="bottom" constant="10" id="YQy-dP-bHu"/>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="o04-bV-uax" secondAttribute="trailing" id="RCP-8A-Mia"/>
                             <constraint firstItem="o04-bV-uax" firstAttribute="leading" secondItem="c9E-fU-8VF" secondAttribute="leading" id="byc-Cz-mLJ"/>
-                            <constraint firstItem="gJS-ON-ukF" firstAttribute="top" secondItem="6la-XC-xHd" secondAttribute="bottom" constant="10" id="qYG-Mw-Q0g"/>
                             <constraint firstItem="cwQ-OA-Sx9" firstAttribute="leading" secondItem="c9E-fU-8VF" secondAttribute="leading" id="rwn-Qv-GIU"/>
-                            <constraint firstItem="gJS-ON-ukF" firstAttribute="leading" secondItem="c9E-fU-8VF" secondAttribute="leading" id="xag-fp-A2M"/>
                             <constraint firstAttribute="trailing" secondItem="cwQ-OA-Sx9" secondAttribute="trailing" id="y3r-E4-xN9"/>
-                            <constraint firstItem="cwQ-OA-Sx9" firstAttribute="top" secondItem="gJS-ON-ukF" secondAttribute="bottom" constant="13.5" id="zPp-CJ-h4j"/>
+                            <constraint firstItem="6la-XC-xHd" firstAttribute="top" secondItem="o04-bV-uax" secondAttribute="bottom" constant="8" id="yZH-ue-3Bm"/>
                             <constraint firstAttribute="bottom" secondItem="cwQ-OA-Sx9" secondAttribute="bottom" id="zg3-KN-Xva"/>
                         </constraints>
                     </view>
@@ -90,20 +91,27 @@
                     <constraint firstAttribute="bottom" secondItem="Eve-El-9MZ" secondAttribute="bottom" constant="10" id="0jq-Xq-kso"/>
                     <constraint firstItem="Eve-El-9MZ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="3Xy-IT-qUE"/>
                     <constraint firstItem="qVN-AA-Ora" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="29.5" id="9Aw-sX-U8T"/>
+                    <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="c9E-fU-8VF" secondAttribute="bottom" constant="20" id="AQE-dn-4Z1"/>
                     <constraint firstItem="Eve-El-9MZ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="Jai-Nv-hdI"/>
                     <constraint firstItem="Eve-El-9MZ" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="PeA-c8-kkd"/>
                     <constraint firstItem="c9E-fU-8VF" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="70" id="QuR-p8-RKk"/>
                     <constraint firstAttribute="trailing" secondItem="Eve-El-9MZ" secondAttribute="trailing" constant="20" id="U7F-gc-u3O"/>
                     <constraint firstAttribute="trailingMargin" secondItem="c9E-fU-8VF" secondAttribute="trailing" constant="20" id="duC-SN-luJ"/>
                     <constraint firstItem="qVN-AA-Ora" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="40" id="gMR-Bn-072"/>
-                    <constraint firstAttribute="bottomMargin" secondItem="c9E-fU-8VF" secondAttribute="bottom" constant="20" id="oAr-Ko-6I6"/>
                     <constraint firstItem="c9E-fU-8VF" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="20" id="w0f-BB-ihu"/>
+                    <constraint firstAttribute="bottom" secondItem="c9E-fU-8VF" secondAttribute="bottom" constant="31" id="xFG-li-ksH"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="cellTitle" destination="qVN-AA-Ora" id="pFs-CH-hTv"/>
+                <outlet property="descriptionLabel" destination="o04-bV-uax" id="8Ei-3A-0nH"/>
+                <outlet property="difficultyLabel" destination="gJS-ON-ukF" id="Iap-Pq-Nap"/>
+                <outlet property="instructionsOneLabel" destination="VfP-z2-viC" id="i5r-cz-hJ1"/>
+                <outlet property="instructionsThreeLabel" destination="UfN-TY-GfN" id="Hnt-5T-1ex"/>
+                <outlet property="instructionsTwoLabel" destination="mfG-44-KxT" id="nTH-GH-t3L"/>
                 <outlet property="roundedView" destination="Eve-El-9MZ" id="kb5-d5-jV4"/>
+                <outlet property="typesLabel" destination="6la-XC-xHd" id="VOm-pV-tA2"/>
             </connections>
             <point key="canvasLocation" x="157.24637681159422" y="141.29464285714286"/>
         </tableViewCell>

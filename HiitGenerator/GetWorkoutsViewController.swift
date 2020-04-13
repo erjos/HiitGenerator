@@ -115,11 +115,13 @@ extension GetWorkoutsViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        var cell = ExerciseTableViewCell()
+        //TODO: get rid of the protocol if it is uneeded
         
+        var cell = ExerciseExpandableTableViewCell()
         cell = tableView.dequeueReusableCell(withIdentifier: "exercise_expandable_cell") as! ExerciseExpandableTableViewCell
-
-        cell.exerciseTitle.text = self.dataSource[indexPath.row].name
+        let exercise = self.dataSource[indexPath.row]
+        //TODO: ensure this is the right place for this
+        cell.configure(for: exercise)
         cell.selectionStyle = .none
         return cell
     }
