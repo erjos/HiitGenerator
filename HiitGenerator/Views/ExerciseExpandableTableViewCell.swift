@@ -39,6 +39,10 @@ class ExerciseExpandableTableViewCell: UITableViewCell {
     }
     
     func configure(for exercise: Exercise){
+        
+        self.instructionsTwoLabel.text = ""
+        self.instructionsThreeLabel.text = ""
+        
         self.cellTitle.text = exercise.name
         self.descriptionLabel.text = exercise.description
         self.typesLabel.text = exercise.workoutTypes.map{$0.rawValue}.joined(separator: " - ")
