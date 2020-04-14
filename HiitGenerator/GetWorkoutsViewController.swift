@@ -11,7 +11,18 @@ import UIKit
 //TODO: need a solution to help prevent adding workouts that are too similar ie. inchworm / inchworm + pushup
 
 //TODO: a button to just randomly replace a single workout if you dont like it - like a request new function...
-//Do we want to give the app a dark mode and a light mode
+
+//Timer that walks user through each workout... countdown to start, highlights and autoexpands the workout you are doing
+
+//Screen / Interaction States
+// Not Started
+// Started - Active (mid Exercercise)
+// Started - Resting between exercises
+// Started - Resting between circuits
+// Paused
+// Finished
+
+//consider if we want to make the style/theme light or dark
 
 class GetWorkoutsViewController: UIViewController {
 
