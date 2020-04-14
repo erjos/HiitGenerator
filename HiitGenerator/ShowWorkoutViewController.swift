@@ -10,7 +10,6 @@ import UIKit
 import DrawerMenu
 
 class ShowWorkoutViewController: UIViewController {
-    var viewModel = ViewModel()
     
     //@IBOutlet weak var drawerMenu: DrawerMenu!
     
@@ -35,7 +34,6 @@ class ShowWorkoutViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupPage(exercise: self.exercise)
-        setView(.Stopped)
         
         //self.runTimer()
         
@@ -68,19 +66,6 @@ class ShowWorkoutViewController: UIViewController {
             //.joined(separator: ", ")
     }
     
-    //IDK if we'll end up using this
-    fileprivate func setView(_ state: WorkoutViewState) {
-        switch state {
-        case .Active:
-            setActive()
-        case .Paused:
-            setPaused()
-        case .Rest:
-            setRest()
-        case .Stopped:
-            setStopped()
-        }
-    }
     
     private func setActive() {
         //set view to active

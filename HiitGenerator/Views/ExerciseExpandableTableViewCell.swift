@@ -14,7 +14,6 @@ class ExerciseExpandableTableViewCell: UITableViewCell {
     @IBOutlet weak var cellTitle: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var typesLabel: UILabel!
-    @IBOutlet weak var difficultyLabel: UILabel!
     @IBOutlet weak var instructionsOneLabel: UILabel!
     @IBOutlet weak var instructionsTwoLabel: UILabel!
     @IBOutlet weak var instructionsThreeLabel: UILabel!
@@ -43,7 +42,6 @@ class ExerciseExpandableTableViewCell: UITableViewCell {
         self.cellTitle.text = exercise.name
         self.descriptionLabel.text = exercise.description
         self.typesLabel.text = exercise.workoutTypes.map{$0.rawValue}.joined(separator: " - ")
-        self.difficultyLabel.text = String(exercise.difficulty.rawValue)
         
         // Setup instructions
         let labelArray = [instructionsOneLabel, instructionsTwoLabel, instructionsThreeLabel]

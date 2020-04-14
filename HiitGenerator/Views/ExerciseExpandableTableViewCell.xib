@@ -31,13 +31,19 @@
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description label could potentially have two lines." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o04-bV-uax">
                                 <rect key="frame" x="0.0" y="0.0" width="267" height="36"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="40" id="PIZ-cJ-sik"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Types Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6la-XC-xHd">
-                                <rect key="frame" x="0.0" y="44" width="81" height="18"/>
-                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
+                                <rect key="frame" x="0.0" y="44" width="82.5" height="18"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="18" id="cm3-fo-2P6"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -47,7 +53,7 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="• Instructions one could be very long so you should do this" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VfP-z2-viC">
                                         <rect key="frame" x="0.0" y="0.0" width="267" height="36"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="36" id="uBB-MD-mzZ"/>
+                                            <constraint firstAttribute="height" relation="lessThanOrEqual" constant="40" id="uBB-MD-mzZ"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
                                         <nil key="textColor"/>
@@ -56,7 +62,7 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="• Instructions two could be very long so you should do this" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mfG-44-KxT">
                                         <rect key="frame" x="0.0" y="50" width="267" height="36"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="36" id="7Wv-Xl-FB3"/>
+                                            <constraint firstAttribute="height" relation="lessThanOrEqual" constant="40" id="7Wv-Xl-FB3"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
                                         <nil key="textColor"/>
@@ -65,7 +71,7 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="• Instructions three could be very long so do this." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UfN-TY-GfN">
                                         <rect key="frame" x="0.0" y="100" width="267" height="36"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="36" id="iW2-D3-Q4t"/>
+                                            <constraint firstAttribute="height" relation="lessThanOrEqual" constant="40" id="iW2-D3-Q4t"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
                                         <nil key="textColor"/>
@@ -73,18 +79,10 @@
                                     </label>
                                 </subviews>
                             </stackView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Difficulty Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gJS-ON-ukF">
-                                <rect key="frame" x="167" y="44" width="100" height="18"/>
-                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="tertiarySystemGroupedBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="gJS-ON-ukF" firstAttribute="top" secondItem="6la-XC-xHd" secondAttribute="top" id="7MZ-Ld-4c4"/>
                             <constraint firstItem="o04-bV-uax" firstAttribute="top" secondItem="c9E-fU-8VF" secondAttribute="top" id="9gE-UP-EAD"/>
-                            <constraint firstAttribute="trailing" secondItem="gJS-ON-ukF" secondAttribute="trailing" id="ENF-0a-eqw"/>
                             <constraint firstItem="6la-XC-xHd" firstAttribute="leading" secondItem="c9E-fU-8VF" secondAttribute="leading" id="IgY-c9-gUg"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="o04-bV-uax" secondAttribute="trailing" id="RCP-8A-Mia"/>
                             <constraint firstItem="cwQ-OA-Sx9" firstAttribute="top" secondItem="6la-XC-xHd" secondAttribute="bottom" constant="33" id="XsT-nz-whh"/>
@@ -115,7 +113,6 @@
             <connections>
                 <outlet property="cellTitle" destination="qVN-AA-Ora" id="pFs-CH-hTv"/>
                 <outlet property="descriptionLabel" destination="o04-bV-uax" id="8Ei-3A-0nH"/>
-                <outlet property="difficultyLabel" destination="gJS-ON-ukF" id="Iap-Pq-Nap"/>
                 <outlet property="instructionsOneLabel" destination="VfP-z2-viC" id="i5r-cz-hJ1"/>
                 <outlet property="instructionsThreeLabel" destination="UfN-TY-GfN" id="Hnt-5T-1ex"/>
                 <outlet property="instructionsTwoLabel" destination="mfG-44-KxT" id="nTH-GH-t3L"/>

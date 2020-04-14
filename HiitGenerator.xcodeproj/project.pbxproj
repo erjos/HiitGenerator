@@ -14,10 +14,8 @@
 		520783DF2442F4BE00E2D789 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 520783DE2442F4BE00E2D789 /* Extensions.swift */; };
 		522D275623BC5709003E76F8 /* DrawerMenu.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5257709023BC54F90042F0DF /* DrawerMenu.framework */; };
 		522D275723BC5709003E76F8 /* DrawerMenu.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5257709023BC54F90042F0DF /* DrawerMenu.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		522F039323943C5600D743F7 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 522F039223943C5600D743F7 /* ViewModel.swift */; };
 		524D93462442EE6D002834C3 /* ExerciseExpandableTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524D93442442EE6D002834C3 /* ExerciseExpandableTableViewCell.swift */; };
 		524D93472442EE6D002834C3 /* ExerciseExpandableTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 524D93452442EE6D002834C3 /* ExerciseExpandableTableViewCell.xib */; };
-		5299C80823AACB8E00074E6A /* WorkoutGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5299C80723AACB8D00074E6A /* WorkoutGenerator.swift */; };
 		52C26A7223923DB400F809E6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C26A7123923DB400F809E6 /* AppDelegate.swift */; };
 		52C26A7423923DB400F809E6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C26A7323923DB400F809E6 /* SceneDelegate.swift */; };
 		52C26A7623923DB400F809E6 /* ShowWorkoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C26A7523923DB400F809E6 /* ShowWorkoutViewController.swift */; };
@@ -73,11 +71,9 @@
 		5201E8162439935000E09A0B /* CreateExerciseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateExerciseViewController.swift; sourceTree = "<group>"; };
 		5201E81A243C185F00E09A0B /* GetWorkoutsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetWorkoutsViewController.swift; sourceTree = "<group>"; };
 		520783DE2442F4BE00E2D789 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
-		522F039223943C5600D743F7 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		524D93442442EE6D002834C3 /* ExerciseExpandableTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseExpandableTableViewCell.swift; sourceTree = "<group>"; };
 		524D93452442EE6D002834C3 /* ExerciseExpandableTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ExerciseExpandableTableViewCell.xib; sourceTree = "<group>"; };
 		5257708A23BC54F90042F0DF /* DrawerMenu.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = DrawerMenu.xcodeproj; path = ../DrawerMenu/DrawerMenu.xcodeproj; sourceTree = "<group>"; };
-		5299C80723AACB8D00074E6A /* WorkoutGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutGenerator.swift; sourceTree = "<group>"; };
 		52C26A6E23923DB400F809E6 /* HiitGenerator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HiitGenerator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		52C26A7123923DB400F809E6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		52C26A7323923DB400F809E6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -185,8 +181,6 @@
 				52C26A7A23923DBD00F809E6 /* Assets.xcassets */,
 				52C26A7C23923DBD00F809E6 /* LaunchScreen.storyboard */,
 				52C26A9323923DEE00F809E6 /* WorkoutDataModels.swift */,
-				522F039223943C5600D743F7 /* ViewModel.swift */,
-				5299C80723AACB8D00074E6A /* WorkoutGenerator.swift */,
 				52C26A7523923DB400F809E6 /* ShowWorkoutViewController.swift */,
 				5201E8162439935000E09A0B /* CreateExerciseViewController.swift */,
 				5201E81A243C185F00E09A0B /* GetWorkoutsViewController.swift */,
@@ -440,8 +434,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				522F039323943C5600D743F7 /* ViewModel.swift in Sources */,
-				5299C80823AACB8E00074E6A /* WorkoutGenerator.swift in Sources */,
 				52C26A7623923DB400F809E6 /* ShowWorkoutViewController.swift in Sources */,
 				5201E8172439935000E09A0B /* CreateExerciseViewController.swift in Sources */,
 				52C26A7223923DB400F809E6 /* AppDelegate.swift in Sources */,
