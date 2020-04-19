@@ -25,7 +25,11 @@ import UIKit
 //consider if we want to make the style/theme light or dark
 
 class GetWorkoutsViewController: UIViewController {
-
+    
+    @IBOutlet weak var timerLabel: UILabel!
+    
+    @IBAction func didPressPlay(_ sender: Any) {
+    }
     @IBOutlet weak var workoutsTable: UITableView!
     
     /// This variable is used to keep a reference to which cell is currently expanded. No more than one cell may be expanded at any time, if this variable is nil then all cells are collapsed.
@@ -70,12 +74,6 @@ class GetWorkoutsViewController: UIViewController {
         }
     }
     
-    enum CircuitType: Int {
-        case small = 3
-        case medium = 5
-        case large = 8
-    }
-    
     // Uses a set so we can quickly tell whether we already have a workout
     private func generateWorkout(circuitType: CircuitType) -> [Exercise]? {
         var workout = [Exercise]()
@@ -88,6 +86,26 @@ class GetWorkoutsViewController: UIViewController {
             workout.append(random_exercise)
         }
         return workout
+    }
+    
+    var seconds: Double = 0
+    var timerDevice = Timer()
+    
+    func timeString(time:TimeInterval) -> String {
+        let minutes = Int(time) / 60 % 60
+        let seconds = Int(time) % 60
+        return String(format: "%02i:%02i", minutes, seconds)
+    }
+    
+    @objc func updateTimer() {
+        seconds += 1
+        timerLabel.text = "\(timeString(time: seconds))"
+    }
+    
+    func runTimer() {
+        timerDevice.invalidate()
+        seconds = 0
+        timerDevice = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
     }
     
     private var exerciseSet = Set<Exercise>()
@@ -125,13 +143,9 @@ extension GetWorkoutsViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        //TODO: get rid of the protocol if it is uneeded
-        
         var cell = ExerciseExpandableTableViewCell()
         cell = tableView.dequeueReusableCell(withIdentifier: "exercise_expandable_cell") as! ExerciseExpandableTableViewCell
         let exercise = self.dataSource[indexPath.row]
-        //TODO: ensure this is the right place for this
         cell.configure(for: exercise)
         cell.selectionStyle = .none
         return cell

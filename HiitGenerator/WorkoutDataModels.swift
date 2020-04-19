@@ -82,6 +82,12 @@ enum Equipment: String {
     case BoxJump //could be any sturdy surface or bench
 }
 
+enum CircuitType: Int {
+    case small = 3
+    case medium = 5
+    case large = 8
+}
+
 /// Completion that takes an optional error - all optional closures are escaping by default
 typealias CompletionOptional = ((Error?)->())?
 
