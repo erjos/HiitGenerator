@@ -11,8 +11,16 @@ import UIKit
 
 extension UIView {
     
-    func roundCorners(radius: CGFloat) {
+    enum ViewCorners: CaseIterable {
+        case topLeft
+        case topRight
+        case bottomLeft
+        case bottomRight
+    }
+    
+    func roundCorners(radius: CGFloat, corners: CACornerMask = [.layerMinXMinYCorner,.layerMaxXMinYCorner, .layerMaxXMaxYCorner, .layerMinXMaxYCorner]) {
         self.layer.cornerRadius = radius
+        self.layer.maskedCorners = corners
     }
     
     func setBorder(width: CGFloat, color: UIColor) {

@@ -26,6 +26,7 @@ import UIKit
 
 class GetWorkoutsViewController: UIViewController {
     
+    @IBOutlet weak var topView: UIView!
     @IBOutlet weak var timerLabel: UILabel!
     
     @IBAction func didPressPlay(_ sender: Any) {
@@ -122,6 +123,7 @@ class GetWorkoutsViewController: UIViewController {
         self.workoutsTable.dataSource = self
         self.workoutsTable.register(UINib.init(nibName: "ExerciseExpandableTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "exercise_expandable_cell")
         self.workoutsTable.separatorStyle = .none
+        self.topView.roundCorners(radius: 25.0, corners: [.layerMinXMaxYCorner, .layerMaxXMaxYCorner])
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
