@@ -23,6 +23,7 @@ class ActiveWorkout {
     var exercises: [Exercise]
     var workoutState : WorkoutState = .unstarted
     private var timer = WorkoutTimer()
+    private (set) var isPaused = false
     
     weak var workoutDelegate: WorkoutDelegate?
     
@@ -33,14 +34,28 @@ class ActiveWorkout {
     }
     
     func startWorkout() {
+        self.workoutState = .active
         self.timer.runTimer(startTime: 0)
         self.workoutDelegate?.didStartWorkout(self)
+    }
+    
+    func resumeWorkout() {
+        self.isPaused = false
+        self.timer.resumeTimer()
+        self.workoutDelegate?.didResumeWorkout(self)
+    }
+    
+    func pauseWorkout() {
+        self.timer.pauseTimer()
+        self.isPaused = true
+        self.workoutDelegate?.didPauseWorkout(self)
     }
 }
 
 protocol ActiveWorkoutDelegate: class {
     
     func didPauseWorkout(_ workout: ActiveWorkout)
+    func didResumeWorkout(_ workout: ActiveWorkout)
     func didStartWorkout(_ workout: ActiveWorkout)
     func didComplete(_ exercise: Exercise, workout: ActiveWorkout)
     func didCompleteCircuit(_ circuit: Int, workout: ActiveWorkout)
@@ -62,19 +77,5 @@ enum WorkoutState {
     case active
     case exerciseBreak
     case circuitBreak
-    case paused
     case finished
-}
-
-//TODO: consider removing this until we actually decide to implement it or not
-protocol Observable {
-    associatedtype T
-    
-    var value: T { get set }
-    
-    var observers: [AnyObject] { get set }
-    
-    func subscribe(observer: AnyObject, block: (_ newValue: T, _ oldValue: T) -> ())
-    
-    func unsubscribe(observer: AnyObject)
 }

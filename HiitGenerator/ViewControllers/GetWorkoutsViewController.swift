@@ -18,13 +18,30 @@ import UIKit
 
 class GetWorkoutsViewController: UIViewController {
     
+    @IBOutlet weak var playButton: UIButton!
     @IBOutlet weak var topView: UIView!
     @IBOutlet weak var timerLabel: UILabel!
     
     @IBAction func didPressPlay(_ sender: Any) {
         guard let currentWorkout = self.activeWorkout else { return }
-        // start the current workout
-        currentWorkout.startWorkout()
+        self.handlePressPlay(workout: currentWorkout)
+    }
+    
+    func handlePressPlay(workout: ActiveWorkout) {
+        
+        //TODO: remove this function from the view controller
+        //This logic is completely dependent on the state of the workout object... it should be removed from the view controller - either have a delegate object or some other object handle this
+        
+        if workout.isPaused {
+            workout.resumeWorkout()
+        } else {
+            switch workout.workoutState {
+            case .unstarted, .finished:
+                workout.startWorkout()
+            case .active, .exerciseBreak, .circuitBreak:
+                workout.pauseWorkout()
+            }
+        }
     }
     
     @IBOutlet weak var workoutsTable: UITableView!
@@ -117,6 +134,7 @@ class GetWorkoutsViewController: UIViewController {
 }
 
 extension GetWorkoutsViewController: UITableViewDataSource {
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return dataSource.count
     }
@@ -129,10 +147,10 @@ extension GetWorkoutsViewController: UITableViewDataSource {
         cell.selectionStyle = .none
         return cell
     }
-    
 }
 
 extension GetWorkoutsViewController: UITableViewDelegate {
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath == self.expandedCell {
             return 332
@@ -142,20 +160,21 @@ extension GetWorkoutsViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.expandedCell = indexPath
-        
-        //TODO: remove this if it no longer works
-        //self.performSegue(withIdentifier: "view_workout", sender: indexPath)
     }
 }
 
 extension GetWorkoutsViewController: ActiveWorkoutDelegate {
     
     func didStartWorkout(_ workout: ActiveWorkout) {
-        //Switch play button to pause button
+        self.playButton.setImage(#imageLiteral(resourceName: "pause_button_fill"), for: .normal)
     }
     
     func didPauseWorkout(_ workout: ActiveWorkout) {
-        
+        self.playButton.setImage(#imageLiteral(resourceName: "play_button_fill"), for: .normal)
+    }
+    
+    func didResumeWorkout(_ workout: ActiveWorkout) {
+        self.playButton.setImage(#imageLiteral(resourceName: "pause_button_fill"), for: .normal)
     }
     
     func didComplete(_ exercise: Exercise, workout: ActiveWorkout) {
@@ -173,7 +192,6 @@ extension GetWorkoutsViewController: ActiveWorkoutDelegate {
 
 extension GetWorkoutsViewController: WorkoutTimerDelegate {
     
-    //TODO: set the delegate for the timer on the workout
     func didUpdateTimer(seconds: Double) {
         let timerText = String.getTimeString(time: seconds)
         self.timerLabel.text = timerText

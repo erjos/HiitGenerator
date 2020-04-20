@@ -17,10 +17,19 @@ class WorkoutTimer {
     
     func runTimer(startTime: Double) {
         timerDevice.invalidate()
-        seconds = 0
+        seconds = startTime
         timerDevice = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
     }
     
+    func pauseTimer() {
+        timerDevice.invalidate()
+    }
+    
+    func resumeTimer() {
+        timerDevice = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
+    }
+    
+    //TODO: add way to switch between count up and count down
     @objc func updateTimer() {
         seconds += 1
         self.delegate?.didUpdateTimer(seconds: self.seconds)
