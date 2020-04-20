@@ -12,19 +12,9 @@ import UIKit
 
 //TODO: a button to just randomly replace a single workout if you dont like it - like a request new function...
 
-//TODO: Create workout object based on user input, ie. circuits and length/difficulty of each circuit
+//TODO: consider dark mode
 
-//Timer that walks user through each workout... countdown to start, highlights and autoexpands the workout you are doing
-
-//Screen / Interaction States
-// Not Started
-// Started - Active (mid Exercercise)
-// Started - Resting between exercises
-// Started - Resting between circuits
-// Paused
-// Finished
-
-//consider if we want to make the style/theme light or dark
+//TODO: shuffle animation when generating the workout
 
 class GetWorkoutsViewController: UIViewController {
     
@@ -32,11 +22,8 @@ class GetWorkoutsViewController: UIViewController {
     @IBOutlet weak var timerLabel: UILabel!
     
     @IBAction func didPressPlay(_ sender: Any) {
-        self.runTimer()
         
-        //create the workout and begin - update the state on the page -
-        
-        //SO ideally we have a situation where we can trigger a callback at various checkpoints during the workout which we use to update the state of the page
+        // TODO: start the workout on the currentWorkout object
     }
     
     @IBOutlet weak var workoutsTable: UITableView!
@@ -83,7 +70,6 @@ class GetWorkoutsViewController: UIViewController {
         }
     }
     
-    // Uses a set so we can quickly tell whether we already have a workout
     private func generateWorkout(circuitType: CircuitType) -> [Exercise]? {
         var workout = [Exercise]()
         var set_snapshot = self.exerciseSet
@@ -97,24 +83,10 @@ class GetWorkoutsViewController: UIViewController {
         return workout
     }
     
-    var seconds: Double = 0
-    var timerDevice = Timer()
-    
     func timeString(time:TimeInterval) -> String {
         let minutes = Int(time) / 60 % 60
         let seconds = Int(time) % 60
         return String(format: "%02i:%02i", minutes, seconds)
-    }
-    
-    @objc func updateTimer() {
-        seconds += 1
-        timerLabel.text = "\(timeString(time: seconds))"
-    }
-    
-    func runTimer() {
-        timerDevice.invalidate()
-        seconds = 0
-        timerDevice = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
     }
     
     private var exerciseSet = Set<Exercise>()

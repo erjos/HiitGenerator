@@ -17,42 +17,42 @@ enum CircuitType: Int {
 class CurrentWorkout {
     
     var workoutState : WorkoutState?
-    weak var updateDelegate: Updatable?
     
+    weak var workoutDelegate: ActiveWorkoutDelegate?
     
-    func pauseWorkout() {
-        
-    }
+    var workout: Workout?
     
     func startWorkout() {
-        
+        //tell the delegate that we started the workout
+        self.workoutDelegate?.didStartWorkout(self)
     }
     
-    func finishedCircuit() {
-        
+    // TIMER LOGIC
+    var seconds: Double = 0
+    var timerDevice = Timer()
+    
+    func runTimer() {
+        timerDevice.invalidate()
+        seconds = 0
+        timerDevice = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
     }
     
-    func finishedExercise() {
+    @objc func updateTimer() {
+        seconds += 1
         
+        //Move this back to the view Controller
+        //timerLabel.text = "\(timeString(time: seconds))"
     }
 }
 
+protocol ActiveWorkoutDelegate: class {
+    
+    func didPauseWorkout(_ workout: CurrentWorkout)
+    func didStartWorkout(_ workout: CurrentWorkout)
+    func didComplete(_ exercise: Exercise, workout: CurrentWorkout)
+    func didCompleteCircuit(_ circuit: Int, workout: CurrentWorkout)
+    func didCompleteWorkout( _ workout: CurrentWorkout)
 
-protocol Updatable: class {
-    func  updatedWorkout(_ workout: CurrentWorkout)
-}
-
-//
-protocol Observable {
-    associatedtype T
-    
-    var value: T { get set }
-    
-    var observers: [AnyObject] { get set }
-    
-    func subscribe(observer: AnyObject, block: (_ newValue: T, _ oldValue: T) -> ())
-    
-    func unsubscribe(observer: AnyObject)
 }
 
 // Model for basic workout that might be stored in the database
@@ -73,6 +73,20 @@ enum WorkoutState {
     case Finished
 }
 
+//TODO: consider if we want to keep track of the active workout
 struct ActiveWorkout {
     
+}
+
+//TODO: consider removing this until we actually decide to implement it or not
+protocol Observable {
+    associatedtype T
+    
+    var value: T { get set }
+    
+    var observers: [AnyObject] { get set }
+    
+    func subscribe(observer: AnyObject, block: (_ newValue: T, _ oldValue: T) -> ())
+    
+    func unsubscribe(observer: AnyObject)
 }
