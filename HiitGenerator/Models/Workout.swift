@@ -22,26 +22,11 @@ class CurrentWorkout {
     
     var workout: Workout?
     
+    lazy var timer = WorkoutTimer()
+    
     func startWorkout() {
-        //tell the delegate that we started the workout
         self.workoutDelegate?.didStartWorkout(self)
-    }
-    
-    // TIMER LOGIC
-    var seconds: Double = 0
-    var timerDevice = Timer()
-    
-    func runTimer() {
-        timerDevice.invalidate()
-        seconds = 0
-        timerDevice = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
-    }
-    
-    @objc func updateTimer() {
-        seconds += 1
         
-        //Move this back to the view Controller
-        //timerLabel.text = "\(timeString(time: seconds))"
     }
 }
 

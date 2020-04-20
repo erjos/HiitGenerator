@@ -83,12 +83,6 @@ class GetWorkoutsViewController: UIViewController {
         return workout
     }
     
-    func timeString(time:TimeInterval) -> String {
-        let minutes = Int(time) / 60 % 60
-        let seconds = Int(time) % 60
-        return String(format: "%02i:%02i", minutes, seconds)
-    }
-    
     private var exerciseSet = Set<Exercise>()
     
     private var dataSource: [Exercise] = [] {
@@ -113,10 +107,6 @@ class GetWorkoutsViewController: UIViewController {
             vc.exercise = self.dataSource[indexPath.row]
         }
     }
-}
-
-extension GetWorkoutsViewController: UIScrollViewDelegate {
-    //implement any behavior we want the table view to exhibit on scroll
 }
 
 extension GetWorkoutsViewController: UITableViewDataSource {
@@ -145,6 +135,16 @@ extension GetWorkoutsViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.expandedCell = indexPath
+        
+        //TODO: remove this
         //self.performSegue(withIdentifier: "view_workout", sender: indexPath)
+    }
+}
+
+extension GetWorkoutsViewController: WorkoutTimerDelegate {
+    
+    func didUpdateTimer(seconds: Double) {
+        let timerText = String.getTimeString(time: seconds)
+        self.timerLabel.text = timerText
     }
 }

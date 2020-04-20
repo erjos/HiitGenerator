@@ -26,6 +26,7 @@
 		52C26A7E23923DBD00F809E6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 52C26A7C23923DBD00F809E6 /* LaunchScreen.storyboard */; };
 		52C26A8923923DBD00F809E6 /* HiitGeneratorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C26A8823923DBD00F809E6 /* HiitGeneratorTests.swift */; };
 		52C26A9423923DEE00F809E6 /* Exercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C26A9323923DEE00F809E6 /* Exercise.swift */; };
+		52DCCE0F244D717B00D3D556 /* WorkoutTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52DCCE0E244D717B00D3D556 /* WorkoutTimer.swift */; };
 		F7B36D3FD63024A5DAE3115E /* Pods_HiitGenerator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B38F1E3A85F2BFA858319B6B /* Pods_HiitGenerator.framework */; };
 /* End PBXBuildFile section */
 
@@ -90,6 +91,7 @@
 		52C26A8823923DBD00F809E6 /* HiitGeneratorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HiitGeneratorTests.swift; sourceTree = "<group>"; };
 		52C26A8A23923DBD00F809E6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		52C26A9323923DEE00F809E6 /* Exercise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exercise.swift; sourceTree = "<group>"; };
+		52DCCE0E244D717B00D3D556 /* WorkoutTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutTimer.swift; sourceTree = "<group>"; };
 		658A13BDD749AE0DD06B4759 /* Pods-HiitGenerator.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HiitGenerator.release.xcconfig"; path = "Pods/Target Support Files/Pods-HiitGenerator/Pods-HiitGenerator.release.xcconfig"; sourceTree = "<group>"; };
 		7CC4106851E1CCF6E7E41E45 /* Pods-HiitGeneratorTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HiitGeneratorTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HiitGeneratorTests/Pods-HiitGeneratorTests.debug.xcconfig"; sourceTree = "<group>"; };
 		B38F1E3A85F2BFA858319B6B /* Pods_HiitGenerator.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HiitGenerator.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -208,6 +210,7 @@
 				52C26A7C23923DBD00F809E6 /* LaunchScreen.storyboard */,
 				5201E813243840BB00E09A0B /* GoogleService-Info.plist */,
 				52C26A7F23923DBD00F809E6 /* Info.plist */,
+				52DCCE0E244D717B00D3D556 /* WorkoutTimer.swift */,
 			);
 			path = HiitGenerator;
 			sourceTree = "<group>";
@@ -458,6 +461,7 @@
 			files = (
 				52C26A7623923DB400F809E6 /* ShowWorkoutViewController.swift in Sources */,
 				5201E8172439935000E09A0B /* CreateExerciseViewController.swift in Sources */,
+				52DCCE0F244D717B00D3D556 /* WorkoutTimer.swift in Sources */,
 				52C26A7223923DB400F809E6 /* AppDelegate.swift in Sources */,
 				520783DF2442F4BE00E2D789 /* Extensions.swift in Sources */,
 				52C26A7423923DB400F809E6 /* SceneDelegate.swift in Sources */,
