@@ -42,6 +42,11 @@ class CreateExerciseViewController: UIViewController {
         self.present(alertViewController, animated: true, completion: nil)
     }
     
+    /// Should be called anytime we need a state update for the workout
+    func updatedState(for workout: Workout) {
+        
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         

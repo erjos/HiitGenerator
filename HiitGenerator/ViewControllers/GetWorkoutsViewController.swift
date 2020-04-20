@@ -12,6 +12,8 @@ import UIKit
 
 //TODO: a button to just randomly replace a single workout if you dont like it - like a request new function...
 
+//TODO: Create workout object based on user input, ie. circuits and length/difficulty of each circuit
+
 //Timer that walks user through each workout... countdown to start, highlights and autoexpands the workout you are doing
 
 //Screen / Interaction States
@@ -30,7 +32,13 @@ class GetWorkoutsViewController: UIViewController {
     @IBOutlet weak var timerLabel: UILabel!
     
     @IBAction func didPressPlay(_ sender: Any) {
+        self.runTimer()
+        
+        //create the workout and begin - update the state on the page -
+        
+        //SO ideally we have a situation where we can trigger a callback at various checkpoints during the workout which we use to update the state of the page
     }
+    
     @IBOutlet weak var workoutsTable: UITableView!
     
     /// This variable is used to keep a reference to which cell is currently expanded. No more than one cell may be expanded at any time, if this variable is nil then all cells are collapsed.
@@ -136,7 +144,7 @@ class GetWorkoutsViewController: UIViewController {
 }
 
 extension GetWorkoutsViewController: UIScrollViewDelegate {
-    
+    //implement any behavior we want the table view to exhibit on scroll
 }
 
 extension GetWorkoutsViewController: UITableViewDataSource {

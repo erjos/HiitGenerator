@@ -12,6 +12,8 @@
 		5201E8172439935000E09A0B /* CreateExerciseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5201E8162439935000E09A0B /* CreateExerciseViewController.swift */; };
 		5201E81B243C185F00E09A0B /* GetWorkoutsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5201E81A243C185F00E09A0B /* GetWorkoutsViewController.swift */; };
 		520783DF2442F4BE00E2D789 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 520783DE2442F4BE00E2D789 /* Extensions.swift */; };
+		520783E5244D2CC300E2D789 /* Workout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 520783E4244D2CC300E2D789 /* Workout.swift */; };
+		520783E9244D2D9700E2D789 /* MockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 520783E8244D2D9700E2D789 /* MockData.swift */; };
 		522D275623BC5709003E76F8 /* DrawerMenu.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5257709023BC54F90042F0DF /* DrawerMenu.framework */; };
 		522D275723BC5709003E76F8 /* DrawerMenu.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5257709023BC54F90042F0DF /* DrawerMenu.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		524D93462442EE6D002834C3 /* ExerciseExpandableTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524D93442442EE6D002834C3 /* ExerciseExpandableTableViewCell.swift */; };
@@ -23,7 +25,7 @@
 		52C26A7B23923DBD00F809E6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 52C26A7A23923DBD00F809E6 /* Assets.xcassets */; };
 		52C26A7E23923DBD00F809E6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 52C26A7C23923DBD00F809E6 /* LaunchScreen.storyboard */; };
 		52C26A8923923DBD00F809E6 /* HiitGeneratorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C26A8823923DBD00F809E6 /* HiitGeneratorTests.swift */; };
-		52C26A9423923DEE00F809E6 /* WorkoutDataModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C26A9323923DEE00F809E6 /* WorkoutDataModels.swift */; };
+		52C26A9423923DEE00F809E6 /* Exercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C26A9323923DEE00F809E6 /* Exercise.swift */; };
 		F7B36D3FD63024A5DAE3115E /* Pods_HiitGenerator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B38F1E3A85F2BFA858319B6B /* Pods_HiitGenerator.framework */; };
 /* End PBXBuildFile section */
 
@@ -71,6 +73,8 @@
 		5201E8162439935000E09A0B /* CreateExerciseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateExerciseViewController.swift; sourceTree = "<group>"; };
 		5201E81A243C185F00E09A0B /* GetWorkoutsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetWorkoutsViewController.swift; sourceTree = "<group>"; };
 		520783DE2442F4BE00E2D789 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		520783E4244D2CC300E2D789 /* Workout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Workout.swift; sourceTree = "<group>"; };
+		520783E8244D2D9700E2D789 /* MockData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockData.swift; sourceTree = "<group>"; };
 		524D93442442EE6D002834C3 /* ExerciseExpandableTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseExpandableTableViewCell.swift; sourceTree = "<group>"; };
 		524D93452442EE6D002834C3 /* ExerciseExpandableTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ExerciseExpandableTableViewCell.xib; sourceTree = "<group>"; };
 		5257708A23BC54F90042F0DF /* DrawerMenu.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = DrawerMenu.xcodeproj; path = ../DrawerMenu/DrawerMenu.xcodeproj; sourceTree = "<group>"; };
@@ -85,7 +89,7 @@
 		52C26A8423923DBD00F809E6 /* HiitGeneratorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HiitGeneratorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		52C26A8823923DBD00F809E6 /* HiitGeneratorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HiitGeneratorTests.swift; sourceTree = "<group>"; };
 		52C26A8A23923DBD00F809E6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		52C26A9323923DEE00F809E6 /* WorkoutDataModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutDataModels.swift; sourceTree = "<group>"; };
+		52C26A9323923DEE00F809E6 /* Exercise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exercise.swift; sourceTree = "<group>"; };
 		658A13BDD749AE0DD06B4759 /* Pods-HiitGenerator.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HiitGenerator.release.xcconfig"; path = "Pods/Target Support Files/Pods-HiitGenerator/Pods-HiitGenerator.release.xcconfig"; sourceTree = "<group>"; };
 		7CC4106851E1CCF6E7E41E45 /* Pods-HiitGeneratorTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HiitGeneratorTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HiitGeneratorTests/Pods-HiitGeneratorTests.debug.xcconfig"; sourceTree = "<group>"; };
 		B38F1E3A85F2BFA858319B6B /* Pods_HiitGenerator.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HiitGenerator.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -120,6 +124,26 @@
 				520783DE2442F4BE00E2D789 /* Extensions.swift */,
 			);
 			path = Util;
+			sourceTree = "<group>";
+		};
+		520783E6244D2CCA00E2D789 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				520783E4244D2CC300E2D789 /* Workout.swift */,
+				52C26A9323923DEE00F809E6 /* Exercise.swift */,
+				520783E8244D2D9700E2D789 /* MockData.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		520783E7244D2CE600E2D789 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				52C26A7523923DB400F809E6 /* ShowWorkoutViewController.swift */,
+				5201E8162439935000E09A0B /* CreateExerciseViewController.swift */,
+				5201E81A243C185F00E09A0B /* GetWorkoutsViewController.swift */,
+			);
+			path = ViewControllers;
 			sourceTree = "<group>";
 		};
 		522D275023BC559D003E76F8 /* Frameworks */ = {
@@ -173,6 +197,8 @@
 		52C26A7023923DB400F809E6 /* HiitGenerator */ = {
 			isa = PBXGroup;
 			children = (
+				520783E7244D2CE600E2D789 /* ViewControllers */,
+				520783E6244D2CCA00E2D789 /* Models */,
 				520783DB2442F4A400E2D789 /* Util */,
 				524D93482442EE75002834C3 /* Views */,
 				52C26A7123923DB400F809E6 /* AppDelegate.swift */,
@@ -180,10 +206,6 @@
 				52C26A7723923DB400F809E6 /* Main.storyboard */,
 				52C26A7A23923DBD00F809E6 /* Assets.xcassets */,
 				52C26A7C23923DBD00F809E6 /* LaunchScreen.storyboard */,
-				52C26A9323923DEE00F809E6 /* WorkoutDataModels.swift */,
-				52C26A7523923DB400F809E6 /* ShowWorkoutViewController.swift */,
-				5201E8162439935000E09A0B /* CreateExerciseViewController.swift */,
-				5201E81A243C185F00E09A0B /* GetWorkoutsViewController.swift */,
 				5201E813243840BB00E09A0B /* GoogleService-Info.plist */,
 				52C26A7F23923DBD00F809E6 /* Info.plist */,
 			);
@@ -439,9 +461,11 @@
 				52C26A7223923DB400F809E6 /* AppDelegate.swift in Sources */,
 				520783DF2442F4BE00E2D789 /* Extensions.swift in Sources */,
 				52C26A7423923DB400F809E6 /* SceneDelegate.swift in Sources */,
-				52C26A9423923DEE00F809E6 /* WorkoutDataModels.swift in Sources */,
+				520783E5244D2CC300E2D789 /* Workout.swift in Sources */,
+				52C26A9423923DEE00F809E6 /* Exercise.swift in Sources */,
 				5201E81B243C185F00E09A0B /* GetWorkoutsViewController.swift in Sources */,
 				524D93462442EE6D002834C3 /* ExerciseExpandableTableViewCell.swift in Sources */,
+				520783E9244D2D9700E2D789 /* MockData.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
