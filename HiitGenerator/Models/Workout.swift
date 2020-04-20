@@ -14,29 +14,37 @@ enum CircuitType: Int {
     case large = 8
 }
 
-class CurrentWorkout {
+/// Set this delegate to receive callbacks for workout state change and workout timer updates
+typealias WorkoutDelegate = ActiveWorkoutDelegate & WorkoutTimerDelegate
+
+/// An active workout object that has been created and started by the user
+class ActiveWorkout {
     
-    var workoutState : WorkoutState?
+    var exercises: [Exercise]
+    var workoutState : WorkoutState = .unstarted
+    private var timer = WorkoutTimer()
     
-    weak var workoutDelegate: ActiveWorkoutDelegate?
+    weak var workoutDelegate: WorkoutDelegate?
     
-    var workout: Workout?
-    
-    lazy var timer = WorkoutTimer()
+    init(_ exercises: [Exercise], _ delegate: WorkoutDelegate) {
+        self.exercises = exercises
+        self.workoutDelegate = delegate
+        self.timer.delegate = delegate
+    }
     
     func startWorkout() {
+        self.timer.runTimer(startTime: 0)
         self.workoutDelegate?.didStartWorkout(self)
-        
     }
 }
 
 protocol ActiveWorkoutDelegate: class {
     
-    func didPauseWorkout(_ workout: CurrentWorkout)
-    func didStartWorkout(_ workout: CurrentWorkout)
-    func didComplete(_ exercise: Exercise, workout: CurrentWorkout)
-    func didCompleteCircuit(_ circuit: Int, workout: CurrentWorkout)
-    func didCompleteWorkout( _ workout: CurrentWorkout)
+    func didPauseWorkout(_ workout: ActiveWorkout)
+    func didStartWorkout(_ workout: ActiveWorkout)
+    func didComplete(_ exercise: Exercise, workout: ActiveWorkout)
+    func didCompleteCircuit(_ circuit: Int, workout: ActiveWorkout)
+    func didCompleteWorkout( _ workout: ActiveWorkout)
 
 }
 
@@ -50,17 +58,12 @@ struct Workout {
 
 //TODO: consider if we want a stopped?
 enum WorkoutState {
-    case Unstarted
-    case Active
-    case ExerciseBreak
-    case CircuitBreak
-    case Paused
-    case Finished
-}
-
-//TODO: consider if we want to keep track of the active workout
-struct ActiveWorkout {
-    
+    case unstarted
+    case active
+    case exerciseBreak
+    case circuitBreak
+    case paused
+    case finished
 }
 
 //TODO: consider removing this until we actually decide to implement it or not

@@ -22,15 +22,17 @@ class GetWorkoutsViewController: UIViewController {
     @IBOutlet weak var timerLabel: UILabel!
     
     @IBAction func didPressPlay(_ sender: Any) {
-        
-        // TODO: start the workout on the currentWorkout object
+        guard let currentWorkout = self.activeWorkout else { return }
+        // start the current workout
+        currentWorkout.startWorkout()
     }
     
     @IBOutlet weak var workoutsTable: UITableView!
     
-    /// This variable is used to keep a reference to which cell is currently expanded. No more than one cell may be expanded at any time, if this variable is nil then all cells are collapsed.
     
     //TODO: this presents problems if the indexPath changes - any change to the table should only be able to be done when this is set to nil
+    
+    /// This variable is used to keep a reference to which cell is currently expanded. No more than one cell may be expanded at any time, if this variable is nil then all cells are collapsed.
     private var expandedCell: IndexPath? {
         didSet {
             self.workoutsTable.beginUpdates()
@@ -41,7 +43,9 @@ class GetWorkoutsViewController: UIViewController {
         }
     }
     
-    @IBAction func didPressGetWorkouts(_ sender: Any) {
+    var activeWorkout: ActiveWorkout?
+    
+    @IBAction func didPressGetExercises(_ sender: Any) {
         WorkoutDataModels.getAllExercises { (snapshot_opt, error_opt) in
             if let _ = error_opt {
                 // TODO: Handle Error
@@ -67,6 +71,9 @@ class GetWorkoutsViewController: UIViewController {
     @IBAction func didPressGenerateWorkout(_ sender: Any) {
         if let workout = self.generateWorkout(circuitType: .large) {
             self.dataSource = workout
+            
+            //Create and set active workout
+            self.activeWorkout = ActiveWorkout(workout, self)
         }
     }
     
@@ -136,13 +143,37 @@ extension GetWorkoutsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.expandedCell = indexPath
         
-        //TODO: remove this
+        //TODO: remove this if it no longer works
         //self.performSegue(withIdentifier: "view_workout", sender: indexPath)
+    }
+}
+
+extension GetWorkoutsViewController: ActiveWorkoutDelegate {
+    
+    func didStartWorkout(_ workout: ActiveWorkout) {
+        //Switch play button to pause button
+    }
+    
+    func didPauseWorkout(_ workout: ActiveWorkout) {
+        
+    }
+    
+    func didComplete(_ exercise: Exercise, workout: ActiveWorkout) {
+        
+    }
+    
+    func didCompleteCircuit(_ circuit: Int, workout: ActiveWorkout) {
+        
+    }
+    
+    func didCompleteWorkout(_ workout: ActiveWorkout) {
+        
     }
 }
 
 extension GetWorkoutsViewController: WorkoutTimerDelegate {
     
+    //TODO: set the delegate for the timer on the workout
     func didUpdateTimer(seconds: Double) {
         let timerText = String.getTimeString(time: seconds)
         self.timerLabel.text = timerText
