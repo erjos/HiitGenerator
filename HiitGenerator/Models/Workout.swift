@@ -35,7 +35,7 @@ class ActiveWorkout {
     
     func startWorkout() {
         self.workoutState = .active
-        self.timer.runTimer(startTime: 0)
+        self.timer.runTimer(startTime: 10, countMode: .down)
         self.workoutDelegate?.didStartWorkout(self)
     }
     
@@ -46,8 +46,8 @@ class ActiveWorkout {
     }
     
     func pauseWorkout() {
-        self.timer.pauseTimer()
         self.isPaused = true
+        self.timer.pauseTimer()
         self.workoutDelegate?.didPauseWorkout(self)
     }
 }

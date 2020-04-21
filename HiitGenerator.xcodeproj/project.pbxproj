@@ -123,6 +123,7 @@
 		520783DB2442F4A400E2D789 /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				52DCCE0E244D717B00D3D556 /* WorkoutTimer.swift */,
 				520783DE2442F4BE00E2D789 /* Extensions.swift */,
 			);
 			path = Util;
@@ -206,11 +207,10 @@
 				52C26A7123923DB400F809E6 /* AppDelegate.swift */,
 				52C26A7323923DB400F809E6 /* SceneDelegate.swift */,
 				52C26A7723923DB400F809E6 /* Main.storyboard */,
-				52C26A7A23923DBD00F809E6 /* Assets.xcassets */,
 				52C26A7C23923DBD00F809E6 /* LaunchScreen.storyboard */,
+				52C26A7A23923DBD00F809E6 /* Assets.xcassets */,
 				5201E813243840BB00E09A0B /* GoogleService-Info.plist */,
 				52C26A7F23923DBD00F809E6 /* Info.plist */,
-				52DCCE0E244D717B00D3D556 /* WorkoutTimer.swift */,
 			);
 			path = HiitGenerator;
 			sourceTree = "<group>";

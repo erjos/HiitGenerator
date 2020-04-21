@@ -196,4 +196,11 @@ extension GetWorkoutsViewController: WorkoutTimerDelegate {
         let timerText = String.getTimeString(time: seconds)
         self.timerLabel.text = timerText
     }
+    
+    func didFinishTimer() {
+        
+        //TODO: determine if this is where we need this notification or if we will need to notify the workout object instead
+        
+        // step completed
+    }
 }
