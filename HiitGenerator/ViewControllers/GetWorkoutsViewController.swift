@@ -9,11 +9,8 @@
 import UIKit
 
 //TODO: need a solution to help prevent adding workouts that are too similar ie. inchworm / inchworm + pushup
-
 //TODO: a button to just randomly replace a single workout if you dont like it - like a request new function...
-
-//TODO: consider dark mode
-
+//TODO: consider a dark mode
 //TODO: shuffle animation when generating the workout
 
 class GetWorkoutsViewController: UIViewController {
@@ -21,34 +18,20 @@ class GetWorkoutsViewController: UIViewController {
     @IBOutlet weak var playButton: UIButton!
     @IBOutlet weak var topView: UIView!
     @IBOutlet weak var timerLabel: UILabel!
-    
-    @IBAction func didPressPlay(_ sender: Any) {
-        guard let currentWorkout = self.activeWorkout else { return }
-        self.handlePressPlay(workout: currentWorkout)
-    }
-    
-    func handlePressPlay(workout: ActiveWorkout) {
-        
-        //TODO: remove this function from the view controller
-        //This logic is completely dependent on the state of the workout object... it should be removed from the view controller - either have a delegate object or some other object handle this
-        
-        if workout.isPaused {
-            workout.resumeWorkout()
-        } else {
-            switch workout.workoutState {
-            case .unstarted, .finished:
-                workout.startWorkout()
-            case .active, .exerciseBreak, .circuitBreak:
-                workout.pauseWorkout()
-            }
-        }
-    }
-    
     @IBOutlet weak var workoutsTable: UITableView!
     
+    var activeWorkout: ActiveWorkout?
     
+    /// Set reference of all the exercises we have
+    private var exerciseSet = Set<Exercise>()
+    
+    private var dataSource: [Exercise] = [] {
+        didSet{
+            self.workoutsTable.reloadData()
+        }
+    }
+
     //TODO: this presents problems if the indexPath changes - any change to the table should only be able to be done when this is set to nil
-    
     /// This variable is used to keep a reference to which cell is currently expanded. No more than one cell may be expanded at any time, if this variable is nil then all cells are collapsed.
     private var expandedCell: IndexPath? {
         didSet {
@@ -60,7 +43,10 @@ class GetWorkoutsViewController: UIViewController {
         }
     }
     
-    var activeWorkout: ActiveWorkout?
+    @IBAction func didPressPlay(_ sender: Any) {
+        guard let currentWorkout = self.activeWorkout else { return }
+        self.handlePressPlay(workout: currentWorkout)
+    }
     
     @IBAction func didPressGetExercises(_ sender: Any) {
         WorkoutDataModels.getAllExercises { (snapshot_opt, error_opt) in
@@ -69,12 +55,10 @@ class GetWorkoutsViewController: UIViewController {
             } else {
                 
                 var exercise_set = Set<Exercise>()
-                
                 snapshot_opt!.documents.forEach { (document_snapshot) in
                     guard let exercise = Exercise(fromData: document_snapshot.data(), id: document_snapshot.documentID) else {
                         fatalError("Struct init returned nil. Check incoming data")
                     }
-                    
                     exercise_set.insert(exercise)
                 }
                 
@@ -94,6 +78,22 @@ class GetWorkoutsViewController: UIViewController {
         }
     }
     
+    func handlePressPlay(workout: ActiveWorkout) {
+        //TODO: remove this function from the view controller
+        //This logic is completely dependent on the state of the workout object... it should be removed from the view controller - either have a delegate object or some other object handle this
+        
+        if workout.isPaused {
+            workout.resumeWorkout()
+        } else {
+            switch workout.workoutState {
+            case .unstarted, .finished:
+                workout.startWorkout()
+            case .active, .exerciseBreak, .circuitBreak:
+                workout.pauseWorkout()
+            }
+        }
+    }
+    
     private func generateWorkout(circuitType: CircuitType) -> [Exercise]? {
         var workout = [Exercise]()
         var set_snapshot = self.exerciseSet
@@ -105,14 +105,6 @@ class GetWorkoutsViewController: UIViewController {
             workout.append(random_exercise)
         }
         return workout
-    }
-    
-    private var exerciseSet = Set<Exercise>()
-    
-    private var dataSource: [Exercise] = [] {
-        didSet{
-            self.workoutsTable.reloadData()
-        }
     }
     
     override func viewDidLoad() {
@@ -198,9 +190,6 @@ extension GetWorkoutsViewController: WorkoutTimerDelegate {
     }
     
     func didFinishTimer() {
-        
         //TODO: determine if this is where we need this notification or if we will need to notify the workout object instead
-        
-        // step completed
     }
 }
