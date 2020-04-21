@@ -26,20 +26,20 @@ class WorkoutTimer {
         // Ensures that the first updateTimer callback will reflect the correct starting time
         switch countMode {
         case .down:
-            seconds = startTime + 1
+            self.seconds = startTime + 1
         case .up:
-            seconds = startTime - 1
+            self.seconds = startTime - 1
         }
         
-        timerDevice = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
+        self.timerDevice = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
     }
     
     func pauseTimer() {
-        timerDevice.invalidate()
+        self.timerDevice.invalidate()
     }
     
     func resumeTimer() {
-        timerDevice = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
+        self.timerDevice = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
     }
     
     func handleTimerUpdate(mode: CountMode) {
@@ -50,7 +50,7 @@ class WorkoutTimer {
             self.delegate?.didFinishTimer()
             return
         }
-        seconds = isUp ? seconds + 1 : seconds - 1
+        self.seconds = isUp ? seconds + 1 : seconds - 1
     }
     
     @objc func updateTimer() {

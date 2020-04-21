@@ -88,7 +88,7 @@ class GetWorkoutsViewController: UIViewController {
             switch workout.workoutState {
             case .unstarted, .finished:
                 workout.startWorkout()
-            case .active, .exerciseBreak, .circuitBreak:
+            case .active, .setBreak, .circuitBreak:
                 workout.pauseWorkout()
             }
         }
@@ -190,6 +190,19 @@ extension GetWorkoutsViewController: WorkoutTimerDelegate {
     }
     
     func didFinishTimer() {
-        //TODO: determine if this is where we need this notification or if we will need to notify the workout object instead
+        guard let currentWorkout = self.activeWorkout else { return }
+        
+        switch currentWorkout.workoutState {
+        case .active :
+             currentWorkout.finishSet()
+        case .setBreak :
+            currentWorkout.beginSet()
+        case .circuitBreak:
+            print ("break")
+        case .finished:
+            print("workout finished")
+        case .unstarted:
+            print("That was weird")
+        }
     }
 }

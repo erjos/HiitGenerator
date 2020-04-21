@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// Circuit type for the workout represents how many circuits the workout will include. Small, medium and large correspond to 3, 5 and 8 respectively
 enum CircuitType: Int {
     case small = 3
     case medium = 5
@@ -20,10 +21,19 @@ typealias WorkoutDelegate = ActiveWorkoutDelegate & WorkoutTimerDelegate
 /// An active workout object that has been created and started by the user
 class ActiveWorkout {
     
-    var exercises: [Exercise]
+    // MARK - STATE VARIABLES
+    
+    private var exercises: [Exercise]
     var workoutState : WorkoutState = .unstarted
+    private var setTime: Double = 45 // TODO: make this dynamic based on difficulty or customizable
+    var circuitType: CircuitType = .medium
+    private var circuitCount = 0
+    private var setBreakTime: Double = 30 // TODO: make dynamic
+    private var circuitBreakTime: Double = 60 // TODO: make dynamic
+    
     private var timer = WorkoutTimer()
-    private (set) var isPaused = false
+    
+    private (set) var isPaused = false //TODO: consider moving this to the timer if we do not need to access it
     
     weak var workoutDelegate: WorkoutDelegate?
     
@@ -34,9 +44,21 @@ class ActiveWorkout {
     }
     
     func startWorkout() {
+        self.beginSet()
+    }
+    
+    func beginSet() {
         self.workoutState = .active
-        self.timer.runTimer(startTime: 10, countMode: .down)
+        self.timer.runTimer(startTime: self.setTime, countMode: .down)
         self.workoutDelegate?.didStartWorkout(self)
+    }
+    
+    func finishSet() {
+        // TODO: the active workout needs to keep track of the current exercise/set we just completed
+        
+        // if the set we finished is the last in the circuit, then we need to increment the circuit count and check to see if we have completed the workout, otherwise, trigger either a circuit break if it is the last in the circuit or a set break if it is a normal workout
+        self.workoutState = .setBreak
+        self.timer.runTimer(startTime: self.setBreakTime)
     }
     
     func resumeWorkout() {
@@ -71,11 +93,10 @@ struct Workout {
     var circuits: Int
 }
 
-//TODO: consider if we want a stopped?
 enum WorkoutState {
     case unstarted
     case active
-    case exerciseBreak
+    case setBreak
     case circuitBreak
     case finished
 }
