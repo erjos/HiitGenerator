@@ -169,7 +169,7 @@ extension GetWorkoutsViewController: ActiveWorkoutDelegate {
         self.playButton.setImage(#imageLiteral(resourceName: "pause_button_fill"), for: .normal)
     }
     
-    func didComplete(_ exercise: Exercise, workout: ActiveWorkout) {
+    func didCompleteExercise(_ exercise: Exercise, workout: ActiveWorkout) {
         
     }
     

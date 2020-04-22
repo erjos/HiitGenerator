@@ -27,7 +27,10 @@ class ActiveWorkout {
     var workoutState : WorkoutState = .unstarted
     private var setTime: Double = 45 // TODO: make this dynamic based on difficulty or customizable
     var circuitType: CircuitType = .medium
-    private var circuitCount = 0
+    
+    private var currentExerciseIndex = 0
+    
+    private var completedCircuitCount = 0
     private var setBreakTime: Double = 30 // TODO: make dynamic
     private var circuitBreakTime: Double = 60 // TODO: make dynamic
     
@@ -53,10 +56,32 @@ class ActiveWorkout {
         self.workoutDelegate?.didStartWorkout(self)
     }
     
+    //TODO: break this down into small methods
+    
     func finishSet() {
-        // TODO: the active workout needs to keep track of the current exercise/set we just completed
         
-        // if the set we finished is the last in the circuit, then we need to increment the circuit count and check to see if we have completed the workout, otherwise, trigger either a circuit break if it is the last in the circuit or a set break if it is a normal workout
+        // Increment the exercise index
+        self.currentExerciseIndex += 1
+        
+        // Check if our circuit is over
+        if self.currentExerciseIndex == self.exercises.count {
+        
+            // Increment the circuit count
+            self.completedCircuitCount += 1
+            
+            // Check if the workout is over
+            if self.completedCircuitCount == self.circuitType.rawValue {
+                
+                // Handle workout completed
+                self.workoutDelegate?.didCompleteWorkout(self)
+            }
+            
+            // Handle circuit completed
+            self.workoutDelegate?.didCompleteCircuit(self.completedCircuitCount, workout: self)
+        }
+        
+        // Handle set completed
+        self.workoutDelegate?.didCompleteExercise(self)
         self.workoutState = .setBreak
         self.timer.runTimer(startTime: self.setBreakTime)
     }
@@ -79,10 +104,9 @@ protocol ActiveWorkoutDelegate: class {
     func didPauseWorkout(_ workout: ActiveWorkout)
     func didResumeWorkout(_ workout: ActiveWorkout)
     func didStartWorkout(_ workout: ActiveWorkout)
-    func didComplete(_ exercise: Exercise, workout: ActiveWorkout)
+    func didCompleteExercise(_ workout: ActiveWorkout)
     func didCompleteCircuit(_ circuit: Int, workout: ActiveWorkout)
     func didCompleteWorkout( _ workout: ActiveWorkout)
-
 }
 
 // Model for basic workout that might be stored in the database
