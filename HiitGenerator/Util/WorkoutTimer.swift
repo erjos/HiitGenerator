@@ -22,15 +22,7 @@ class WorkoutTimer {
         self.countMode = countMode
         self.endTime = endTime
         timerDevice.invalidate()
-        
-        // Ensures that the first updateTimer callback will reflect the correct starting time
-        switch countMode {
-        case .down:
-            self.seconds = startTime + 1
-        case .up:
-            self.seconds = startTime - 1
-        }
-        
+        self.seconds = startTime
         self.timerDevice = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
     }
     

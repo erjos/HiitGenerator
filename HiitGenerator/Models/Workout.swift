@@ -46,6 +46,7 @@ class ActiveWorkout {
         self.timer.delegate = delegate
     }
     
+    //TODO: consider removing this
     func startWorkout() {
         self.beginSet()
     }
@@ -53,7 +54,7 @@ class ActiveWorkout {
     func beginSet() {
         self.workoutState = .active
         self.timer.runTimer(startTime: self.setTime, countMode: .down)
-        self.workoutDelegate?.didStartWorkout(self)
+        self.workoutDelegate?.didBeginExercise(self, exerciseIndex: self.currentExerciseIndex)
     }
     
     func finishSet() {
@@ -80,12 +81,15 @@ class ActiveWorkout {
         self.handleSetCompleted()
     }
     
+    /// Called by the action on the view controller to
     func handlePlayPause(){
         if self.isPaused {
             self.resumeWorkout()
         } else {
             switch self.workoutState {
             case .unstarted, .finished:
+                
+                //TODO: may not need start workout anymore
                 self.startWorkout()
             case .active, .setBreak, .circuitBreak:
                 self.pauseWorkout()
@@ -127,7 +131,8 @@ protocol ActiveWorkoutDelegate: class {
     
     func didPauseWorkout(_ workout: ActiveWorkout)
     func didResumeWorkout(_ workout: ActiveWorkout)
-    func didStartWorkout(_ workout: ActiveWorkout)
+    func didBeginExercise(_ workout: ActiveWorkout, exerciseIndex: Int)
+    //TODO: pass info for cell to expand in did complete so we can expand before the next one starts
     func didCompleteExercise(_ workout: ActiveWorkout)
     func didCompleteCircuit(_ circuit: Int, workout: ActiveWorkout)
     func didCompleteWorkout( _ workout: ActiveWorkout)

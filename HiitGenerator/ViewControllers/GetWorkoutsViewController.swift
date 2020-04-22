@@ -30,6 +30,9 @@ class GetWorkoutsViewController: UIViewController {
             self.workoutsTable.reloadData()
         }
     }
+    
+    let EXPANDED_CELL_HEIGHT: CGFloat = 332
+    let COLLAPSED_CELL_HEIGHT: CGFloat = 80
 
     //TODO: this presents problems if the indexPath changes - any change to the table should only be able to be done when this is set to nil
     /// This variable is used to keep a reference to which cell is currently expanded. No more than one cell may be expanded at any time, if this variable is nil then all cells are collapsed.
@@ -129,19 +132,24 @@ extension GetWorkoutsViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath == self.expandedCell {
-            return 332
+            return self.EXPANDED_CELL_HEIGHT
         }
-        return 80
+        return self.COLLAPSED_CELL_HEIGHT
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        // TODO: Consider prevent this if the workout is in flux
         self.expandedCell = indexPath
     }
 }
 
 extension GetWorkoutsViewController: ActiveWorkoutDelegate {
     
-    func didStartWorkout(_ workout: ActiveWorkout) {
+    func didBeginExercise(_ workout: ActiveWorkout, exerciseIndex: Int) {
+        //It could be better to pass this data along all the way through... I dont like the disconnect here
+        let indexPath = IndexPath(row: exerciseIndex, section: 0)
+        self.expandedCell = indexPath
         self.playButton.setImage(#imageLiteral(resourceName: "pause_button_fill"), for: .normal)
     }
     
@@ -154,7 +162,7 @@ extension GetWorkoutsViewController: ActiveWorkoutDelegate {
     }
     
     func didCompleteExercise(_ workout: ActiveWorkout) {
-        //
+        // TODO: put the screen in break state
     }
     
     func didCompleteCircuit(_ circuit: Int, workout: ActiveWorkout) {
