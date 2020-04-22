@@ -80,13 +80,26 @@ class ActiveWorkout {
         self.handleSetCompleted()
     }
     
-    func resumeWorkout() {
+    func handlePlayPause(){
+        if self.isPaused {
+            self.resumeWorkout()
+        } else {
+            switch self.workoutState {
+            case .unstarted, .finished:
+                self.startWorkout()
+            case .active, .setBreak, .circuitBreak:
+                self.pauseWorkout()
+            }
+        }
+    }
+    
+    private func resumeWorkout() {
         self.isPaused = false
         self.timer.resumeTimer()
         self.workoutDelegate?.didResumeWorkout(self)
     }
     
-    func pauseWorkout() {
+    private func pauseWorkout() {
         self.isPaused = true
         self.timer.pauseTimer()
         self.workoutDelegate?.didPauseWorkout(self)

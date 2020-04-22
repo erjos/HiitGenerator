@@ -45,7 +45,7 @@ class GetWorkoutsViewController: UIViewController {
     
     @IBAction func didPressPlay(_ sender: Any) {
         guard let currentWorkout = self.activeWorkout else { return }
-        self.handlePressPlay(workout: currentWorkout)
+        currentWorkout.handlePlayPause()
     }
     
     @IBAction func didPressGetExercises(_ sender: Any) {
@@ -75,22 +75,6 @@ class GetWorkoutsViewController: UIViewController {
             
             //Create and set active workout
             self.activeWorkout = ActiveWorkout(workout, self)
-        }
-    }
-    
-    func handlePressPlay(workout: ActiveWorkout) {
-        //TODO: remove this function from the view controller
-        //This logic is completely dependent on the state of the workout object... it should be removed from the view controller - either have a delegate object or some other object handle this
-        
-        if workout.isPaused {
-            workout.resumeWorkout()
-        } else {
-            switch workout.workoutState {
-            case .unstarted, .finished:
-                workout.startWorkout()
-            case .active, .setBreak, .circuitBreak:
-                workout.pauseWorkout()
-            }
         }
     }
     
@@ -169,8 +153,8 @@ extension GetWorkoutsViewController: ActiveWorkoutDelegate {
         self.playButton.setImage(#imageLiteral(resourceName: "pause_button_fill"), for: .normal)
     }
     
-    func didCompleteExercise(_ exercise: Exercise, workout: ActiveWorkout) {
-        
+    func didCompleteExercise(_ workout: ActiveWorkout) {
+        //
     }
     
     func didCompleteCircuit(_ circuit: Int, workout: ActiveWorkout) {
@@ -198,10 +182,12 @@ extension GetWorkoutsViewController: WorkoutTimerDelegate {
         case .setBreak :
             currentWorkout.beginSet()
         case .circuitBreak:
-            print ("break")
+            currentWorkout.beginSet()
         case .finished:
+            //TODO: --> This may never happen because we call completed delegate function from the finishSet function
             print("workout finished")
         case .unstarted:
+            // this should also never happen.
             print("That was weird")
         }
     }
