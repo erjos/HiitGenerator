@@ -56,34 +56,28 @@ class ActiveWorkout {
         self.workoutDelegate?.didStartWorkout(self)
     }
     
-    //TODO: break this down into small methods
-    
     func finishSet() {
         
         // Increment the exercise index
         self.currentExerciseIndex += 1
         
         // Check if our circuit is over
-        if self.currentExerciseIndex == self.exercises.count {
-        
+        guard self.currentExerciseIndex != self.exercises.count else {
+            
             // Increment the circuit count
             self.completedCircuitCount += 1
             
             // Check if the workout is over
-            if self.completedCircuitCount == self.circuitType.rawValue {
-                
-                // Handle workout completed
-                self.workoutDelegate?.didCompleteWorkout(self)
+            guard self.completedCircuitCount != self.circuitType.rawValue else {
+                self.handleWorkoutCompleted()
+                return
             }
             
-            // Handle circuit completed
-            self.workoutDelegate?.didCompleteCircuit(self.completedCircuitCount, workout: self)
+            self.handleCircuitCompleted()
+            return
         }
         
-        // Handle set completed
-        self.workoutDelegate?.didCompleteExercise(self)
-        self.workoutState = .setBreak
-        self.timer.runTimer(startTime: self.setBreakTime)
+        self.handleSetCompleted()
     }
     
     func resumeWorkout() {
@@ -96,6 +90,23 @@ class ActiveWorkout {
         self.isPaused = true
         self.timer.pauseTimer()
         self.workoutDelegate?.didPauseWorkout(self)
+    }
+    
+    private func handleSetCompleted() {
+        self.workoutDelegate?.didCompleteExercise(self)
+        self.workoutState = .setBreak
+        self.timer.runTimer(startTime: self.setBreakTime, countMode: .down)
+    }
+    
+    private func handleCircuitCompleted() {
+        self.workoutDelegate?.didCompleteCircuit(self.completedCircuitCount, workout: self)
+        self.workoutState = .circuitBreak
+        self.timer.runTimer(startTime: self.circuitBreakTime, countMode: .down)
+    }
+    
+    private func handleWorkoutCompleted() {
+        self.workoutDelegate?.didCompleteWorkout(self)
+        self.workoutState = .finished
     }
 }
 
