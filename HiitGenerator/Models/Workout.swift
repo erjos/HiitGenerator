@@ -8,6 +8,15 @@
 
 import Foundation
 
+//SOME NOTES:
+// Highlight the active workout with an outline or something to make it pop
+// experiment with drop shadows for top view and cards
+// The next workout should expand during the break so you can prep for what you need to do next
+// There should be a 5 second countdown before the workout starts where the screen flashes or something.
+// What about a restart method?
+// You should be able to expand and collapse other cells during breaks, as long as the workout is not active... But if you pause you should also be able to expand
+// We should scroll to the focused cell
+
 /// Circuit type for the workout represents how many circuits the workout will include. Small, medium and large correspond to 3, 5 and 8 respectively
 enum CircuitType: Int {
     case small = 3
