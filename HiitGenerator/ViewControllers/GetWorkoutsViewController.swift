@@ -49,6 +49,8 @@ class GetWorkoutsViewController: UIViewController {
     @IBAction func didPressPlay(_ sender: Any) {
         guard let currentWorkout = self.activeWorkout else { return }
         currentWorkout.handlePlayPause()
+        
+        self.topView.stopBlink()
     }
     
     @IBAction func didPressGetExercises(_ sender: Any) {
@@ -101,6 +103,8 @@ class GetWorkoutsViewController: UIViewController {
         self.workoutsTable.register(UINib.init(nibName: "ExerciseExpandableTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "exercise_expandable_cell")
         self.workoutsTable.separatorStyle = .none
         self.topView.roundCorners(radius: 25.0, corners: [.layerMinXMaxYCorner, .layerMaxXMaxYCorner])
+        
+        self.topView.blink(duration: 0.75, delay: 0.0, color: UIColor.systemBlue, alpha: 0.0)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

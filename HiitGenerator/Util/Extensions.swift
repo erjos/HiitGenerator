@@ -29,6 +29,37 @@ extension UIView {
     }
 }
 
+extension UIView: Blinkable {
+
+    func blink(duration: TimeInterval, delay: TimeInterval, color: UIColor, alpha: CGFloat) {
+        let blinkview = UIView(frame: self.frame)
+        blinkview.tag = 3
+        self.addSubview(blinkview)
+        self.sendSubviewToBack(blinkview)
+        self.layer.masksToBounds = true
+        
+        UIView.animate(withDuration: duration, delay: delay, options: [.curveEaseInOut, .repeat, .autoreverse], animations: {
+            blinkview.layer.backgroundColor = UIColor.systemBlue.cgColor
+            blinkview.alpha = alpha
+        })
+    }
+    
+    func stopBlink() {
+        let blinkview = self.subviews.first { (view) -> Bool in
+            return view.tag == 3
+        }
+        
+        guard let subview = blinkview else { return }
+        
+        subview.removeFromSuperview()
+    }
+}
+
+protocol Blinkable {
+    func blink(duration: TimeInterval, delay: TimeInterval, color: UIColor, alpha: CGFloat)
+    func stopBlink()
+}
+
 extension String {
     
     static func getTimeString(time:TimeInterval) -> String {
