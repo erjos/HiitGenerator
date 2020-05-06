@@ -132,7 +132,7 @@ extension GetWorkoutsViewController: UITableViewDataSource {
         // Check if cell should be marked completed
         if let current = self.activeWorkout?.currentExerciseIndex,
             indexPath.row < current {
-            cell.markCompleted()
+            cell.markFilled()
         }
         
         cell.selectionStyle = .none
@@ -151,7 +151,7 @@ extension GetWorkoutsViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        // TODO: Consider prevent this if the workout is in flux
+        // TODO: Consider preventing this if the workout is in flux
         self.expandedCell = indexPath
     }
 }
@@ -159,18 +159,37 @@ extension GetWorkoutsViewController: UITableViewDelegate {
 extension GetWorkoutsViewController: ActiveWorkoutDelegate {
     
     func didBeginExercise(_ workout: ActiveWorkout, exerciseIndex: Int) {
-        //It could be better to pass this data along all the way through... I dont like the disconnect here
-        self.topView.backgroundColor = Color.topViewColor
+        self.topView.backgroundColor = Color.topViewNormal
         let indexPath = IndexPath(row: exerciseIndex, section: 0)
+        
+        if let completedExerciseCell = self.workoutsTable.cellForRow(at: indexPath) as? ExerciseExpandableTableViewCell {
+            completedExerciseCell.markFilled()
+        }
+        
+        //TODO: may not need this here anymore - just need to handle the case for the first exercise
         self.expandedCell = indexPath
         self.playButton.setImage(#imageLiteral(resourceName: "pause_button_fill"), for: .normal)
+        
     }
     
     func didPauseWorkout(_ workout: ActiveWorkout) {
+        self.topView.backgroundColor = Color.topViewPause
         self.playButton.setImage(#imageLiteral(resourceName: "play_button_fill"), for: .normal)
     }
     
     func didResumeWorkout(_ workout: ActiveWorkout) {
+        
+        //TODO: Could potentially create a method for the top view that takes the workout state and sets it's colors accordingly
+        //The color we set here is dependent on the state of the workout (break vs active)
+        switch workout.workoutState {
+        case .active:
+            self.topView.backgroundColor = Color.topViewNormal
+        case .circuitBreak, .setBreak:
+            self.topView.backgroundColor = Color.topViewBreak
+        default:
+            self.topView.backgroundColor = Color.topViewNormal
+        }
+        
         self.playButton.setImage(#imageLiteral(resourceName: "pause_button_fill"), for: .normal)
     }
     
@@ -179,11 +198,14 @@ extension GetWorkoutsViewController: ActiveWorkoutDelegate {
         if let completedExerciseCell = self.workoutsTable.cellForRow(at: IndexPath(row: exerciseIndex, section: 0)) as? ExerciseExpandableTableViewCell {
             
             //How can we reflect this in the data source so that the cells are set correctly
-            completedExerciseCell.markCompleted()
+            completedExerciseCell.markFilled()
         }
         
+        //expand the next exercise cell
+        self.expandedCell = IndexPath(row: exerciseIndex + 1, section: 0)
+        
         // Indicate break state with change to top view color
-        self.topView.backgroundColor = UIColor.red.withAlphaComponent(0.3)
+        self.topView.backgroundColor = Color.topViewBreak
     }
     
     func didCompleteCircuit(_ circuit: Int, workout: ActiveWorkout) {

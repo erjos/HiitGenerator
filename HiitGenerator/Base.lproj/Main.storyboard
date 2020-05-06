@@ -110,15 +110,25 @@
                                             <action selector="didPressGenerateWorkout:" destination="2Ub-6E-e7c" eventType="touchUpInside" id="7iF-ux-vwJ"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jLj-3O-gKO">
+                                        <rect key="frame" x="349" y="67.5" width="45" height="45"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="45" id="6TL-1Y-ECx"/>
+                                            <constraint firstAttribute="height" constant="45" id="Pti-A4-JAw"/>
+                                        </constraints>
+                                        <state key="normal" image="right_arrow"/>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.83529411764705885" green="0.792156862745098" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="aWs-XQ-DEJ" firstAttribute="centerX" secondItem="ecz-Dj-XB9" secondAttribute="centerX" id="1Zq-2B-dKW"/>
                                     <constraint firstItem="2wY-fM-rW5" firstAttribute="centerX" secondItem="ecz-Dj-XB9" secondAttribute="centerX" id="45O-v0-tnS"/>
+                                    <constraint firstItem="jLj-3O-gKO" firstAttribute="centerY" secondItem="ecz-Dj-XB9" secondAttribute="centerY" id="EFa-Ht-OFU"/>
                                     <constraint firstAttribute="trailing" secondItem="rpg-Z4-x4S" secondAttribute="trailing" constant="20" id="JXo-wS-jfO"/>
                                     <constraint firstItem="zBO-Yq-Lt6" firstAttribute="leading" secondItem="ecz-Dj-XB9" secondAttribute="leading" constant="20" id="RIe-6Q-H41"/>
                                     <constraint firstAttribute="height" constant="180" id="Ru7-TE-kQx"/>
                                     <constraint firstItem="aWs-XQ-DEJ" firstAttribute="top" secondItem="2wY-fM-rW5" secondAttribute="bottom" constant="10" id="cKf-fg-eqH"/>
+                                    <constraint firstAttribute="trailing" secondItem="jLj-3O-gKO" secondAttribute="trailing" constant="20" id="kmI-XV-3EL"/>
                                     <constraint firstItem="zBO-Yq-Lt6" firstAttribute="top" secondItem="rpg-Z4-x4S" secondAttribute="top" id="qMH-cM-yk7"/>
                                     <constraint firstAttribute="bottom" secondItem="zBO-Yq-Lt6" secondAttribute="bottom" constant="5" id="y3p-g7-3aR"/>
                                 </constraints>
@@ -555,6 +565,7 @@
     <resources>
         <image name="circle_empty" width="512" height="512"/>
         <image name="play_button_fill" width="512" height="512"/>
+        <image name="right_arrow" width="512" height="512"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="d62-7P-vHD"/>
