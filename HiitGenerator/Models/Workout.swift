@@ -9,13 +9,18 @@
 import Foundation
 
 //SOME NOTES:
+
 // Highlight the active workout with an outline or something to make it pop
-// experiment with drop shadows for top view and cards
+
+// experiment with drop shadows for top view and cells
+
 // The next workout should expand during the break so you can prep for what you need to do next
+
 // There should be a 5 second countdown before the workout starts where the screen flashes or something.
-// What about a restart method?
-// You should be able to expand and collapse other cells during breaks, as long as the workout is not active... But if you pause you should also be able to expand
-// We should scroll to the focused cell
+
+// What about a restart/reset method?
+
+// The app should scroll to the focused cell
 
 /// Circuit type for the workout represents how many circuits the workout will include. Small, medium and large correspond to 3, 5 and 8 respectively
 enum CircuitType: Int {
@@ -37,7 +42,7 @@ class ActiveWorkout {
     private var setTime: Double = 45 // TODO: make this dynamic based on difficulty or customizable
     var circuitType: CircuitType = .medium
     
-    private var currentExerciseIndex = 0
+    private (set) var currentExerciseIndex = 0
     
     private var completedCircuitCount = 0
     private var setBreakTime: Double = 30 // TODO: make dynamic
@@ -66,18 +71,21 @@ class ActiveWorkout {
         self.workoutDelegate?.didBeginExercise(self, exerciseIndex: self.currentExerciseIndex)
     }
     
+    /// Prepares the workout to begin the next step, notifies the delegate of the current workout state via handleSetCompleted, handleCircuitCompleted or handleWorkoutCompleted
     func finishSet() {
         
-        // Increment the exercise index
-        self.currentExerciseIndex += 1
+        // Get next exercise index - Increment the exercise index
+        let nextExerciseIndex = self.currentExerciseIndex + 1
         
-        // Check if our circuit is over
-        guard self.currentExerciseIndex != self.exercises.count else {
+        //self.currentExerciseIndex += 1
+        
+        // Check if circuit is over
+        guard nextExerciseIndex != self.exercises.count else {
             
-            // Increment the circuit count
+            // Increment circuit count
             self.completedCircuitCount += 1
             
-            // Check if the workout is over
+            // Check if workout is over
             guard self.completedCircuitCount != self.circuitType.rawValue else {
                 self.handleWorkoutCompleted()
                 return
@@ -87,7 +95,8 @@ class ActiveWorkout {
             return
         }
         
-        self.handleSetCompleted()
+        self.handleSetCompleted(setIndex: self.currentExerciseIndex)
+        self.currentExerciseIndex = nextExerciseIndex
     }
     
     /// Called by the action on the view controller to
@@ -118,8 +127,9 @@ class ActiveWorkout {
         self.workoutDelegate?.didPauseWorkout(self)
     }
     
-    private func handleSetCompleted() {
-        self.workoutDelegate?.didCompleteExercise(self)
+    //TODO: this naming is confusing, either refer to the item as exercise or set, but not both
+    private func handleSetCompleted(setIndex: Int) {
+        self.workoutDelegate?.didCompleteExercise(self, exerciseIndex: setIndex)
         self.workoutState = .setBreak
         self.timer.runTimer(startTime: self.setBreakTime, countMode: .down)
     }
@@ -141,8 +151,7 @@ protocol ActiveWorkoutDelegate: class {
     func didPauseWorkout(_ workout: ActiveWorkout)
     func didResumeWorkout(_ workout: ActiveWorkout)
     func didBeginExercise(_ workout: ActiveWorkout, exerciseIndex: Int)
-    //TODO: pass info for cell to expand in did complete so we can expand before the next one starts
-    func didCompleteExercise(_ workout: ActiveWorkout)
+    func didCompleteExercise(_ workout: ActiveWorkout, exerciseIndex: Int)
     func didCompleteCircuit(_ circuit: Int, workout: ActiveWorkout)
     func didCompleteWorkout( _ workout: ActiveWorkout)
 }

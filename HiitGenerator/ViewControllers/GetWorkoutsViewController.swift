@@ -9,9 +9,10 @@
 import UIKit
 
 //TODO: need a solution to help prevent adding workouts that are too similar ie. inchworm / inchworm + pushup
+
 //TODO: a button to just randomly replace a single workout if you dont like it - like a request new function...
-//TODO: consider a dark mode
-//TODO: shuffle animation when generating the workout
+
+//TODO: shuffle animation when generating the workout would be nice to have
 
 class GetWorkoutsViewController: UIViewController {
     
@@ -47,10 +48,10 @@ class GetWorkoutsViewController: UIViewController {
     }
     
     @IBAction func didPressPlay(_ sender: Any) {
+        self.topView.stopBlink()
+        
         guard let currentWorkout = self.activeWorkout else { return }
         currentWorkout.handlePlayPause()
-        
-        self.topView.stopBlink()
     }
     
     @IBAction func didPressGetExercises(_ sender: Any) {
@@ -127,6 +128,13 @@ extension GetWorkoutsViewController: UITableViewDataSource {
         cell = tableView.dequeueReusableCell(withIdentifier: "exercise_expandable_cell") as! ExerciseExpandableTableViewCell
         let exercise = self.dataSource[indexPath.row]
         cell.configure(for: exercise)
+        
+        // Check if cell should be marked completed
+        if let current = self.activeWorkout?.currentExerciseIndex,
+            indexPath.row < current {
+            cell.markCompleted()
+        }
+        
         cell.selectionStyle = .none
         return cell
     }
@@ -165,7 +173,14 @@ extension GetWorkoutsViewController: ActiveWorkoutDelegate {
         self.playButton.setImage(#imageLiteral(resourceName: "pause_button_fill"), for: .normal)
     }
     
-    func didCompleteExercise(_ workout: ActiveWorkout) {
+    func didCompleteExercise(_ workout: ActiveWorkout, exerciseIndex: Int) {
+        
+        if let completedExerciseCell = self.workoutsTable.cellForRow(at: IndexPath(row: exerciseIndex, section: 0)) as? ExerciseExpandableTableViewCell {
+            
+            //How can we reflect this in the data source so that the cells are set correctly
+            completedExerciseCell.markCompleted()
+        }
+        
         // TODO: put the screen in break state
     }
     

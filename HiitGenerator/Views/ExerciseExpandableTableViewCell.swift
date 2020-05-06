@@ -38,8 +38,9 @@ class ExerciseExpandableTableViewCell: UITableViewCell {
         super.prepareForReuse()
     }
     
-    func configure(for exercise: Exercise){
-        
+    /// Sets up the cell. Called by table view data source.
+    func configure(for exercise: Exercise ){
+        self.roundedView.backgroundColor = UIColor.clear
         self.instructionsTwoLabel.text = ""
         self.instructionsThreeLabel.text = ""
         
@@ -52,5 +53,10 @@ class ExerciseExpandableTableViewCell: UITableViewCell {
         for (step, label) in zip(exercise.instructions, labelArray) {
             label?.text = "• \(step)"
         }
+    }
+    
+    /// Marks the cell as completed by changing the background color
+    func markCompleted() {
+        self.roundedView.backgroundColor = UIColor.blue.withAlphaComponent(0.5)
     }
 }

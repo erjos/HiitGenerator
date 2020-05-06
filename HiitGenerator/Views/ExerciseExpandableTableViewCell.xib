@@ -80,7 +80,6 @@
                                 </subviews>
                             </stackView>
                         </subviews>
-                        <color key="backgroundColor" systemColor="tertiarySystemGroupedBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="o04-bV-uax" firstAttribute="top" secondItem="c9E-fU-8VF" secondAttribute="top" id="9gE-UP-EAD"/>
                             <constraint firstItem="6la-XC-xHd" firstAttribute="leading" secondItem="c9E-fU-8VF" secondAttribute="leading" id="IgY-c9-gUg"/>
