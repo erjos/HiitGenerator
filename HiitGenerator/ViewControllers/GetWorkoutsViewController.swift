@@ -31,7 +31,7 @@ class GetWorkoutsViewController: UIViewController {
             self.workoutsTable.reloadData()
         }
     }
-    
+
     let EXPANDED_CELL_HEIGHT: CGFloat = 332
     let COLLAPSED_CELL_HEIGHT: CGFloat = 80
 
@@ -160,6 +160,7 @@ extension GetWorkoutsViewController: ActiveWorkoutDelegate {
     
     func didBeginExercise(_ workout: ActiveWorkout, exerciseIndex: Int) {
         //It could be better to pass this data along all the way through... I dont like the disconnect here
+        self.topView.backgroundColor = Color.topViewColor
         let indexPath = IndexPath(row: exerciseIndex, section: 0)
         self.expandedCell = indexPath
         self.playButton.setImage(#imageLiteral(resourceName: "pause_button_fill"), for: .normal)
@@ -181,7 +182,8 @@ extension GetWorkoutsViewController: ActiveWorkoutDelegate {
             completedExerciseCell.markCompleted()
         }
         
-        // TODO: put the screen in break state
+        // Indicate break state with change to top view color
+        self.topView.backgroundColor = UIColor.red.withAlphaComponent(0.3)
     }
     
     func didCompleteCircuit(_ circuit: Int, workout: ActiveWorkout) {
