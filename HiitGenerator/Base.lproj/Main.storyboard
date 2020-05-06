@@ -117,6 +117,9 @@
                                             <constraint firstAttribute="height" constant="45" id="Pti-A4-JAw"/>
                                         </constraints>
                                         <state key="normal" image="right_arrow"/>
+                                        <connections>
+                                            <action selector="didPressNext:" destination="2Ub-6E-e7c" eventType="touchUpInside" id="lSf-OK-9P8"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.83529411764705885" green="0.792156862745098" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -148,6 +151,7 @@
                         <viewLayoutGuide key="safeArea" id="dsy-at-ThE"/>
                     </view>
                     <connections>
+                        <outlet property="nextButton" destination="jLj-3O-gKO" id="PUr-J0-Nsi"/>
                         <outlet property="playButton" destination="zPB-pR-q1A" id="Cf5-M0-XIJ"/>
                         <outlet property="timerLabel" destination="mCQ-d3-Wvk" id="5TU-ie-j2w"/>
                         <outlet property="topView" destination="ecz-Dj-XB9" id="oju-8j-QtW"/>

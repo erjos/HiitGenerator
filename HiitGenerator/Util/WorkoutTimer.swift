@@ -57,6 +57,8 @@ enum CountMode {
 }
 
 protocol WorkoutTimerDelegate: class {
+    /// Implemented by the class that wishes to display timer updates
     func didUpdateTimer(seconds: Double)
+    /// Implemented when the class wishes to listen to timer completions.
     func didFinishTimer()
 }

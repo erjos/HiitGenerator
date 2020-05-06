@@ -16,6 +16,7 @@ import UIKit
 
 class GetWorkoutsViewController: UIViewController {
     
+    @IBOutlet weak var nextButton: UIButton!
     @IBOutlet weak var playButton: UIButton!
     @IBOutlet weak var topView: UIView!
     @IBOutlet weak var timerLabel: UILabel!
@@ -82,6 +83,10 @@ class GetWorkoutsViewController: UIViewController {
             //Create and set active workout
             self.activeWorkout = ActiveWorkout(workout, self)
         }
+    }
+    
+    @IBAction func didPressNext(_ sender: Any) {
+        self.activeWorkout?.handleNext()
     }
     
     private func generateWorkout(circuitType: CircuitType) -> [Exercise]? {

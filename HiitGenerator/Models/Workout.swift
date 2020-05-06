@@ -14,8 +14,6 @@ import Foundation
 
 // experiment with drop shadows for top view and cells
 
-// The next workout should expand during the break so you can prep for what you need to do next
-
 // There should be a 5 second countdown before the workout starts where the screen flashes or something.
 
 // What about a restart/reset method?
@@ -99,8 +97,14 @@ class ActiveWorkout {
         self.currentExerciseIndex = nextExerciseIndex
     }
     
-    /// Called by the action on the view controller to
-    func handlePlayPause(){
+    /// Called by the action on the view controller
+    func handleNext() {
+        //This tells the timer delegate that the current time period has completed and initiates the beginning of the next one in the sequence
+        self.timer.delegate?.didFinishTimer()
+    }
+    
+    /// Called by the action on the view controller to pause or resume the workout
+    func handlePlayPause() {
         if self.isPaused {
             self.resumeWorkout()
         } else {
