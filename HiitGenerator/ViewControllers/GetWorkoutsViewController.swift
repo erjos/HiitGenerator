@@ -214,7 +214,7 @@ extension GetWorkoutsViewController: ActiveWorkoutDelegate {
     }
     
     func didCompleteCircuit(_ circuit: Int, workout: ActiveWorkout) {
-        
+        //circuit break just started - need to fill in one of the current circuit markers
     }
     
     func didCompleteWorkout(_ workout: ActiveWorkout) {
@@ -235,9 +235,8 @@ extension GetWorkoutsViewController: WorkoutTimerDelegate {
         switch currentWorkout.workoutState {
         case .active :
              currentWorkout.finishSet()
-        case .setBreak :
-            currentWorkout.beginSet()
-        case .circuitBreak:
+        case .setBreak,
+             .circuitBreak :
             currentWorkout.beginSet()
         case .finished:
             //TODO: --> This may never happen because we call completed delegate function from the finishSet function

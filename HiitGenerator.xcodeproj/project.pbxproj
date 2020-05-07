@@ -12,6 +12,8 @@
 		5201E8172439935000E09A0B /* CreateExerciseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5201E8162439935000E09A0B /* CreateExerciseViewController.swift */; };
 		5201E81B243C185F00E09A0B /* GetWorkoutsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5201E81A243C185F00E09A0B /* GetWorkoutsViewController.swift */; };
 		520578CC2462921A003F0757 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 520578CB2462921A003F0757 /* Color.swift */; };
+		520578D22463865A003F0757 /* CircuitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 520578D12463865A003F0757 /* CircuitView.swift */; };
+		520578D4246387E7003F0757 /* CircuitView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 520578D3246387E7003F0757 /* CircuitView.xib */; };
 		520783DF2442F4BE00E2D789 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 520783DE2442F4BE00E2D789 /* Extensions.swift */; };
 		520783E5244D2CC300E2D789 /* Workout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 520783E4244D2CC300E2D789 /* Workout.swift */; };
 		520783E9244D2D9700E2D789 /* MockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 520783E8244D2D9700E2D789 /* MockData.swift */; };
@@ -75,6 +77,8 @@
 		5201E8162439935000E09A0B /* CreateExerciseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateExerciseViewController.swift; sourceTree = "<group>"; };
 		5201E81A243C185F00E09A0B /* GetWorkoutsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetWorkoutsViewController.swift; sourceTree = "<group>"; };
 		520578CB2462921A003F0757 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
+		520578D12463865A003F0757 /* CircuitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircuitView.swift; sourceTree = "<group>"; };
+		520578D3246387E7003F0757 /* CircuitView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CircuitView.xib; sourceTree = "<group>"; };
 		520783DE2442F4BE00E2D789 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		520783E4244D2CC300E2D789 /* Workout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Workout.swift; sourceTree = "<group>"; };
 		520783E8244D2D9700E2D789 /* MockData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockData.swift; sourceTree = "<group>"; };
@@ -166,6 +170,8 @@
 			children = (
 				524D93442442EE6D002834C3 /* ExerciseExpandableTableViewCell.swift */,
 				524D93452442EE6D002834C3 /* ExerciseExpandableTableViewCell.xib */,
+				520578D12463865A003F0757 /* CircuitView.swift */,
+				520578D3246387E7003F0757 /* CircuitView.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -349,6 +355,7 @@
 			files = (
 				524D93472442EE6D002834C3 /* ExerciseExpandableTableViewCell.xib in Resources */,
 				5201E814243840BB00E09A0B /* GoogleService-Info.plist in Resources */,
+				520578D4246387E7003F0757 /* CircuitView.xib in Resources */,
 				52C26A7E23923DBD00F809E6 /* LaunchScreen.storyboard in Resources */,
 				52C26A7B23923DBD00F809E6 /* Assets.xcassets in Resources */,
 				52C26A7923923DB400F809E6 /* Main.storyboard in Resources */,
@@ -468,6 +475,7 @@
 				52C26A7223923DB400F809E6 /* AppDelegate.swift in Sources */,
 				520783DF2442F4BE00E2D789 /* Extensions.swift in Sources */,
 				520578CC2462921A003F0757 /* Color.swift in Sources */,
+				520578D22463865A003F0757 /* CircuitView.swift in Sources */,
 				52C26A7423923DB400F809E6 /* SceneDelegate.swift in Sources */,
 				520783E5244D2CC300E2D789 /* Workout.swift in Sources */,
 				52C26A9423923DEE00F809E6 /* Exercise.swift in Sources */,
