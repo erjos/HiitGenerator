@@ -13,7 +13,12 @@ class CircuitView: UIView {
     
     var stackView: UIStackView!
     
-    //Should setup a max width here to handle it
+    private var currentCount: Int = 0
+    
+    private func fillView(for index: Int) {
+        guard let completedView = self.stackView.arrangedSubviews[index] as? UIImageView else { return }
+        completedView.image = #imageLiteral(resourceName: "circle_fill")
+    }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
@@ -29,12 +34,25 @@ class CircuitView: UIView {
         self.stackView.frame = self.bounds
     }
     
+    func incrementCircuit() {
+        fillView(for: self.currentCount)
+        self.currentCount += 1
+    }
+    
+    private func reset() {
+        self.currentCount = 0
+        let images = self.stackView.arrangedSubviews.map { (view) -> UIImageView in
+            return view as! UIImageView
+        }
+        images.forEach { (imageView) in
+            imageView.image = #imageLiteral(resourceName: "circle_empty")
+        }
+    }
+    
     func configure(for type: CircuitType) {
         for i in 0..<type.rawValue {
             let circle = CircleView()
             self.stackView.addArrangedSubview(circle)
         }
-        
-        self.setNeedsLayout()
     }
 }

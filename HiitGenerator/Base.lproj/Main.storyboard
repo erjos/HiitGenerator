@@ -57,9 +57,10 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cGP-v5-h7W" customClass="CircuitView" customModule="HiitGenerator" customModuleProvider="target">
-                                        <rect key="frame" x="132" y="99" width="150" height="30"/>
+                                        <rect key="frame" x="107" y="99" width="200" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="90x-ZT-f4e"/>
+                                            <constraint firstAttribute="width" constant="200" id="kH8-BG-jS9"/>
                                         </constraints>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zBO-Yq-Lt6">
@@ -92,12 +93,10 @@
                                 <constraints>
                                     <constraint firstItem="2wY-fM-rW5" firstAttribute="centerX" secondItem="ecz-Dj-XB9" secondAttribute="centerX" id="45O-v0-tnS"/>
                                     <constraint firstItem="jLj-3O-gKO" firstAttribute="centerY" secondItem="ecz-Dj-XB9" secondAttribute="centerY" id="EFa-Ht-OFU"/>
-                                    <constraint firstItem="cGP-v5-h7W" firstAttribute="leading" secondItem="ecz-Dj-XB9" secondAttribute="leading" constant="132" id="I6t-AM-1yz"/>
                                     <constraint firstAttribute="trailing" secondItem="rpg-Z4-x4S" secondAttribute="trailing" constant="20" id="JXo-wS-jfO"/>
                                     <constraint firstItem="cGP-v5-h7W" firstAttribute="centerX" secondItem="ecz-Dj-XB9" secondAttribute="centerX" id="Qrd-9s-6QY"/>
                                     <constraint firstItem="zBO-Yq-Lt6" firstAttribute="leading" secondItem="ecz-Dj-XB9" secondAttribute="leading" constant="20" id="RIe-6Q-H41"/>
                                     <constraint firstAttribute="height" constant="180" id="Ru7-TE-kQx"/>
-                                    <constraint firstAttribute="trailing" secondItem="cGP-v5-h7W" secondAttribute="trailing" constant="132" id="eZF-K3-JAc"/>
                                     <constraint firstItem="cGP-v5-h7W" firstAttribute="top" secondItem="2wY-fM-rW5" secondAttribute="bottom" constant="10" id="eec-qh-uOY"/>
                                     <constraint firstAttribute="trailing" secondItem="jLj-3O-gKO" secondAttribute="trailing" constant="20" id="kmI-XV-3EL"/>
                                     <constraint firstItem="zBO-Yq-Lt6" firstAttribute="top" secondItem="rpg-Z4-x4S" secondAttribute="top" id="qMH-cM-yk7"/>
