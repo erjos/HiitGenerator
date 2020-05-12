@@ -21,6 +21,7 @@ class GetWorkoutsViewController: UIViewController {
     @IBOutlet weak var topView: UIView!
     @IBOutlet weak var timerLabel: UILabel!
     @IBOutlet weak var workoutsTable: UITableView!
+    @IBOutlet weak var circuitView: CircuitView!
     
     var activeWorkout: ActiveWorkout?
     
@@ -82,6 +83,11 @@ class GetWorkoutsViewController: UIViewController {
             
             //Create and set active workout
             self.activeWorkout = ActiveWorkout(workout, self)
+            
+            if let circuitType = self.activeWorkout?.circuitType {
+                //Configure circuit view
+                self.circuitView.configure(for: circuitType)
+            }
         }
     }
     

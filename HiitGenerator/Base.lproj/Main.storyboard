@@ -119,6 +119,7 @@
                         <viewLayoutGuide key="safeArea" id="dsy-at-ThE"/>
                     </view>
                     <connections>
+                        <outlet property="circuitView" destination="cGP-v5-h7W" id="Ylu-HV-xBo"/>
                         <outlet property="nextButton" destination="jLj-3O-gKO" id="PUr-J0-Nsi"/>
                         <outlet property="playButton" destination="zPB-pR-q1A" id="Cf5-M0-XIJ"/>
                         <outlet property="timerLabel" destination="mCQ-d3-Wvk" id="5TU-ie-j2w"/>

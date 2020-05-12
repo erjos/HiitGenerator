@@ -2,29 +2,39 @@
 //  CircuitView.swift
 //  HiitGenerator
 //
-//  Created by Ethan Joseph on 5/6/20.
+//  Created by Ethan Joseph on 5/11/20.
 //  Copyright © 2020 Ethan Joseph. All rights reserved.
 //
 
+import Foundation
 import UIKit
 
 class CircuitView: UIView {
     
-    var contentView: UIView?
-    let nibName = "CircuitView"
+    var stackView: UIStackView!
     
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-
-        guard let view = loadViewFromNib() else { return }
-        view.frame = self.bounds
-        self.addSubview(view)
-        contentView = view
+    //Should setup a max width here to handle it
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        self.stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.alignment = .center
+        stackView.spacing = 8.0
+        stackView.distribution = .fillEqually
+        self.addSubview(self.stackView)
     }
-
-    func loadViewFromNib() -> UIView? {
-        let bundle = Bundle(for: type(of: self))
-        let nib = UINib(nibName: nibName, bundle: bundle)
-        return nib.instantiate(withOwner: self, options: nil).first as? UIView
+    
+    override func layoutSubviews() {
+        self.stackView.frame = self.bounds
+    }
+    
+    func configure(for type: CircuitType) {
+        for i in 0..<type.rawValue {
+            let circle = CircleView()
+            self.stackView.addArrangedSubview(circle)
+        }
+        
+        self.setNeedsLayout()
     }
 }
