@@ -220,7 +220,12 @@ extension GetWorkoutsViewController: ActiveWorkoutDelegate {
     }
     
     func didCompleteCircuit(_ circuit: Int, workout: ActiveWorkout) {
-        //circuit break just started - need to fill in one of the current circuit markers
+        self.circuitView.incrementCircuit()
+        
+        // Reload table to remove fill
+        self.workoutsTable.reloadData()
+        // Indicate break state with change to top view color
+        self.topView.backgroundColor = Color.topViewBreak
     }
     
     func didCompleteWorkout(_ workout: ActiveWorkout) {

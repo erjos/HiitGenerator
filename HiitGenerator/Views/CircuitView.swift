@@ -16,8 +16,8 @@ class CircuitView: UIView {
     private var currentCount: Int = 0
     
     private func fillView(for index: Int) {
-        guard let completedView = self.stackView.arrangedSubviews[index] as? UIImageView else { return }
-        completedView.image = #imageLiteral(resourceName: "circle_fill")
+        guard let circle = self.stackView.arrangedSubviews[index] as? CircleView else { return }
+        circle.imageView.image = #imageLiteral(resourceName: "circle_fill")
     }
     
     required init?(coder: NSCoder) {
@@ -37,6 +37,7 @@ class CircuitView: UIView {
     func incrementCircuit() {
         fillView(for: self.currentCount)
         self.currentCount += 1
+        self.setNeedsLayout()
     }
     
     private func reset() {

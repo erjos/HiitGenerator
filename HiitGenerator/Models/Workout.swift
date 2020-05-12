@@ -80,8 +80,7 @@ class ActiveWorkout {
         // Check if circuit is over
         guard nextExerciseIndex != self.exercises.count else {
             
-            // Increment circuit count
-            self.completedCircuitCount += 1
+            
             
             // Check if workout is over
             guard self.completedCircuitCount != self.circuitType.rawValue else {
@@ -138,7 +137,12 @@ class ActiveWorkout {
         self.timer.runTimer(startTime: self.setBreakTime, countMode: .down)
     }
     
+    //TODO: make these methods more consistent in naming - do they handle or do they just take the action
     private func handleCircuitCompleted() {
+        // Increment circuit count
+        self.completedCircuitCount += 1
+        // Reset exercise index to prep for next circuit
+        self.currentExerciseIndex = 0
         self.workoutDelegate?.didCompleteCircuit(self.completedCircuitCount, workout: self)
         self.workoutState = .circuitBreak
         self.timer.runTimer(startTime: self.circuitBreakTime, countMode: .down)

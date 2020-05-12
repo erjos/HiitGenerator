@@ -14,6 +14,7 @@ class CircleView: UIView {
     var contentView: UIView?
     let nibName = "CircleView"
     
+    @IBOutlet weak var imageView: UIImageView!
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
 
