@@ -10,8 +10,6 @@ import Foundation
 
 //SOME NOTES:
 
-// Highlight the active workout with an outline or something to make it pop
-
 // experiment with drop shadows for top view and cells
 
 // There should be a 5 second countdown before the workout starts where the screen flashes or something.
@@ -72,18 +70,14 @@ class ActiveWorkout {
     /// Prepares the workout to begin the next step, notifies the delegate of the current workout state via handleSetCompleted, handleCircuitCompleted or handleWorkoutCompleted
     func finishSet() {
         
-        // Get next exercise index - Increment the exercise index
+        // Get next exercise index
         let nextExerciseIndex = self.currentExerciseIndex + 1
-        
-        //self.currentExerciseIndex += 1
         
         // Check if circuit is over
         guard nextExerciseIndex != self.exercises.count else {
             
-            
-            
             // Check if workout is over
-            guard self.completedCircuitCount != self.circuitType.rawValue else {
+            guard self.completedCircuitCount < self.circuitType.rawValue else {
                 self.handleWorkoutCompleted()
                 return
             }

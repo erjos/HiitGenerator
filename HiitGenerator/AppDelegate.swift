@@ -10,10 +10,38 @@ import Firebase
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
+    
+    private let data_version_key = "current_data_version"
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         FirebaseApp.configure()
         return true
+    }
+    
+    private func checkAppConfig() {
+        
+        
+        let defaults = UserDefaults.standard
+        
+        
+        // get the document from firebase
+        WorkoutDataModels.getAppConfig { (snapshot_opt, error_opt) in
+            
+            if let snapshot = snapshot_opt {
+                snapshot.documents.first
+            }
+        }
+        
+        // compare current local data version with remote data version
+        let currentData = defaults.object(forKey: self.data_version_key) as? String
+        defaults.set(currentData, forKey: "current_version")
+        
+        // compare current version number with min supported version number
+        // we dont need to store this, assuming we can get it anytime we launch
+        if let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String {
+            // compare to the document
+        }
+        
     }
 
     // MARK: UISceneSession Lifecycle
@@ -29,7 +57,5 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
     }
-
-
 }
 

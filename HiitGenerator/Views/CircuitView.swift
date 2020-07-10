@@ -11,7 +11,7 @@ import UIKit
 
 class CircuitView: UIView {
     
-    var stackView: UIStackView!
+    var stackView = UIStackView()
     
     private var currentCount: Int = 0
     
@@ -22,11 +22,10 @@ class CircuitView: UIView {
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        self.stackView = UIStackView()
-        stackView.axis = .horizontal
-        stackView.alignment = .center
-        stackView.spacing = 8.0
-        stackView.distribution = .fillEqually
+        self.stackView.axis = .horizontal
+        self.stackView.alignment = .center
+        self.stackView.spacing = 8.0
+        self.stackView.distribution = .fillEqually
         self.addSubview(self.stackView)
     }
     
@@ -42,18 +41,16 @@ class CircuitView: UIView {
     
     private func reset() {
         self.currentCount = 0
-        let images = self.stackView.arrangedSubviews.map { (view) -> UIImageView in
-            return view as! UIImageView
-        }
-        images.forEach { (imageView) in
-            imageView.image = #imageLiteral(resourceName: "circle_empty")
+        guard let images = self.stackView.arrangedSubviews as? [CircleView] else { return }
+        images.forEach { (circleView) in
+            circleView.imageView.image = #imageLiteral(resourceName: "circle_empty")
         }
     }
     
     func configure(for type: CircuitType) {
         for i in 0..<type.rawValue {
-            let circle = CircleView()
-            self.stackView.addArrangedSubview(circle)
+            // this causes a bug where we add the circuits multiple times
+            self.stackView.addArrangedSubview(CircleView())
         }
     }
 }

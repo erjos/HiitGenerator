@@ -50,7 +50,7 @@ class GetWorkoutsViewController: UIViewController {
     }
     
     @IBAction func didPressPlay(_ sender: Any) {
-        self.topView.stopBlink()
+        //self.topView.stopBlink()
         
         guard let currentWorkout = self.activeWorkout else { return }
         currentWorkout.handlePlayPause()
@@ -63,6 +63,8 @@ class GetWorkoutsViewController: UIViewController {
             } else {
                 
                 var exercise_set = Set<Exercise>()
+                
+                // TODO: safe unwrap this snapshotOptional
                 snapshot_opt!.documents.forEach { (document_snapshot) in
                     guard let exercise = Exercise(fromData: document_snapshot.data(), id: document_snapshot.documentID) else {
                         fatalError("Struct init returned nil. Check incoming data")
@@ -116,7 +118,7 @@ class GetWorkoutsViewController: UIViewController {
         self.workoutsTable.separatorStyle = .none
         self.topView.roundCorners(radius: 25.0, corners: [.layerMinXMaxYCorner, .layerMaxXMaxYCorner])
         
-        self.topView.blink(duration: 0.75, delay: 0.0, color: UIColor.systemBlue, alpha: 0.0)
+        //self.topView.blink(duration: 0.75, delay: 0.0, color: UIColor.systemBlue, alpha: 0.0)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -221,7 +223,6 @@ extension GetWorkoutsViewController: ActiveWorkoutDelegate {
     
     func didCompleteCircuit(_ circuit: Int, workout: ActiveWorkout) {
         self.circuitView.incrementCircuit()
-        
         // Reload table to remove fill
         self.workoutsTable.reloadData()
         // Indicate break state with change to top view color
@@ -229,7 +230,7 @@ extension GetWorkoutsViewController: ActiveWorkoutDelegate {
     }
     
     func didCompleteWorkout(_ workout: ActiveWorkout) {
-        
+        //TODO: figure out what the screen should do in this case
     }
 }
 

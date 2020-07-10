@@ -256,8 +256,14 @@ class WorkoutDataModels {
         }
     }
     
+    static func getAppConfig(completion: @escaping (_ snapshot: QuerySnapshot?, _ error: Error?)-> Void) {
+        let _ = Firestore.firestore().collection("app_config").getDocuments { (query_snapshot, error_optional) in
+            completion(query_snapshot,error_optional)
+        }
+    }
+    
     /// Gets all exercises in the collection
-    static func getAllExercises(completion: @escaping (_ snapshot: QuerySnapshot?, _ error: Error?)->Void) {
+    static func getAllExercises(completion: @escaping (_ snapshot: QuerySnapshot?, _ error: Error?)-> Void) {
         let _ = Firestore.firestore().collection("exercises").getDocuments { (query_snapshot, error_optional) in
             completion(query_snapshot,error_optional)
         }
